@@ -1,2101 +1,919 @@
 <!DOCTYPE html>
-<html lang="vi" data-theme="dark">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>VISUAL CODE Tdung V30 FIX - Base64 Hex Builder Pro</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP Pro Max Ultimate V4 FIX</title>
     <style>
-        :root {
-            --bg-primary: #080b18;
-            --bg-secondary: rgba(10,14,30,0.92);
-            --bg-card: rgba(6,10,22,0.7);
-            --bg-input: rgba(0,0,0,0.6);
-            --bg-hover: rgba(0,255,204,0.06);
-            --bg-active: rgba(0,255,204,0.08);
-            --border-color: rgba(255,255,255,0.06);
-            --border-hover: rgba(0,255,204,0.25);
-            --border-input: #1a2848;
-            --text-primary: #e8f0f8;
-            --text-secondary: #9ab0d0;
-            --text-muted: #4a5a7a;
-            --text-accent: #00ffcc;
-            --text-accent2: #ff00cc;
-            --shadow: 0 30px 80px rgba(0,0,0,0.8);
-            --radius: 28px;
-            --radius-sm: 16px;
-            --radius-xs: 12px;
-            --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
-            --gradient-main: linear-gradient(135deg,#ff00cc,#00ffcc);
-            --gradient-btn: linear-gradient(135deg,#ff00cc,#cc00ff);
-            --gradient-btn-hover: linear-gradient(135deg,#00ffcc,#0088ff);
-            --gradient-card: linear-gradient(145deg,rgba(255,255,255,0.02),rgba(255,255,255,0.00));
-            --font: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-        }
-        [data-theme="light"] { --bg-primary: #f0f4fa; --bg-secondary: rgba(255,255,255,0.92); --bg-card: rgba(255,255,255,0.7); --bg-input: rgba(255,255,255,0.8); --bg-hover: rgba(0,180,180,0.05); --bg-active: rgba(0,180,180,0.08); --border-color: rgba(0,0,0,0.06); --border-hover: rgba(0,180,180,0.2); --border-input: #c0d0e0; --text-primary: #1a2a3a; --text-secondary: #4a6a8a; --text-muted: #8a9aaa; --text-accent: #0088aa; --text-accent2: #cc00aa; --shadow: 0 20px 60px rgba(0,0,0,0.08); --gradient-main: linear-gradient(135deg,#0088cc,#00ccaa); --gradient-btn: linear-gradient(135deg,#0088cc,#0066aa); --gradient-btn-hover: linear-gradient(135deg,#00ccaa,#0088aa); --gradient-card: linear-gradient(145deg,rgba(0,0,0,0.02),rgba(0,0,0,0.00)); }
-        [data-theme="ocean"] { --bg-primary: #081820; --bg-secondary: rgba(8,24,40,0.92); --bg-card: rgba(4,14,30,0.7); --bg-input: rgba(0,10,30,0.6); --bg-hover: rgba(0,200,255,0.06); --bg-active: rgba(0,200,255,0.08); --border-color: rgba(0,200,255,0.08); --border-hover: rgba(0,200,255,0.25); --border-input: #0a3a5a; --text-primary: #c8e8ff; --text-secondary: #7ab0d0; --text-muted: #3a5a7a; --text-accent: #00ccff; --text-accent2: #ff66aa; --shadow: 0 30px 80px rgba(0,0,0,0.8); --gradient-main: linear-gradient(135deg,#00aaff,#0066cc); --gradient-btn: linear-gradient(135deg,#0066cc,#003366); --gradient-btn-hover: linear-gradient(135deg,#00ccff,#0088cc); --gradient-card: linear-gradient(145deg,rgba(0,150,255,0.03),rgba(0,0,0,0.00)); }
-        [data-theme="sunset"] { --bg-primary: #1a0a10; --bg-secondary: rgba(30,10,20,0.92); --bg-card: rgba(20,6,12,0.7); --bg-input: rgba(20,0,10,0.6); --bg-hover: rgba(255,100,100,0.06); --bg-active: rgba(255,100,100,0.08); --border-color: rgba(255,100,100,0.08); --border-hover: rgba(255,120,80,0.25); --border-input: #5a2a3a; --text-primary: #ffd8d0; --text-secondary: #d08a8a; --text-muted: #7a4a4a; --text-accent: #ff8866; --text-accent2: #ff44aa; --shadow: 0 30px 80px rgba(0,0,0,0.8); --gradient-main: linear-gradient(135deg,#ff6644,#ff3388); --gradient-btn: linear-gradient(135deg,#ff3388,#cc0044); --gradient-btn-hover: linear-gradient(135deg,#ff8866,#ff4466); --gradient-card: linear-gradient(145deg,rgba(255,100,50,0.03),rgba(0,0,0,0.00)); }
-        [data-theme="forest"] { --bg-primary: #0a1a0a; --bg-secondary: rgba(10,26,10,0.92); --bg-card: rgba(6,18,6,0.7); --bg-input: rgba(0,16,0,0.6); --bg-hover: rgba(0,255,100,0.06); --bg-active: rgba(0,255,100,0.08); --border-color: rgba(0,255,100,0.08); --border-hover: rgba(0,255,100,0.25); --border-input: #1a3a1a; --text-primary: #d0f0d0; --text-secondary: #80b080; --text-muted: #4a6a4a; --text-accent: #66ff88; --text-accent2: #ffaa44; --shadow: 0 30px 80px rgba(0,0,0,0.8); --gradient-main: linear-gradient(135deg,#44cc66,#228844); --gradient-btn: linear-gradient(135deg,#228844,#004422); --gradient-btn-hover: linear-gradient(135deg,#66ff88,#44cc66); --gradient-card: linear-gradient(145deg,rgba(0,200,80,0.03),rgba(0,0,0,0.00)); }
-        [data-theme="neon"] { --bg-primary: #0a0015; --bg-secondary: rgba(10,0,25,0.92); --bg-card: rgba(6,0,18,0.7); --bg-input: rgba(0,0,20,0.6); --bg-hover: rgba(255,0,255,0.06); --bg-active: rgba(255,0,255,0.08); --border-color: rgba(255,0,255,0.1); --border-hover: rgba(0,255,255,0.3); --border-input: #3a0a5a; --text-primary: #f0d0ff; --text-secondary: #b080d0; --text-muted: #6a4a7a; --text-accent: #ff44ff; --text-accent2: #00ffff; --shadow: 0 30px 80px rgba(0,0,0,0.9); --gradient-main: linear-gradient(135deg,#ff44ff,#00ffff); --gradient-btn: linear-gradient(135deg,#aa00ff,#4400aa); --gradient-btn-hover: linear-gradient(135deg,#ff44ff,#00ffff); --gradient-card: linear-gradient(145deg,rgba(200,0,255,0.03),rgba(0,0,0,0.00)); }
-        [data-theme="neonred"] {
-            --bg-primary: #0a0000;
-            --bg-secondary: rgba(20,0,0,0.92);
-            --bg-card: rgba(12,0,0,0.7);
-            --bg-input: rgba(30,0,0,0.6);
-            --bg-hover: rgba(255,0,0,0.08);
-            --bg-active: rgba(255,0,0,0.12);
-            --border-color: rgba(255,0,0,0.15);
-            --border-hover: rgba(255,50,50,0.4);
-            --border-input: #5a0a0a;
-            --text-primary: #ffd0d0;
-            --text-secondary: #ff8888;
-            --text-muted: #8a4a4a;
-            --text-accent: #ff2222;
-            --text-accent2: #ff6666;
-            --shadow: 0 30px 80px rgba(255,0,0,0.3);
-            --gradient-main: linear-gradient(135deg,#ff0000,#cc0033);
-            --gradient-btn: linear-gradient(135deg,#cc0000,#880000);
-            --gradient-btn-hover: linear-gradient(135deg,#ff3333,#cc0033);
-            --gradient-card: linear-gradient(145deg,rgba(255,0,0,0.05),rgba(0,0,0,0.00));
-        }
-        @keyframes fireGlow { 0% { text-shadow: 0 0 10px #ff0000,0 0 20px #ff3300; } 50% { text-shadow: 0 0 20px #ff4400,0 0 40px #ff2200; } 100% { text-shadow: 0 0 10px #ff0000,0 0 20px #ff3300; } }
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:var(--font); background:var(--bg-primary); color:var(--text-primary); padding:14px; min-height:100vh; display:flex; justify-content:center; transition:background var(--transition),color var(--transition); }
-        ::-webkit-scrollbar { width:5px; height:5px; }
-        ::-webkit-scrollbar-track { background:rgba(255,255,255,0.02); border-radius:10px; }
-        ::-webkit-scrollbar-thumb { background:var(--text-accent); border-radius:10px; }
-        .app { max-width:1480px; width:100%; background:var(--bg-secondary); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px); border-radius:var(--radius); padding:28px 26px; border:1px solid var(--border-color); box-shadow:var(--shadow); position:relative; transition:all var(--transition); }
-        .app::before { content:''; position:absolute; top:-25%; left:-5%; width:55%; height:80%; background:radial-gradient(circle,rgba(255,0,200,0.03) 0%,transparent 70%); pointer-events:none; z-index:0; }
-        .header { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; margin-bottom:24px; gap:14px; position:relative; z-index:1; }
-        .logo { display:flex; align-items:center; gap:14px; }
-        .logo i { font-size:34px; color:var(--text-accent); filter:drop-shadow(0 0 16px var(--text-accent)); animation:fireGlow 1.5s infinite alternate; }
-        .logo h1 { font-size:28px; font-weight:900; background:var(--gradient-main); -webkit-background-clip:text; -webkit-text-fill-color:transparent; letter-spacing:-0.5px; }
-        .logo span { font-size:14px; font-weight:400; color:var(--text-muted); -webkit-text-fill-color:var(--text-muted); margin-left:6px; }
-        .header-actions { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
-        .theme-selector { display:flex; gap:4px; background:var(--bg-card); padding:4px; border-radius:40px; border:1px solid var(--border-color); backdrop-filter:blur(4px); }
-        .theme-selector button { background:transparent; border:none; color:var(--text-muted); padding:5px 12px; border-radius:30px; font-size:13px; font-weight:500; cursor:pointer; transition:var(--transition); }
-        .theme-selector button.active { background:var(--text-accent); color:#000; box-shadow:0 0 16px var(--text-accent); }
-        .theme-selector button:hover { color:var(--text-primary); }
-        .badge-pro { background:rgba(255,0,204,0.12); border:1px solid #ff44aa; color:#ff88dd; padding:6px 20px; border-radius:60px; font-size:13px; font-weight:700; letter-spacing:0.5px; backdrop-filter:blur(4px); }
-        .badge-pro i { margin-right:6px; }
-        .btn-logout { background:rgba(255,0,0,0.08); border:1px solid rgba(255,0,0,0.2); color:#ff6666; padding:6px 16px; border-radius:40px; font-size:13px; font-weight:500; cursor:pointer; transition:var(--transition); display:inline-flex; align-items:center; gap:6px; backdrop-filter:blur(4px); }
-        .btn-logout:hover { background:rgba(255,0,0,0.12); border-color:#ff6666; color:#ff8888; }
-        .toolbar { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:22px; position:relative; z-index:1; }
-        .toolbar button, .toolbar label { background:var(--bg-card); border:1px solid var(--border-color); color:var(--text-secondary); padding:7px 14px; border-radius:40px; font-size:13px; font-weight:500; cursor:pointer; transition:var(--transition); display:inline-flex; align-items:center; gap:8px; backdrop-filter:blur(4px); white-space:nowrap; }
-        .toolbar button:hover { background:var(--bg-hover); border-color:var(--border-hover); color:var(--text-primary); transform:translateY(-1px); box-shadow:0 4px 12px rgba(0,255,204,0.05); }
-        .toolbar button i { color:var(--text-accent); }
-        .toolbar input[type="file"] { display:none; }
-        .toolbar .sep { width:1px; background:var(--border-color); margin:0 4px; }
-        .search-bar { display:flex; gap:12px; margin-bottom:16px; position:relative; z-index:1; }
-        .search-bar input { flex:1; background:var(--bg-input); border:1px solid var(--border-input); border-radius:40px; padding:10px 18px 10px 46px; color:var(--text-primary); font-size:14px; outline:none; transition:var(--transition); }
-        .search-bar input:focus { border-color:var(--text-accent); box-shadow:0 0 0 3px rgba(0,255,204,0.06); }
-        .search-bar input::placeholder { color:var(--text-muted); }
-        .search-bar .search-icon { position:absolute; left:18px; top:50%; transform:translateY(-50%); color:var(--text-muted); pointer-events:none; }
-        .search-bar .search-wrapper { position:relative; flex:1; }
-        .search-bar .filter-options { display:flex; gap:6px; align-items:center; }
-        .search-bar .filter-options button { background:var(--bg-card); border:1px solid var(--border-color); color:var(--text-secondary); padding:6px 14px; border-radius:30px; font-size:12px; font-weight:500; cursor:pointer; transition:var(--transition); }
-        .search-bar .filter-options button.active { background:var(--bg-active); border-color:var(--text-accent); color:var(--text-accent); }
-        .search-bar .filter-options button:hover { background:var(--bg-hover); border-color:var(--border-hover); }
-        .main-grid { display:grid; grid-template-columns:1fr 1.1fr; gap:24px; position:relative; z-index:1; }
-        @media (max-width:960px) { .main-grid { grid-template-columns:1fr; gap:18px; } }
-        .left-panel { display:flex; flex-direction:column; gap:18px; }
-        .card { background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius); padding:20px 22px; backdrop-filter:blur(4px); transition:all var(--transition); background-image:var(--gradient-card); }
-        .card:hover { border-color:var(--border-hover); box-shadow:0 8px 32px rgba(255,0,0,0.08); }
-        .card-title { display:flex; align-items:center; gap:12px; font-weight:600; color:var(--text-secondary); margin-bottom:16px; font-size:15px; letter-spacing:0.2px; }
-        .card-title i { color:var(--text-accent); font-size:18px; }
-        .card-title .badge-count { background:rgba(0,255,204,0.06); color:var(--text-accent); padding:2px 14px; border-radius:40px; font-size:12px; font-weight:700; margin-left:auto; }
-        .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px 16px; }
-        .form-grid .full { grid-column:1 / -1; }
-        .form-group { margin-bottom:2px; }
-        .form-group label { display:flex; align-items:center; gap:8px; font-size:12px; font-weight:500; color:var(--text-secondary); margin-bottom:4px; text-transform:uppercase; letter-spacing:0.3px; }
-        .form-group label i { color:var(--text-accent); width:16px; font-size:13px; }
-        .form-control { width:100%; padding:9px 14px; background:var(--bg-input); border:1px solid var(--border-input); border-radius:var(--radius-xs); color:var(--text-primary); font-size:14px; transition:var(--transition); outline:none; }
-        .form-control:focus { border-color:var(--text-accent); box-shadow:0 0 0 3px rgba(0,255,204,0.06); }
-        .form-control::placeholder { color:var(--text-muted); }
-        select.form-control { appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2300ffcc' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; padding-right:36px; }
-        .payload-list { display:flex; flex-direction:column; gap:10px; max-height:500px; overflow-y:auto; padding-right:4px; }
-        .payload-item { background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-sm); padding:12px 14px; transition:all var(--transition); border-left:3px solid transparent; cursor:grab; position:relative; display:flex; flex-direction:column; gap:6px; }
-        .payload-item:hover { border-color:var(--border-hover); background:var(--bg-hover); transform:translateX(6px); }
-        .payload-item.dragging { opacity:0.3; border-style:dashed; }
-        .payload-item.drag-over { border-color:var(--text-accent); background:var(--bg-active); }
-        .payload-item .top-row { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; }
-        .payload-item .top-row .info { display:flex; align-items:center; gap:8px; flex-wrap:wrap; flex:1; }
-        .payload-item .top-row .info .idx { color:var(--text-muted); font-weight:600; font-size:12px; min-width:24px; }
-        .payload-item .top-row .info .type-badge { font-size:11px; background:rgba(0,255,204,0.06); color:var(--text-accent); padding:2px 12px; border-radius:30px; font-weight:500; }
-        .payload-item .top-row .info .desc { font-weight:500; font-size:14px; color:var(--text-primary); min-width:60px; flex:1; }
-        .payload-item .top-row .info .desc input { background:transparent; border:none; border-bottom:1px solid var(--border-input); color:var(--text-primary); font-size:14px; font-weight:500; padding:2px 4px; min-width:60px; flex:1; outline:none; }
-        .payload-item .top-row .info .desc input:focus { border-bottom-color:var(--text-accent); }
-        .payload-item .top-row .actions { display:flex; gap:2px; }
-        .payload-item .top-row .actions button { background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:14px; transition:var(--transition); padding:2px 6px; border-radius:6px; }
-        .payload-item .top-row .actions button:hover { color:#ff6688; background:rgba(255,0,0,0.05); }
-        .payload-item .top-row .actions button.dup:hover { color:var(--text-accent); }
-        .payload-item .top-row .actions button.move-up:hover, .payload-item .top-row .actions button.move-down:hover { color:#66ddff; }
-        .payload-item .bottom-row { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
-        .payload-item .bottom-row .size-tag { font-size:11px; color:var(--text-muted); background:var(--bg-input); padding:1px 10px; border-radius:30px; }
-        .payload-item .bottom-row .custom-fields-preview { font-size:11px; color:var(--text-secondary); display:flex; gap:8px; flex-wrap:wrap; }
-        .payload-item .bottom-row .custom-fields-preview span { background:rgba(0,255,204,0.04); padding:1px 8px; border-radius:30px; border:1px solid var(--border-color); }
-        .payload-item .expand-btn { background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:12px; padding:2px 8px; border-radius:30px; transition:var(--transition); }
-        .payload-item .expand-btn:hover { background:var(--bg-hover); color:var(--text-primary); }
-        .payload-item .detail-area { display:none; margin-top:8px; border-top:1px solid var(--border-color); padding-top:10px; }
-        .payload-item .detail-area.open { display:block; }
-        .payload-item .detail-area textarea { width:100%; min-height:60px; background:var(--bg-input); border:1px solid var(--border-input); border-radius:var(--radius-xs); color:var(--text-primary); padding:8px 12px; font-family:'Fira Code',monospace; font-size:12px; resize:vertical; outline:none; transition:var(--transition); }
-        .payload-item .detail-area textarea:focus { border-color:var(--text-accent); }
-        .payload-item .detail-area .btn-group { display:flex; gap:4px; flex-wrap:wrap; margin-top:6px; }
-        .payload-item .detail-area .btn-group button { background:rgba(0,255,204,0.04); border:1px solid var(--border-color); color:var(--text-secondary); padding:3px 12px; border-radius:30px; font-size:11px; font-weight:500; cursor:pointer; transition:var(--transition); }
-        .payload-item .detail-area .btn-group button:hover { background:var(--bg-hover); border-color:var(--text-accent); color:var(--text-primary); }
-        .payload-item .detail-area .custom-fields { display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
-        .payload-item .detail-area .custom-fields .field-group { display:flex; flex-direction:column; gap:2px; flex:1; min-width:120px; }
-        .payload-item .detail-area .custom-fields .field-group label { font-size:10px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; }
-        .payload-item .detail-area .custom-fields .field-group input { background:var(--bg-input); border:1px solid var(--border-input); border-radius:10px; padding:4px 10px; color:var(--text-primary); font-size:13px; outline:none; transition:var(--transition); }
-        .payload-item .detail-area .custom-fields .field-group input:focus { border-color:var(--text-accent); }
-        .payload-item .detail-area .custom-fields .field-group .gen-btn { background:rgba(0,255,204,0.06); border:1px solid var(--border-color); color:var(--text-accent); padding:4px 12px; border-radius:30px; cursor:pointer; font-size:11px; font-weight:500; transition:var(--transition); margin-top:auto; }
-        .payload-item .detail-area .custom-fields .field-group .gen-btn:hover { background:var(--bg-hover); border-color:var(--text-accent); }
-        .add-base64-section { background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius); padding:18px 20px; margin-top:12px; transition:all var(--transition); }
-        .add-base64-section .title { display:flex; align-items:center; gap:10px; font-weight:600; color:var(--text-secondary); margin-bottom:12px; font-size:14px; }
-        .add-base64-section .title i { color:var(--text-accent); font-size:16px; }
-        .add-base64-section .row { display:flex; gap:12px; flex-wrap:wrap; align-items:stretch; }
-        .add-base64-section .row textarea { flex:1; min-width:200px; min-height:70px; background:var(--bg-input); border:1px solid var(--border-input); border-radius:var(--radius-xs); color:var(--text-primary); padding:10px 14px; font-family:'Fira Code',monospace; font-size:13px; resize:vertical; outline:none; transition:var(--transition); }
-        .add-base64-section .row textarea:focus { border-color:var(--text-accent); }
-        .add-base64-section .row .actions { display:flex; flex-direction:column; gap:6px; justify-content:center; }
-        .add-base64-section .row .actions button { background:rgba(0,255,204,0.06); border:1px solid var(--border-color); color:var(--text-secondary); padding:6px 16px; border-radius:30px; font-size:13px; font-weight:500; cursor:pointer; transition:var(--transition); white-space:nowrap; }
-        .add-base64-section .row .actions button:hover { background:var(--bg-hover); border-color:var(--text-accent); color:var(--text-primary); }
-        .add-base64-section .row .actions button i { color:var(--text-accent); margin-right:6px; }
-        .add-base64-section .row .actions button.primary { background:var(--gradient-btn); color:#fff; border:none; }
-        .add-base64-section .row .actions button.primary:hover { background:var(--gradient-btn-hover); }
-        .add-base64-section .row .actions button.primary i { color:#fff; }
-        .add-payload-btn { display:flex; align-items:center; justify-content:center; gap:10px; background:rgba(0,255,204,0.03); border:1px dashed rgba(0,255,204,0.2); border-radius:60px; padding:12px; color:var(--text-accent); font-weight:600; cursor:pointer; transition:var(--transition); margin-top:6px; }
-        .add-payload-btn:hover { background:var(--bg-hover); border-color:var(--text-accent); }
-        .right-panel { display:flex; flex-direction:column; gap:18px; }
-        .preview-box { background:var(--bg-input); border:1px solid var(--border-input); border-radius:var(--radius-sm); padding:16px; max-height:380px; overflow:auto; font-family:'Fira Code',monospace; font-size:11.5px; color:var(--text-secondary); white-space:pre-wrap; word-break:break-all; transition:var(--transition); line-height:1.6; }
-        .preview-box .xml-tag { color:#ff88aa; }
-        .preview-box .xml-attr { color:#88ddff; }
-        .preview-box .xml-value { color:#aadd88; }
-        .stats-row { display:flex; gap:12px; flex-wrap:wrap; padding:4px 0; }
-        .stats-row span { background:rgba(0,255,204,0.03); border:1px solid var(--border-color); padding:4px 16px; border-radius:40px; font-size:12px; color:var(--text-secondary); }
-        .stats-row span i { color:var(--text-accent); margin-right:6px; }
-        .btn-download { width:100%; padding:18px; background:var(--gradient-btn); border:none; border-radius:60px; font-size:20px; font-weight:700; color:#fff; display:flex; align-items:center; justify-content:center; gap:14px; cursor:pointer; transition:var(--transition); box-shadow:0 6px 28px rgba(255,0,204,0.15); margin-top:8px; }
-        .btn-download:hover { transform:scale(1.02) translateY(-2px); box-shadow:0 12px 48px rgba(0,255,204,0.25); background:var(--gradient-btn-hover); }
-        .btn-download i { font-size:24px; }
-        .action-row { display:flex; gap:10px; margin-top:10px; }
-        .action-row button { flex:1; background:rgba(0,255,204,0.04); border:1px solid var(--border-color); color:var(--text-secondary); padding:10px; border-radius:40px; font-weight:600; cursor:pointer; transition:var(--transition); font-size:14px; }
-        .action-row button:hover { background:var(--bg-hover); border-color:var(--text-accent); color:var(--text-primary); }
-        .action-row button i { color:var(--text-accent); margin-right:6px; }
-        .qr-container { display:flex; justify-content:center; margin:6px 0; }
-        .qr-container canvas, .qr-container img { border-radius:var(--radius-sm); background:var(--bg-input); padding:8px; border:1px solid var(--border-input); }
-        .status-bar { margin-top:22px; padding:12px 20px; background:var(--bg-card); border-radius:40px; border-left:6px solid var(--text-accent2); color:var(--text-secondary); display:flex; align-items:center; gap:16px; flex-wrap:wrap; font-size:14px; position:relative; z-index:1; border:1px solid var(--border-color); }
-        .status-bar .dot { width:10px; height:10px; border-radius:50%; background:var(--text-accent); animation:pulse 1.5s infinite; }
-        @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.2; } }
-        .status-bar .status-text { flex:1; }
-        .status-bar .status-time { font-size:12px; color:var(--text-muted); }
-        .footer { margin-top:22px; padding-top:16px; border-top:1px solid var(--border-color); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:12px; color:var(--text-muted); position:relative; z-index:1; }
-        .footer a { color:var(--text-accent); text-decoration:none; font-weight:500; }
-        .footer a:hover { text-decoration:underline; }
-        @media (max-width:640px) { .app { padding:16px 12px; border-radius:24px; } .form-grid { grid-template-columns:1fr; gap:8px; } .logo h1 { font-size:20px; } .logo span { display:none; } .toolbar button { font-size:12px; padding:6px 12px; } .btn-download { font-size:17px; padding:14px; } .badge-pro { font-size:10px; padding:4px 14px; } .action-row { flex-direction:column; } .theme-selector button { font-size:11px; padding:4px 10px; } .search-bar { flex-direction:column; gap:8px; } .search-bar .filter-options { flex-wrap:wrap; } .add-base64-section .row { flex-direction:column; } .add-base64-section .row .actions { flex-direction:row; flex-wrap:wrap; justify-content:center; } }
-        @keyframes fadeInUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
-        .payload-item { animation:fadeInUp 0.2s ease forwards; }
-        .payload-item:nth-child(2) { animation-delay:0.05s; }
-        .payload-item:nth-child(3) { animation-delay:0.1s; }
-        .payload-item:nth-child(4) { animation-delay:0.15s; }
-        .payload-item:nth-child(5) { animation-delay:0.2s; }
-        #loginOverlay { position:fixed; top:0; left:0; width:100%; height:100%; background:var(--bg-primary); display:flex; justify-content:center; align-items:center; z-index:9999; transition:opacity 0.6s ease,transform 0.6s ease; backdrop-filter:blur(10px); }
-        #loginOverlay.hidden { opacity:0; pointer-events:none; transform:scale(1.05); }
-        .login-container { background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius); padding:40px 36px; max-width:420px; width:100%; box-shadow:var(--shadow); backdrop-filter:blur(20px); animation:fadeInUp 0.5s ease; }
-        .login-container .logo { text-align:center; margin-bottom:28px; }
-        .login-container .logo i { font-size:48px; color:var(--text-accent); filter:drop-shadow(0 0 20px var(--text-accent)); }
-        .login-container .logo h2 { font-size:24px; font-weight:800; background:var(--gradient-main); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-top:6px; }
-        .login-container .logo p { font-size:14px; color:var(--text-muted); margin-top:4px; }
-        .login-container .form-group { margin-bottom:18px; }
-        .login-container .form-group label { display:block; font-size:13px; font-weight:500; color:var(--text-secondary); margin-bottom:4px; }
-        .login-container .form-group input { width:100%; padding:12px 16px; background:var(--bg-input); border:1px solid var(--border-input); border-radius:var(--radius-xs); color:var(--text-primary); font-size:15px; outline:none; transition:var(--transition); }
-        .login-container .form-group input:focus { border-color:var(--text-accent); box-shadow:0 0 0 3px rgba(0,255,204,0.06); }
-        .login-container .btn-login { width:100%; padding:14px; background:var(--gradient-btn); border:none; border-radius:var(--radius-xs); color:#fff; font-size:18px; font-weight:700; cursor:pointer; transition:var(--transition); margin-top:6px; }
-        .login-container .btn-login:hover { background:var(--gradient-btn-hover); transform:scale(1.02); box-shadow:0 6px 24px rgba(0,255,204,0.2); }
-        .login-container .error-msg { color:#ff4466; font-size:13px; margin-top:10px; text-align:center; min-height:24px; }
-        .login-container .footer-login { text-align:center; font-size:12px; color:var(--text-muted); margin-top:16px; }
+        body { background:#0a0c16; color:#d0d8e8; font-family:'Segoe UI',sans-serif; padding:16px; display:flex; justify-content:center; min-height:100vh; }
+        .container { max-width:1500px; width:100%; background:#111726; border-radius:36px; padding:24px; border:1px solid #2a3a5a; box-shadow:0 20px 60px rgba(0,0,0,0.9); }
+        h1 { text-align:center; font-size:38px; font-weight:900; background:linear-gradient(135deg,#ff44aa,#ffaa44,#44ddff,#ff44aa); background-size:300% 300%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:grad 4s ease infinite; }
+        @keyframes grad { 0%{background-position:0% 50%;} 50%{background-position:100% 50%;} 100%{background-position:0% 50%;} }
+        .sub { text-align:center; color:#8899bb; font-size:14px; margin-bottom:16px; border-bottom:1px solid #1e2a3a; padding-bottom:12px; }
+        .grid-4 { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:14px; }
+        @media (max-width:1100px){ .grid-4{ grid-template-columns:1fr 1fr; } }
+        @media (max-width:600px){ .grid-4{ grid-template-columns:1fr; } }
+        .card { background:#0e1424; border-radius:18px; padding:14px 16px; border:1px solid #1e2a3a; transition:0.3s; }
+        .card:hover { border-color:#3a5a8a; box-shadow:0 0 50px rgba(0,180,255,0.05); }
+        .card-title { font-size:15px; font-weight:700; color:#88ccff; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+        .card-title i { color:#ff66aa; font-size:16px; }
+        .card-title .badge { font-size:9px; background:#1a2a3a; padding:2px 10px; border-radius:30px; color:#88aadd; margin-left:auto; }
+        .badge-gold { background:#ffaa0022; color:#ffcc66; border:1px solid #ffaa0044; }
+        .badge-red { background:#ff446622; color:#ff6688; border:1px solid #ff446644; }
+        .badge-green { background:#00cc8822; color:#66dd88; border:1px solid #00cc8844; }
+        .form-group { margin-bottom:8px; }
+        .form-group label { display:block; font-size:11px; font-weight:600; color:#99bbdd; margin-bottom:2px; }
+        .form-group label i { color:#ff66aa; margin-right:4px; }
+        .form-control { width:100%; padding:7px 10px; background:#080c18; border:1px solid #1e2a3a; border-radius:8px; color:#e8f0f8; font-size:12px; outline:none; transition:0.2s; font-family:'Courier New',monospace; }
+        .form-control:focus { border-color:#44ddff; box-shadow:0 0 0 3px rgba(68,221,255,0.08); }
+        select.form-control { appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2344ddff' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 10px center; padding-right:32px; }
+        .range-group { display:flex; align-items:center; gap:10px; margin-top:2px; }
+        .range-group input[type="range"] { flex:1; accent-color:#44ddff; height:4px; background:#1a2a3a; border-radius:10px; }
+        .range-group .val { min-width:36px; font-weight:700; color:#88ddff; font-size:14px; text-align:center; font-family:'Courier New',monospace; }
+        .range-group .label-mini { font-size:10px; color:#445566; }
+        .toggle-group { display:flex; gap:4px; flex-wrap:wrap; margin-top:4px; }
+        .toggle-item { display:flex; align-items:center; gap:4px; background:#080c18; padding:2px 8px 2px 5px; border-radius:30px; border:1px solid #1e2a3a; cursor:pointer; transition:0.2s; font-size:11px; }
+        .toggle-item:hover { border-color:#3a5a8a; }
+        .toggle-item input[type="checkbox"] { accent-color:#44ddff; width:14px; height:14px; cursor:pointer; }
+        .btn-group { display:flex; gap:6px; flex-wrap:wrap; margin:10px 0 8px; }
+        .btn { padding:8px 16px; border-radius:40px; border:none; font-weight:700; font-size:12px; cursor:pointer; transition:0.3s; display:inline-flex; align-items:center; gap:6px; flex:1; justify-content:center; min-width:60px; }
+        .btn:hover { transform:translateY(-2px) scale(1.02); box-shadow:0 8px 30px rgba(0,0,0,0.3); }
+        .btn-primary { background:linear-gradient(135deg,#44ddff,#7b2ffc); color:#fff; }
+        .btn-gold { background:linear-gradient(135deg,#ffaa44,#ff6600); color:#fff; }
+        .btn-green { background:linear-gradient(135deg,#00cc88,#00aa66); color:#fff; }
+        .btn-red { background:linear-gradient(135deg,#ff4466,#cc2244); color:#fff; }
+        .btn-purple { background:linear-gradient(135deg,#aa66ff,#7733cc); color:#fff; }
+        .btn-secondary { background:#1a2a3a; color:#88bbdd; border:1px solid #2a3a5a; }
+        .btn-secondary:hover { background:#2a3a5a; color:#bbddff; }
+        .output-box { background:#060a12; border:1px solid #1a2a3a; border-radius:14px; padding:14px; font-family:'Courier New',monospace; font-size:11px; color:#bbddff; white-space:pre-wrap; max-height:550px; overflow:auto; line-height:1.5; }
+        .row-actions { display:flex; gap:6px; margin-top:8px; flex-wrap:wrap; }
+        .row-actions button { padding:5px 14px; border-radius:30px; border:1px solid #1e2a3a; background:#080c18; color:#88aadd; cursor:pointer; transition:0.2s; font-size:11px; }
+        .row-actions button:hover { background:#1a2a3a; border-color:#3a5a8a; color:#bbddff; }
+        .status-bar { background:#080c18; border-radius:40px; padding:8px 18px; margin-top:12px; display:flex; align-items:center; gap:12px; border:1px solid #1a2a3a; font-size:13px; color:#88aadd; }
+        .status-bar .dot { width:8px; height:8px; border-radius:50%; background:#44dd88; animation:pulse 1.5s infinite; }
+        @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+        .status-bar .status-text{ flex:1; }
+        .footer { margin-top:16px; text-align:center; font-size:11px; color:#445566; border-top:1px solid #1a2a3a; padding-top:12px; }
+        .file-badge { display:inline-block; padding:2px 10px; border-radius:30px; font-size:10px; font-weight:700; background:#ffaa0022; color:#ffcc66; border:1px solid #ffaa0044; margin-left:6px; }
+        .offset-row { display:flex; gap:8px; align-items:center; margin-bottom:4px; }
+        .offset-row .label { font-size:11px; color:#88aadd; min-width:70px; }
+        .offset-row .val-hex { font-family:'Courier New',monospace; color:#ff88aa; font-size:12px; min-width:90px; }
+        .file-grid { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:4px; margin-top:6px; }
+        .file-grid .btn { padding:4px; font-size:10px; min-width:auto; }
+        @media (max-width:700px){ .file-grid{ grid-template-columns:1fr 1fr 1fr; } }
+        .mt-2 { margin-top:6px; }
+        .highlight { color:#44ddff; }
+        .highlight2 { color:#ff88aa; }
     </style>
 </head>
 <body>
-    <!-- LOGIN OVERLAY -->
-    <div id="loginOverlay">
-        <div class="login-container">
-            <div class="logo">
-                <i class="fas fa-crown"></i>
-                <h2>VISUAL CODE Tdung V30 FIX</h2>
-                <p>Nhập key để kích hoạt</p>
+
+<div class="container">
+
+    <h1>⚡ VIP PRO MAX ULTIMATE V4 FIX</h1>
+    <div class="sub">
+        <i class="fas fa-dragon"></i> Đẳng cấp nhất – Aimlock · Fix rung · Fix lố · Fix lạc đạn · Bám đầu · Êm tâm · AimNeck · AimDrag
+    </div>
+
+    <!-- ===== ROW 1 ===== -->
+    <div class="grid-4">
+        <div class="card">
+            <div class="card-title"><i class="fas fa-crosshairs"></i> Aimlock <span class="badge badge-gold">VIP</span></div>
+            <div class="form-group">
+                <label><i class="fas fa-bullseye"></i> FOV</label>
+                <div class="range-group">
+                    <span class="label-mini">1</span>
+                    <input type="range" id="fovSlider" min="1" max="360" value="120" oninput="updateDisplay()">
+                    <span class="val" id="fovVal">120</span>
+                    <span class="label-mini">360</span>
+                </div>
             </div>
             <div class="form-group">
-                <label><i class="fas fa-key"></i> License Key</label>
-                <input type="password" id="loginKey" placeholder="Nhập key..." value="Tdung2026">
+                <label><i class="fas fa-feather-alt"></i> Smooth</label>
+                <div class="range-group">
+                    <span class="label-mini">1</span>
+                    <input type="range" id="smoothSlider" min="1" max="100" value="80" oninput="updateDisplay()">
+                    <span class="val" id="smoothVal">80</span>
+                    <span class="label-mini">100</span>
+                </div>
             </div>
-            <button class="btn-login" onclick="handleLogin()"><i class="fas fa-unlock"></i> Kích hoạt</button>
-            <div class="error-msg" id="loginError"></div>
-            <div class="footer-login">
-                <span>Key mặc định: Tdung2026</span>
+            <div class="form-group">
+                <label><i class="fas fa-tachometer-alt"></i> Aim Speed</label>
+                <div class="range-group">
+                    <span class="label-mini">1</span>
+                    <input type="range" id="aimSpeedSlider" min="1" max="100" value="60" oninput="updateDisplay()">
+                    <span class="val" id="aimSpeedVal">60</span>
+                    <span class="label-mini">100</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-dot-circle"></i> Target</label>
+                <select class="form-control" id="aimTarget" onchange="updateDisplay()">
+                    <option value="head">Đầu (Head)</option>
+                    <option value="neck" selected>Cổ (Neck)</option>
+                    <option value="chest">Ngực (Chest)</option>
+                    <option value="body">Thân (Body)</option>
+                    <option value="drag">Drag (Kéo chuột)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title"><i class="fas fa-cog"></i> Fix & Ổn định <span class="badge badge-red">Pro</span></div>
+            <div class="form-group">
+                <label><i class="fas fa-wave-square"></i> Fix rung (Anti-Shake)</label>
+                <div class="range-group">
+                    <span class="label-mini">0</span>
+                    <input type="range" id="antiShakeSlider" min="0" max="100" value="80" oninput="updateDisplay()">
+                    <span class="val" id="antiShakeVal">80</span>
+                    <span class="label-mini">100</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-crosshairs"></i> Cứng tâm (Stabilizer)</label>
+                <div class="range-group">
+                    <span class="label-mini">0</span>
+                    <input type="range" id="stabilizerSlider" min="0" max="100" value="70" oninput="updateDisplay()">
+                    <span class="val" id="stabilizerVal">70</span>
+                    <span class="label-mini">100</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-bullseye"></i> Fix lạc đạn (Spread)</label>
+                <div class="range-group">
+                    <span class="label-mini">0</span>
+                    <input type="range" id="spreadFixSlider" min="0" max="100" value="85" oninput="updateDisplay()">
+                    <span class="val" id="spreadFixVal">85</span>
+                    <span class="label-mini">100</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-undo-alt"></i> Fix lố (Overcorrection)</label>
+                <div class="range-group">
+                    <span class="label-mini">0</span>
+                    <input type="range" id="overcorrectionSlider" min="0" max="100" value="60" oninput="updateDisplay()">
+                    <span class="val" id="overcorrectionVal">60</span>
+                    <span class="label-mini">100</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title"><i class="fas fa-sliders-h"></i> Offset Setting <span class="badge badge-green">Live</span></div>
+            <div class="offset-row">
+                <span class="label">Base</span>
+                <input class="form-control" id="baseOffset" value="0x8A5A1A0" style="flex:1;font-size:11px;" oninput="updateDisplay()">
+                <span class="val-hex" id="baseHex">0x8A5A1A0</span>
+            </div>
+            <div class="offset-row">
+                <span class="label">XRay</span>
+                <input class="form-control" id="xrayOffset" value="0x5A0A1A0" style="flex:1;font-size:11px;" oninput="updateDisplay()">
+                <span class="val-hex" id="xrayHex">0x5A0A1A0</span>
+            </div>
+            <div class="offset-row">
+                <span class="label">Speed</span>
+                <input class="form-control" id="speedOffset" value="0x4B0A1A0" style="flex:1;font-size:11px;" oninput="updateDisplay()">
+                <span class="val-hex" id="speedHex">0x4B0A1A0</span>
+            </div>
+            <div class="offset-row">
+                <span class="label">NoRecoil</span>
+                <input class="form-control" id="norecoilOffset" value="0x5C0A1A0" style="flex:1;font-size:11px;" oninput="updateDisplay()">
+                <span class="val-hex" id="norecoilHex">0x5C0A1A0</span>
+            </div>
+            <div class="offset-row">
+                <span class="label">GodMode</span>
+                <input class="form-control" id="godmodeOffset" value="0x7A0A1A0" style="flex:1;font-size:11px;" oninput="updateDisplay()">
+                <span class="val-hex" id="godmodeHex">0x7A0A1A0</span>
+            </div>
+            <div style="margin-top:6px;display:flex;gap:4px;">
+                <button class="btn btn-secondary" style="flex:1;padding:4px;font-size:10px;" onclick="presetFF()">FF Max</button>
+                <button class="btn btn-secondary" style="flex:1;padding:4px;font-size:10px;" onclick="presetFFTH()">FF Th</button>
+                <button class="btn btn-gold" style="flex:1;padding:4px;font-size:10px;" onclick="presetVIP()">VIP Mode</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title"><i class="fas fa-toggle-on"></i> Tính năng <span class="badge badge-red">VIP+</span></div>
+            <div class="toggle-group">
+                <label class="toggle-item"><input type="checkbox" id="chkAimlock" checked onchange="updateDisplay()"><span>Aimlock</span></label>
+                <label class="toggle-item"><input type="checkbox" id="chkHeadAim" checked onchange="updateDisplay()"><span>Bám đầu</span></label>
+                <label class="toggle-item"><input type="checkbox" id="chkNeckAim" checked onchange="updateDisplay()"><span>AimNeck</span></label>
+                <label class="toggle-item"><input type="checkbox" id="chkDrag" checked onchange="updateDisplay()"><span>AimDrag</span></label>
+                <label class="toggle-item"><input type="checkbox" id="chkFixRung" checked onchange="updateDisplay()"><span>Fix rung</span></label>
+                <label class="toggle-item"><input type="checkbox" id="chkFixLo" checked onchange="updateDisplay()"><span>Fix lố</span></label>
+                <label class="toggle-item"><input type="checkbox" id="chkFixSpread" checked onchange="updateDisplay()"><span>Fix lạc đạn</span></label>
+                <label class="toggle-item"><input type="checkbox" id="chkEmTam" checked onchange="updateDisplay()"><span>Êm tâm</span></label>
+                <label class="toggle-item"><input type="checkbox" id="chkXRay" checked onchange="updateDisplay()"><span>XRay</span></label>
+                <label class="toggle-item"><input type="checkbox" id="chkSpeed" checked onchange="updateDisplay()"><span>Speed</span></label>
+                <label class="toggle-item"><input type="checkbox" id="chkNoRecoil" checked onchange="updateDisplay()"><span>NoRecoil</span></label>
+                <label class="toggle-item"><input type="checkbox" id="chkGodMode" checked onchange="updateDisplay()"><span>GodMode</span></label>
+                <label class="toggle-item"><input type="checkbox" id="chkBypassAC" checked onchange="updateDisplay()"><span>BypassAC</span></label>
             </div>
         </div>
     </div>
 
-    <!-- APP MAIN -->
-    <div class="app" id="appMain">
-        <div class="header">
-            <div class="logo">
-                <i class="fas fa-crown"></i>
-                <h1>VISUAL CODE <span>Tdung V30 FIX</span></h1>
+    <!-- ===== ROW 2 ===== -->
+    <div class="grid-4" style="margin-top:6px;">
+        <div class="card">
+            <div class="card-title"><i class="fas fa-file-export"></i> Xuất file <span class="badge badge-gold">Đa dạng</span></div>
+            <div class="file-grid">
+                <button class="btn btn-primary" onclick="exportSO()">.so</button>
+                <button class="btn btn-purple" onclick="exportDex()">.dex</button>
+                <button class="btn btn-green" onclick="exportLua()">.lua</button>
+                <button class="btn btn-secondary" onclick="exportJS()">.js</button>
+                <button class="btn btn-secondary" onclick="exportCPP()">.cpp</button>
+                <button class="btn btn-secondary" onclick="exportCFG()">.cfg</button>
+                <button class="btn btn-secondary" onclick="exportINI()">.ini</button>
+                <button class="btn btn-secondary" onclick="exportTXT()">.txt</button>
+                <button class="btn btn-secondary" onclick="exportJSON()">.json</button>
             </div>
-            <div class="header-actions">
-                <div class="theme-selector" id="themeSelector">
-                    <button data-theme="dark" class="active" onclick="setTheme('dark')" title="Dark"><i class="fas fa-moon"></i></button>
-                    <button data-theme="light" onclick="setTheme('light')" title="Light"><i class="fas fa-sun"></i></button>
-                    <button data-theme="ocean" onclick="setTheme('ocean')" title="Ocean"><i class="fas fa-water"></i></button>
-                    <button data-theme="sunset" onclick="setTheme('sunset')" title="Sunset"><i class="fas fa-sunset"></i></button>
-                    <button data-theme="forest" onclick="setTheme('forest')" title="Forest"><i class="fas fa-tree"></i></button>
-                    <button data-theme="neon" onclick="setTheme('neon')" title="Neon"><i class="fas fa-bolt"></i></button>
-                    <button data-theme="neonred" onclick="setTheme('neonred')" title="Neon Red"><i class="fas fa-fire"></i></button>
-                </div>
-                <button class="btn-logout" onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
-                <div class="badge-pro"><i class="fas fa-star"></i> Tdung · V30 FIX</div>
+            <button class="btn btn-gold" style="margin-top:4px;padding:5px;font-size:11px;width:100%;" onclick="exportAll()"><i class="fas fa-boxes"></i> Xuất tất cả</button>
+        </div>
+
+        <div class="card">
+            <div class="card-title"><i class="fas fa-magic"></i> Hành động <span class="badge">VIP</span></div>
+            <button class="btn btn-primary" style="width:100%;margin-bottom:4px;padding:6px;" onclick="applyConfig()"><i class="fas fa-check"></i> Áp dụng</button>
+            <button class="btn btn-secondary" style="width:100%;margin-bottom:4px;padding:6px;" onclick="resetAll()"><i class="fas fa-undo"></i> Reset</button>
+            <button class="btn btn-secondary" style="width:100%;padding:6px;" onclick="clearOutput()"><i class="fas fa-eraser"></i> Xóa output</button>
+        </div>
+
+        <div class="card">
+            <div class="card-title"><i class="fas fa-info-circle"></i> Trạng thái <span class="badge badge-green">Live</span></div>
+            <div style="font-size:11px;color:#88aadd;line-height:1.8;">
+                <div><span style="color:#445566;">FOV:</span> <span id="infoFOV">120</span></div>
+                <div><span style="color:#445566;">Smooth:</span> <span id="infoSmooth">80</span></div>
+                <div><span style="color:#445566;">Target:</span> <span id="infoTarget">Neck</span></div>
+                <div><span style="color:#445566;">Tính năng:</span> <span id="infoFeatures">13</span></div>
+                <div><span style="color:#445566;">File:</span> <span id="infoFile">.so</span></div>
+                <div><span style="color:#445566;">Trạng thái:</span> <span id="infoStatus" style="color:#44dd88;">● Sẵn sàng</span></div>
             </div>
         </div>
 
-        <div class="toolbar">
-            <button onclick="addPayload()"><i class="fas fa-plus-circle"></i> Thêm</button>
-            <button onclick="addWebClipPayload()"><i class="fas fa-link"></i> WebClip</button>
-            <button onclick="addDNSPayload()"><i class="fas fa-network-wired"></i> DNS</button>
-            <button onclick="addVPNPayload()"><i class="fas fa-lock"></i> VPN</button>
-            <button onclick="addWiFiPayload()"><i class="fas fa-wifi"></i> Wi-Fi</button>
-            <button onclick="addPasscodePayload()"><i class="fas fa-key"></i> Passcode</button>
-            <button onclick="addRestrictionsPayload()"><i class="fas fa-ban"></i> Restrictions</button>
-            <span class="sep"></span>
-            <button onclick="duplicateLast()"><i class="fas fa-copy"></i> Nhân đôi</button>
-            <button onclick="clearAll()"><i class="fas fa-trash-alt"></i> Xóa hết</button>
-            <span class="sep"></span>
-            <button onclick="exportJSON()"><i class="fas fa-file-export"></i> JSON</button>
-            <button onclick="document.getElementById('importJSON').click()"><i class="fas fa-file-import"></i> Nhập JSON</button>
-            <input type="file" id="importJSON" accept=".json" onchange="importJSON(event)" />
-            <button onclick="exportMobileConfig()"><i class="fas fa-mobile-alt"></i> Xuất .mobileconfig</button>
-            <button onclick="document.getElementById('importMobileConfig').click()"><i class="fas fa-upload"></i> Nhập .mobileconfig</button>
-            <input type="file" id="importMobileConfig" accept=".mobileconfig,.plist" onchange="importMobileConfig(event)" />
-            <span class="sep"></span>
-            <button onclick="saveLocal()"><i class="fas fa-save"></i> Lưu</button>
-            <button onclick="loadLocal()"><i class="fas fa-upload"></i> Tải</button>
-            <span class="sep"></span>
-            <!-- ===== MÃ HÓA V30 FIX - BẤM LÀ CHẠY ===== -->
-            <button onclick="encodeBase64Prompt()"><i class="fas fa-lock"></i> Mã hóa</button>
-            <button onclick="decodeBase64Prompt()"><i class="fas fa-unlock"></i> Giải mã</button>
-            <button onclick="convertBase64ToHex()"><i class="fas fa-exchange-alt"></i> → Hex</button>
-            <button onclick="convertHexToBase64()"><i class="fas fa-exchange-alt"></i> ← Hex</button>
-            <button onclick="convertBase64ToDec()"><i class="fas fa-sort-numeric-up"></i> → Dec</button>
-            <button onclick="convertDecToBase64()"><i class="fas fa-sort-numeric-up"></i> Dec → B64</button>
-            <button onclick="convertBase64ToBin()"><i class="fas fa-sort-numeric-down"></i> → Bin</button>
-            <button onclick="convertBinToBase64()"><i class="fas fa-sort-numeric-down"></i> Bin → B64</button>
-            <button onclick="convertHexStream()"><i class="fas fa-stream"></i> Hex Stream</button>
-            <button onclick="autoDetectAndConvert()"><i class="fas fa-magic"></i> Auto Convert</button>
-            <button onclick="copyBase64Output()"><i class="fas fa-copy"></i> Sao chép</button>
-            <span class="sep"></span>
-            <button onclick="generateNextVersion()"><i class="fas fa-tag"></i> New Version</button>
-            <button onclick="showVersionHistory()"><i class="fas fa-history"></i> Version History</button>
-            <span class="sep"></span>
-            <button onclick="generateAimlockCode()"><i class="fas fa-crosshairs"></i> Aimlock</button>
-            <button onclick="generateAndroidCode()"><i class="fab fa-android"></i> Android Code</button>
-            <button onclick="generateIOSVIP()"><i class="fab fa-apple"></i> iOS VIP</button>
-            <button onclick="generateGameVIP()"><i class="fas fa-gamepad"></i> VIP Game</button>
-            <span class="sep"></span>
-            <button onclick="generateQR()"><i class="fas fa-qrcode"></i> QR</button>
-            <button onclick="validateXML()"><i class="fas fa-check-circle"></i> Validate</button>
-            <button onclick="analyzePlist()"><i class="fas fa-chart-pie"></i> Phân tích</button>
-            <button onclick="exportCSV()"><i class="fas fa-file-csv"></i> CSV</button>
-        </div>
-
-        <div class="search-bar">
-            <div class="search-wrapper">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" id="searchInput" placeholder="Tìm kiếm payload..." oninput="filterPayloads()" />
+        <div class="card">
+            <div class="card-title"><i class="fas fa-database"></i> Thông tin <span class="badge badge-purple">Pro</span></div>
+            <div style="font-size:11px;color:#88aadd;line-height:1.8;">
+                <div><span style="color:#445566;">Version:</span> <span id="infoVersion">V4 FIX</span></div>
+                <div><span style="color:#445566;">Game:</span> <span id="infoGame">FF Max & FF Th</span></div>
+                <div><span style="color:#445566;">Base:</span> <span id="infoBase">0x8A5A1A0</span></div>
+                <div><span style="color:#445566;">Số dòng:</span> <span id="infoLines">0</span></div>
             </div>
-            <div class="filter-options">
-                <button class="active" data-filter="all" onclick="setFilter('all')">Tất cả</button>
-                <button data-filter="WebClip" onclick="setFilter('WebClip')">WebClip</button>
-                <button data-filter="DNS Proxy" onclick="setFilter('DNS Proxy')">DNS</button>
-                <button data-filter="VPN" onclick="setFilter('VPN')">VPN</button>
-                <button data-filter="Wi-Fi" onclick="setFilter('Wi-Fi')">Wi-Fi</button>
-                <button data-filter="Passcode" onclick="setFilter('Passcode')">Passcode</button>
-            </div>
-        </div>
-
-        <div class="main-grid">
-            <div class="left-panel">
-                <div class="card">
-                    <div class="card-title">
-                        <i class="fas fa-sliders-h"></i> Cấu hình chính
-                        <span class="badge-count" id="payloadCountBadge">0 payload</span>
-                    </div>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label><i class="fas fa-tag"></i> Tên hiển thị</label>
-                            <input class="form-control" id="displayName" value="Cấu hình Pro" />
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-fingerprint"></i> Định danh</label>
-                            <input class="form-control" id="identifier" value="com.tdung.pro" />
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-qrcode"></i> UUID</label>
-                            <input class="form-control" id="uuid" placeholder="Tự tạo" />
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-mobile-alt"></i> OS tối thiểu</label>
-                            <input class="form-control" id="osVersion" value="14.0" />
-                        </div>
-                        <div class="form-group full">
-                            <label><i class="fas fa-building"></i> Tổ chức</label>
-                            <input class="form-control" id="organization" value="Tdung" />
-                        </div>
-                        <div class="form-group full">
-                            <label><i class="fas fa-align-left"></i> Mô tả</label>
-                            <input class="form-control" id="description" value="Cấu hình đa năng tối ưu" />
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-globe"></i> Phạm vi</label>
-                            <select class="form-control" id="scope">
-                                <option value="System">System</option>
-                                <option value="User">User</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-tablet"></i> Loại TB</label>
-                            <select class="form-control" id="targetDevice">
-                                <option value="0">Tất cả</option>
-                                <option value="1">iPhone/iPad</option>
-                                <option value="2">Mac</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card" style="flex:1;">
-                    <div class="card-title">
-                        <i class="fas fa-boxes"></i> Payloads
-                        <span class="badge-count" id="payloadListCount">0</span>
-                        <span style="margin-left:8px;font-size:12px;color:var(--text-muted);font-weight:400;" id="payloadTotalSize">0 B</span>
-                    </div>
-                    <div class="payload-list" id="payloadList"></div>
-                    <div class="add-payload-btn" onclick="addPayload()">
-                        <i class="fas fa-plus-circle"></i> Thêm payload mới
-                    </div>
-                </div>
-
-                <div class="add-base64-section">
-                    <div class="title">
-                        <i class="fas fa-code"></i> Thêm payload từ Base64/Hex/Dec/Bin
-                    </div>
-                    <div class="row">
-                        <textarea id="base64Input" placeholder="Dán Base64, Hex, Dec hoặc Bin vào đây..."></textarea>
-                        <div class="actions">
-                            <button onclick="addBase64Payload()" class="primary"><i class="fas fa-plus"></i> Thêm</button>
-                            <button onclick="decodeBase64FromInput()"><i class="fas fa-unlock"></i> Giải mã</button>
-                            <button onclick="clearBase64Input()"><i class="fas fa-eraser"></i> Xóa</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="right-panel">
-                <div class="card">
-                    <div class="card-title">
-                        <i class="fas fa-code"></i> Xem trước XML
-                        <span class="badge-count" style="font-size:11px;" id="xmlLineCount">0 dòng</span>
-                    </div>
-                    <div class="preview-box" id="previewArea">🔍 Nhấn "Xem trước" để hiển thị XML.</div>
-                    <div class="stats-row">
-                        <span><i class="fas fa-layer-group"></i> Payload: <strong id="statCount">0</strong></span>
-                        <span><i class="fas fa-weight-hanging"></i> Kích thước: <strong id="statSize">0 B</strong></span>
-                        <span><i class="fas fa-clock"></i> <span id="statTimestamp">--</span></span>
-                    </div>
-                    <button class="btn-download" onclick="generateAndDownload()">
-                        <i class="fas fa-download"></i> TẢI .MOBILECONFIG
-                    </button>
-                    <div class="action-row">
-                        <button onclick="previewXML()"><i class="fas fa-eye"></i> Xem trước</button>
-                        <button onclick="copyXML()"><i class="fas fa-copy"></i> Sao chép</button>
-                        <button onclick="downloadPlistOnly()"><i class="fas fa-file-code"></i> Xuất .plist</button>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-title">
-                        <i class="fas fa-qrcode"></i> QR & Tiện ích
-                    </div>
-                    <div class="qr-container" id="qrContainer">
-                        <span style="color:var(--text-muted);font-size:13px;">Nhấn "Tạo QR" để hiển thị</span>
-                    </div>
-                    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;">
-                        <button onclick="generateQR()" style="flex:1;background:rgba(0,255,204,0.04);border:1px solid var(--border-color);color:var(--text-secondary);padding:8px;border-radius:40px;cursor:pointer;font-weight:500;transition:var(--transition);">Tạo QR (payload đầu)</button>
-                        <button onclick="clearQR()" style="flex:1;background:rgba(255,0,0,0.04);border:1px solid var(--border-color);color:#ff6666;padding:8px;border-radius:40px;cursor:pointer;font-weight:500;transition:var(--transition);">Xóa QR</button>
-                    </div>
-                    <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
-                        <button onclick="shareConfig()" style="flex:1;background:rgba(0,100,255,0.04);border:1px solid var(--border-color);color:#66aaff;padding:8px;border-radius:40px;cursor:pointer;font-weight:500;transition:var(--transition);"><i class="fas fa-share-alt"></i> Chia sẻ</button>
-                        <button onclick="resetAll()" style="flex:1;background:rgba(255,100,0,0.04);border:1px solid var(--border-color);color:#ffaa66;padding:8px;border-radius:40px;cursor:pointer;font-weight:500;transition:var(--transition);"><i class="fas fa-undo-alt"></i> Reset</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="status-bar">
-            <span class="dot"></span>
-            <span class="status-text" id="statusText">🚀 VISUAL CODE Tdung V30 FIX sẵn sàng.</span>
-            <span class="status-time" id="statusTime"></span>
-        </div>
-
-        <div class="footer">
-            <span><i class="fas fa-skull"></i> Tdung · V30 FIX</span>
-            <span><i class="fas fa-bolt"></i> Mã hóa chạy 100% · Hex Stream</span>
-            <a href="#" onclick="location.reload();return false;"><i class="fas fa-undo-alt"></i> Reload</a>
         </div>
     </div>
 
-    <script>
-        // ============================================================
-        // LOGIN
-        // ============================================================
-        const LICENSE_KEY = 'Tdung2026';
-        let isLoggedIn = false;
+    <!-- ===== KẾT QUẢ ===== -->
+    <div class="card" style="margin-top:12px;">
+        <div class="card-title">
+            <i class="fas fa-terminal"></i> Nội dung xuất
+            <span class="file-badge" id="fileTypeBadge">.so</span>
+            <span style="margin-left:auto;font-size:11px;color:#445566;" id="lineCount">0 dòng</span>
+        </div>
+        <div class="output-box" id="outputArea">// Chọn loại file và bấm xuất</div>
+        <div class="row-actions">
+            <button onclick="copyOutput()"><i class="fas fa-copy"></i> Sao chép</button>
+            <button onclick="downloadFile()"><i class="fas fa-download"></i> Tải file</button>
+            <button onclick="clearOutput()"><i class="fas fa-eraser"></i> Xóa</button>
+        </div>
+    </div>
 
-        function checkLogin() {
-            const logged = localStorage.getItem('tdung_logged_in');
-            if (logged === 'true') {
-                isLoggedIn = true;
-                document.getElementById('loginOverlay').classList.add('hidden');
-                document.getElementById('appMain').style.display = 'block';
-                initApp();
-            } else {
-                document.getElementById('loginOverlay').classList.remove('hidden');
-                document.getElementById('appMain').style.display = 'none';
-            }
-        }
+    <!-- ===== STATUS ===== -->
+    <div class="status-bar">
+        <span class="dot"></span>
+        <span class="status-text" id="statusText">✅ Sẵn sàng. Điều chỉnh thông số và xuất file.</span>
+        <span id="statusTime" style="font-size:11px;color:#445566;"></span>
+    </div>
 
-        function handleLogin() {
-            const key = document.getElementById('loginKey').value.trim();
-            const errorEl = document.getElementById('loginError');
-            if (key === LICENSE_KEY) {
-                localStorage.setItem('tdung_logged_in', 'true');
-                isLoggedIn = true;
-                document.getElementById('loginOverlay').classList.add('hidden');
-                document.getElementById('appMain').style.display = 'block';
-                errorEl.textContent = '';
-                initApp();
-            } else {
-                errorEl.textContent = '❌ Key không hợp lệ!';
-                document.getElementById('loginKey').value = '';
-                document.getElementById('loginKey').focus();
-            }
-        }
+    <div class="footer">
+        <span>⚡ VIP Pro Max Ultimate V4 FIX – <span class="highlight">Không lỗi</span> – <span class="highlight2">Logic VIP</span></span>
+    </div>
+</div>
 
-        function handleLogout() {
-            if (confirm('Đăng xuất?')) {
-                localStorage.removeItem('tdung_logged_in');
-                isLoggedIn = false;
-                document.getElementById('loginOverlay').classList.remove('hidden');
-                document.getElementById('appMain').style.display = 'none';
-                document.getElementById('loginError').textContent = '';
-                document.getElementById('loginKey').value = '';
-            }
-        }
+<script>
+    // ============================================================
+    // CORE LOGIC
+    // ============================================================
+    function getVal(id) { return document.getElementById(id).value; }
+    function getInt(id) { return parseInt(document.getElementById(id).value) || 0; }
+    function isChecked(id) { return document.getElementById(id).checked; }
 
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && !isLoggedIn) handleLogin();
-        });
+    function gB() { return getVal('baseOffset') || '0x8A5A1A0'; }
+    function gX() { return getVal('xrayOffset') || '0x5A0A1A0'; }
+    function gS() { return getVal('speedOffset') || '0x4B0A1A0'; }
+    function gN() { return getVal('norecoilOffset') || '0x5C0A1A0'; }
+    function gG() { return getVal('godmodeOffset') || '0x7A0A1A0'; }
+    function gFOV() { return getInt('fovSlider') || 120; }
+    function gSmooth() { return getInt('smoothSlider') || 80; }
+    function gAimSpeed() { return getInt('aimSpeedSlider') || 60; }
+    function gAntiShake() { return getInt('antiShakeSlider') || 80; }
+    function gStabilizer() { return getInt('stabilizerSlider') || 70; }
+    function gSpreadFix() { return getInt('spreadFixSlider') || 85; }
+    function gOvercorrection() { return getInt('overcorrectionSlider') || 60; }
+    function gTarget() { return getVal('aimTarget') || 'neck'; }
 
-        // ============================================================
-        // STATE
-        // ============================================================
-        let payloads = [];
-        let payloadIdCounter = 0;
-        let qrInstance = null;
-        let dragIndex = null;
-        let currentFilter = 'all';
-        let searchQuery = '';
-        let versionCounter = 1;
-        let versionHistory = [];
-
-        const CUSTOM_FIELDS_CONFIG = {
-            'DNS Proxy': [
-                { key: 'configName', label: 'Tên cấu hình', placeholder: 'DNS Custom', default: 'DNS Custom' },
-                { key: 'server', label: 'DNS Server(s)', placeholder: '8.8.8.8,1.1.1.1', default: '8.8.8.8,1.1.1.1' },
-                { key: 'searchDomain', label: 'Search Domain', placeholder: 'example.com', default: '' },
-                { key: 'fallbackServer', label: 'Fallback Server', placeholder: '8.8.4.4', default: '' }
-            ],
-            'WebClip': [
-                { key: 'url', label: 'URL', placeholder: 'https://example.com', default: 'https://example.com' },
-                { key: 'label', label: 'Label', placeholder: 'Web Clip', default: 'Web Clip' }
-            ],
-            'VPN (IKEv2)': [
-                { key: 'server', label: 'Server', placeholder: 'vpn.example.com', default: 'vpn.example.com' },
-                { key: 'remoteAddress', label: 'Remote Address', placeholder: 'vpn.example.com', default: 'vpn.example.com' },
-                { key: 'authMethod', label: 'Auth Method', placeholder: 'Certificate', default: 'Certificate' },
-                { key: 'username', label: 'Username (optional)', placeholder: 'user', default: '' },
-                { key: 'password', label: 'Password (optional)', placeholder: 'pass', default: '' }
-            ],
-            'Wi-Fi (Enterprise)': [
-                { key: 'ssid', label: 'SSID', placeholder: 'MyWiFi', default: 'MyWiFi' },
-                { key: 'encryption', label: 'Encryption', placeholder: 'WPA2', default: 'WPA2' },
-                { key: 'password', label: 'Password', placeholder: 'password123', default: 'password123' },
-                { key: 'hidden', label: 'Hidden (true/false)', placeholder: 'false', default: 'false' }
-            ],
-            'Passcode Policy': [
-                { key: 'allowSimple', label: 'Allow Simple (true/false)', placeholder: 'false', default: 'false' },
-                { key: 'minLength', label: 'Min Length', placeholder: '6', default: '6' },
-                { key: 'maxFailedAttempts', label: 'Max Failed', placeholder: '5', default: '5' },
-                { key: 'autoLock', label: 'Auto Lock (minutes)', placeholder: '5', default: '5' }
-            ],
-            'Restrictions (App Lock)': [
-                { key: 'allowAppInstallation', label: 'Allow Installation', placeholder: 'true', default: 'true' },
-                { key: 'allowAppRemoval', label: 'Allow Removal', placeholder: 'true', default: 'true' },
-                { key: 'allowCamera', label: 'Allow Camera', placeholder: 'true', default: 'true' },
-                { key: 'allowSafari', label: 'Allow Safari', placeholder: 'true', default: 'true' }
-            ]
+    function flags() {
+        return {
+            aimlock: isChecked('chkAimlock'),
+            headAim: isChecked('chkHeadAim'),
+            neckAim: isChecked('chkNeckAim'),
+            drag: isChecked('chkDrag'),
+            fixRung: isChecked('chkFixRung'),
+            fixLo: isChecked('chkFixLo'),
+            fixSpread: isChecked('chkFixSpread'),
+            emTam: isChecked('chkEmTam'),
+            xray: isChecked('chkXRay'),
+            speed: isChecked('chkSpeed'),
+            norecoil: isChecked('chkNoRecoil'),
+            godmode: isChecked('chkGodMode'),
+            bypassac: isChecked('chkBypassAC')
         };
-
-        function genUUID() {
-            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-                const r = Math.random() * 16 | 0;
-                return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-            });
-        }
-
-        function getPayloadTypeId(typeName) {
-            const map = {
-                'Custom (PayloadData)': 'com.apple.configuration-profile.payload',
-                'WebClip': 'com.apple.webClip.managed',
-                'DNS Proxy': 'com.apple.dnsproxy',
-                'VPN (IKEv2)': 'com.apple.vpn.managed',
-                'Wi-Fi (Enterprise)': 'com.apple.wifi.managed',
-                'Passcode Policy': 'com.apple.mobiledevice.passwordpolicy',
-                'Restrictions (App Lock)': 'com.apple.applicationaccess'
-            };
-            return map[typeName] || 'com.apple.configuration-profile.payload';
-        }
-
-        function escapeXml(str) {
-            return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;').replace(/'/g, '&apos;');
-        }
-
-        function formatSize(bytes) {
-            if (bytes < 1024) return bytes + ' B';
-            if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
-            return (bytes / 1048576).toFixed(1) + ' MB';
-        }
-
-        function buildCustomXML(type, fields) {
-            const map = {
-                'DNS Proxy': (f) => `<?xml version="1.0"?><plist version="1.0"><dict>
-                    <key>ConfigurationName</key><string>${escapeXml(f.configName || 'DNS Custom')}</string>
-                    <key>DNSServerAddresses</key><array>${(f.server || '8.8.8.8').split(',').map(s => `<string>${escapeXml(s.trim())}</string>`).join('')}</array>
-                    ${f.searchDomain ? `<key>SearchDomains</key><array><string>${escapeXml(f.searchDomain)}</string></array>` : ''}
-                    ${f.fallbackServer ? `<key>FallbackServer</key><string>${escapeXml(f.fallbackServer)}</string>` : ''}
-                </dict></plist>`,
-                'WebClip': (f) => `<?xml version="1.0"?><plist version="1.0"><dict>
-                    <key>URL</key><string>${escapeXml(f.url || 'https://example.com')}</string>
-                    <key>Label</key><string>${escapeXml(f.label || 'Web Clip')}</string>
-                    <key>FullScreen</key><true/><key>IsRemovable</key><true/><key>Precomposed</key><true/>
-                </dict></plist>`,
-                'VPN (IKEv2)': (f) => `<?xml version="1.0"?><plist version="1.0"><dict>
-                    <key>Server</key><string>${escapeXml(f.server || 'vpn.example.com')}</string>
-                    <key>RemoteAddress</key><string>${escapeXml(f.remoteAddress || 'vpn.example.com')}</string>
-                    <key>AuthenticationMethod</key><string>${escapeXml(f.authMethod || 'Certificate')}</string>
-                    ${f.username ? `<key>UserName</key><string>${escapeXml(f.username)}</string>` : ''}
-                    ${f.password ? `<key>Password</key><string>${escapeXml(f.password)}</string>` : ''}
-                </dict></plist>`,
-                'Wi-Fi (Enterprise)': (f) => `<?xml version="1.0"?><plist version="1.0"><dict>
-                    <key>SSID_STR</key><string>${escapeXml(f.ssid || 'MyWiFi')}</string>
-                    <key>EncryptionType</key><string>${escapeXml(f.encryption || 'WPA2')}</string>
-                    <key>Password</key><string>${escapeXml(f.password || 'password123')}</string>
-                    ${f.hidden === 'true' ? `<key>HiddenNetwork</key><true/>` : ''}
-                </dict></plist>`,
-                'Passcode Policy': (f) => `<?xml version="1.0"?><plist version="1.0"><dict>
-                    <key>allowSimple</key><${f.allowSimple === 'true' ? 'true' : 'false'}/>
-                    <key>minLength</key><integer>${parseInt(f.minLength) || 6}</integer>
-                    <key>maxFailedAttempts</key><integer>${parseInt(f.maxFailedAttempts) || 5}</integer>
-                    ${f.autoLock ? `<key>autoLock</key><integer>${parseInt(f.autoLock) || 5}</integer>` : ''}
-                </dict></plist>`,
-                'Restrictions (App Lock)': (f) => `<?xml version="1.0"?><plist version="1.0"><dict>
-                    <key>allowAppInstallation</key><${f.allowAppInstallation === 'true' ? 'true' : 'false'}/>
-                    <key>allowAppRemoval</key><${f.allowAppRemoval === 'true' ? 'true' : 'false'}/>
-                    <key>allowCamera</key><${f.allowCamera === 'true' ? 'true' : 'false'}/>
-                    <key>allowSafari</key><${f.allowSafari === 'true' ? 'true' : 'false'}/>
-                </dict></plist>`
-            };
-            return map[type] ? map[type](fields) : '';
-        }
-
-        function setTheme(theme) {
-            document.documentElement.setAttribute('data-theme', theme);
-            document.querySelectorAll('.theme-selector button').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.theme === theme);
-            });
-            localStorage.setItem('tdung_theme', theme);
-        }
-
-        // ============================================================
-        // RENDER PAYLOADS
-        // ============================================================
-        function renderPayloads() {
-            const container = document.getElementById('payloadList');
-            const countBadge = document.getElementById('payloadListCount');
-            const totalBadge = document.getElementById('payloadCountBadge');
-            const sizeSpan = document.getElementById('payloadTotalSize');
-
-            let filtered = payloads;
-            if (searchQuery) {
-                const q = searchQuery.toLowerCase();
-                filtered = filtered.filter(p =>
-                    p.description.toLowerCase().includes(q) ||
-                    p.type.toLowerCase().includes(q) ||
-                    (p.data || '').toLowerCase().includes(q) ||
-                    (p.customFields && Object.values(p.customFields).some(v => String(v).toLowerCase().includes(q)))
-                );
-            }
-            if (currentFilter !== 'all') {
-                filtered = filtered.filter(p => p.type.includes(currentFilter));
-            }
-
-            countBadge.textContent = filtered.length;
-            totalBadge.textContent = payloads.length + ' payload';
-            let totalSize = 0;
-            payloads.forEach(p => { totalSize += (p.data || '').length; });
-            sizeSpan.textContent = formatSize(totalSize);
-
-            if (filtered.length === 0) {
-                container.innerHTML =
-                    '<div style="color:var(--text-muted);text-align:center;padding:30px 10px;">' +
-                    (payloads.length === 0 ? 'Chưa có payload.<br>Nhấn "Thêm" hoặc dán dữ liệu để bắt đầu.' :
-                        'Không tìm thấy payload phù hợp.') +
-                    '</div>';
-                return;
-            }
-
-            container.innerHTML = '';
-            filtered.forEach((p, index) => {
-                const div = document.createElement('div');
-                div.className = 'payload-item';
-                div.dataset.id = p.id;
-                div.draggable = true;
-
-                const topRow = document.createElement('div');
-                topRow.className = 'top-row';
-                topRow.innerHTML = `
-                    <div class="info">
-                        <span class="idx">#${index+1}</span>
-                        <span class="type-badge">${p.type}</span>
-                        <span class="desc"><input value="${escapeXml(p.description)}" placeholder="Mô tả" onchange="updatePayloadProp(${p.id}, 'description', this.value)" /></span>
-                    </div>
-                    <div class="actions">
-                        <button class="move-up" onclick="movePayload(${p.id}, -1)" title="Lên"><i class="fas fa-chevron-up"></i></button>
-                        <button class="move-down" onclick="movePayload(${p.id}, 1)" title="Xuống"><i class="fas fa-chevron-down"></i></button>
-                        <button class="dup" onclick="duplicatePayload(${p.id})" title="Nhân đôi"><i class="fas fa-copy"></i></button>
-                        <button onclick="removePayload(${p.id})" title="Xóa"><i class="fas fa-times"></i></button>
-                    </div>
-                `;
-                div.appendChild(topRow);
-
-                const bottomRow = document.createElement('div');
-                bottomRow.className = 'bottom-row';
-                const dataSize = (p.data || '').length;
-                let previewFields = '';
-                if (p.customFields) {
-                    const entries = Object.entries(p.customFields).filter(([k, v]) => v && v.length > 0);
-                    if (entries.length > 0) {
-                        previewFields = entries.slice(0, 3).map(([k, v]) =>
-                            `<span>${k}: ${escapeXml(v)}</span>`
-                        ).join('');
-                        if (entries.length > 3) previewFields += `<span>+${entries.length-3}</span>`;
-                    }
-                }
-                bottomRow.innerHTML = `
-                    <span class="size-tag">${formatSize(dataSize)}</span>
-                    <div class="custom-fields-preview">${previewFields}</div>
-                    <button class="expand-btn" onclick="toggleDetail(${p.id})"><i class="fas fa-chevron-down"></i> Chi tiết</button>
-                `;
-                div.appendChild(bottomRow);
-
-                const detailArea = document.createElement('div');
-                detailArea.className = 'detail-area';
-                detailArea.id = `detail-${p.id}`;
-
-                const fieldsConfig = CUSTOM_FIELDS_CONFIG[p.type] || [];
-                let customHtml = '';
-                if (fieldsConfig.length > 0) {
-                    customHtml = `<div class="custom-fields">`;
-                    fieldsConfig.forEach(f => {
-                        const val = p.customFields && p.customFields[f.key] !== undefined ? p.customFields[f.key] :
-                            f.default || '';
-                        customHtml += `
-                            <div class="field-group">
-                                <label>${f.label}</label>
-                                <input type="text" value="${escapeXml(val)}" placeholder="${f.placeholder}" 
-                                    onchange="updateCustomField(${p.id}, '${f.key}', this.value)" />
-                            </div>
-                        `;
-                    });
-                    customHtml += `
-                        <div class="field-group" style="flex:0 0 auto;justify-content:flex-end;">
-                            <button class="gen-btn" onclick="generateFromCustomFields(${p.id})">Tạo Payload</button>
-                        </div>
-                    `;
-                    customHtml += `</div>`;
-                }
-
-                detailArea.innerHTML = `
-                    <textarea onchange="updatePayloadProp(${p.id}, 'data', this.value)" placeholder="Dán Base64 hoặc dữ liệu payload...">${p.data || ''}</textarea>
-                    ${customHtml}
-                    <div class="btn-group">
-                        <button onclick="encodeField(${p.id})"><i class="fas fa-lock"></i> Mã hóa</button>
-                        <button onclick="decodeField(${p.id})"><i class="fas fa-unlock"></i> Giải mã</button>
-                        <button onclick="clearField(${p.id})"><i class="fas fa-eraser"></i> Xóa</button>
-                        <button onclick="applyTemplate(${p.id})"><i class="fas fa-magic"></i> Mẫu</button>
-                    </div>
-                `;
-                div.appendChild(detailArea);
-
-                div.addEventListener('dragstart', (e) => {
-                    dragIndex = payloads.findIndex(item => item.id === p.id);
-                    div.classList.add('dragging');
-                });
-                div.addEventListener('dragend', () => {
-                    div.classList.remove('dragging');
-                });
-                div.addEventListener('dragover', (e) => {
-                    e.preventDefault();
-                    const items = container.querySelectorAll('.payload-item');
-                    items.forEach(el => el.classList.remove('drag-over'));
-                    const rect = div.getBoundingClientRect();
-                    const mid = rect.top + rect.height / 2;
-                    if (e.clientY < mid) {
-                        div.classList.add('drag-over');
-                    } else {
-                        div.classList.add('drag-over');
-                    }
-                });
-                div.addEventListener('dragleave', () => {
-                    div.classList.remove('drag-over');
-                });
-                div.addEventListener('drop', (e) => {
-                    e.preventDefault();
-                    div.classList.remove('drag-over');
-                    if (dragIndex !== null && dragIndex !== index) {
-                        const item = payloads.splice(dragIndex, 1)[0];
-                        payloads.splice(index, 0, item);
-                        renderPayloads();
-                        updateStatus('🔄 Đã sắp xếp lại payload.');
-                    }
-                    dragIndex = null;
-                });
-
-                container.appendChild(div);
-            });
-            updateStats();
-        }
-
-        // ============================================================
-        // PAYLOAD CRUD
-        // ============================================================
-        function addPayload() {
-            const id = payloadIdCounter++;
-            payloads.push({
-                id,
-                type: 'Custom (PayloadData)',
-                description: 'Payload ' + (payloads.length + 1),
-                data: '',
-                customFields: {}
-            });
-            renderPayloads();
-            updateStatus('✅ Đã thêm payload mới.');
-        }
-
-        function addWebClipPayload() {
-            const id = payloadIdCounter++;
-            const defaultFields = { url: 'https://example.com', label: 'Web Clip' };
-            payloads.push({
-                id,
-                type: 'WebClip',
-                description: 'WebClip ' + (payloads.length + 1),
-                data: '',
-                customFields: defaultFields
-            });
-            renderPayloads();
-            const p = payloads.find(p => p.id === id);
-            if (p) generateFromCustomFields(id);
-            updateStatus('✅ Đã thêm WebClip.');
-        }
-
-        function addDNSPayload() {
-            const id = payloadIdCounter++;
-            const defaultFields = {
-                configName: 'DNS Custom',
-                server: '8.8.8.8,1.1.1.1',
-                searchDomain: '',
-                fallbackServer: '8.8.4.4'
-            };
-            payloads.push({
-                id,
-                type: 'DNS Proxy',
-                description: 'DNS Proxy ' + (payloads.length + 1),
-                data: '',
-                customFields: defaultFields
-            });
-            renderPayloads();
-            const p = payloads.find(p => p.id === id);
-            if (p) generateFromCustomFields(id);
-            updateStatus('✅ Đã thêm DNS Proxy.');
-        }
-
-        function addVPNPayload() {
-            const id = payloadIdCounter++;
-            const defaultFields = {
-                server: 'vpn.example.com',
-                remoteAddress: 'vpn.example.com',
-                authMethod: 'Certificate',
-                username: '',
-                password: ''
-            };
-            payloads.push({
-                id,
-                type: 'VPN (IKEv2)',
-                description: 'VPN ' + (payloads.length + 1),
-                data: '',
-                customFields: defaultFields
-            });
-            renderPayloads();
-            const p = payloads.find(p => p.id === id);
-            if (p) generateFromCustomFields(id);
-            updateStatus('✅ Đã thêm VPN.');
-        }
-
-        function addWiFiPayload() {
-            const id = payloadIdCounter++;
-            const defaultFields = {
-                ssid: 'MyWiFi',
-                encryption: 'WPA2',
-                password: 'password123',
-                hidden: 'false'
-            };
-            payloads.push({
-                id,
-                type: 'Wi-Fi (Enterprise)',
-                description: 'Wi-Fi ' + (payloads.length + 1),
-                data: '',
-                customFields: defaultFields
-            });
-            renderPayloads();
-            const p = payloads.find(p => p.id === id);
-            if (p) generateFromCustomFields(id);
-            updateStatus('✅ Đã thêm Wi-Fi.');
-        }
-
-        function addPasscodePayload() {
-            const id = payloadIdCounter++;
-            const defaultFields = {
-                allowSimple: 'false',
-                minLength: '6',
-                maxFailedAttempts: '5',
-                autoLock: '5'
-            };
-            payloads.push({
-                id,
-                type: 'Passcode Policy',
-                description: 'Passcode ' + (payloads.length + 1),
-                data: '',
-                customFields: defaultFields
-            });
-            renderPayloads();
-            const p = payloads.find(p => p.id === id);
-            if (p) generateFromCustomFields(id);
-            updateStatus('✅ Đã thêm Passcode.');
-        }
-
-        function addRestrictionsPayload() {
-            const id = payloadIdCounter++;
-            const defaultFields = {
-                allowAppInstallation: 'true',
-                allowAppRemoval: 'true',
-                allowCamera: 'true',
-                allowSafari: 'true'
-            };
-            payloads.push({
-                id,
-                type: 'Restrictions (App Lock)',
-                description: 'Restrictions ' + (payloads.length + 1),
-                data: '',
-                customFields: defaultFields
-            });
-            renderPayloads();
-            const p = payloads.find(p => p.id === id);
-            if (p) generateFromCustomFields(id);
-            updateStatus('✅ Đã thêm Restrictions.');
-        }
-
-        function duplicatePayload(id) {
-            const orig = payloads.find(p => p.id === id);
-            if (!orig) return;
-            const newId = payloadIdCounter++;
-            const copy = {
-                ...orig,
-                id: newId,
-                description: orig.description + ' (copy)',
-                customFields: { ...orig.customFields }
-            };
-            payloads.push(copy);
-            renderPayloads();
-            updateStatus('📋 Đã nhân đôi.');
-        }
-
-        function duplicateLast() {
-            if (payloads.length === 0) return addPayload();
-            duplicatePayload(payloads[payloads.length - 1].id);
-        }
-
-        function removePayload(id) {
-            if (!confirm('Xóa payload này?')) return;
-            payloads = payloads.filter(p => p.id !== id);
-            renderPayloads();
-            updateStatus('🗑️ Đã xóa.');
-        }
-
-        function clearAll() {
-            if (!confirm('Xóa tất cả payload?')) return;
-            payloads = [];
-            renderPayloads();
-            updateStatus('🧹 Đã xóa toàn bộ.');
-        }
-
-        function movePayload(id, direction) {
-            const idx = payloads.findIndex(p => p.id === id);
-            if (idx === -1) return;
-            const newIdx = idx + direction;
-            if (newIdx < 0 || newIdx >= payloads.length) return;
-            const item = payloads.splice(idx, 1)[0];
-            payloads.splice(newIdx, 0, item);
-            renderPayloads();
-            updateStatus('🔄 Đã di chuyển.');
-        }
-
-        function toggleDetail(id) {
-            const el = document.getElementById(`detail-${id}`);
-            if (el) {
-                el.classList.toggle('open');
-                const btn = el.closest('.payload-item').querySelector('.expand-btn i');
-                if (btn) btn.className = el.classList.contains('open') ? 'fas fa-chevron-up' : 'fas fa-chevron-down';
-            }
-        }
-
-        function updatePayloadProp(id, prop, value) {
-            const p = payloads.find(p => p.id === id);
-            if (p) {
-                p[prop] = value;
-                updateStats();
-            }
-        }
-
-        function updateCustomField(id, key, value) {
-            const p = payloads.find(p => p.id === id);
-            if (p) {
-                if (!p.customFields) p.customFields = {};
-                p.customFields[key] = value;
-                updateStats();
-            }
-        }
-
-        function generateFromCustomFields(id) {
-            const p = payloads.find(p => p.id === id);
-            if (!p) return;
-            const fields = p.customFields || {};
-            const xml = buildCustomXML(p.type, fields);
-            if (xml) {
-                p.data = btoa(unescape(encodeURIComponent(xml)));
-                renderPayloads();
-                updateStatus('✅ Đã tạo payload từ custom fields.');
-            } else {
-                updateStatus('⚠️ Không hỗ trợ loại này.');
-            }
-        }
-
-        function applyTemplate(id) {
-            const p = payloads.find(p => p.id === id);
-            if (!p) return;
-            generateFromCustomFields(id);
-        }
-
-        function clearField(id) {
-            const p = payloads.find(p => p.id === id);
-            if (p) {
-                p.data = '';
-                p.customFields = {};
-                renderPayloads();
-                updateStatus('🧹 Đã xóa dữ liệu.');
-            }
-        }
-
-        function encodeField(id) {
-            const p = payloads.find(p => p.id === id);
-            if (!p) return;
-            const text = prompt('Nhập văn bản cần mã hóa:');
-            if (text === null) return;
-            try {
-                const base64 = btoa(unescape(encodeURIComponent(text)));
-                p.data = base64;
-                renderPayloads();
-                updateStatus('✅ Mã hóa thành công.');
-            } catch (e) { updateStatus('❌ Lỗi: ' + e.message); }
-        }
-
-        function decodeField(id) {
-            const p = payloads.find(p => p.id === id);
-            if (!p || !p.data) { updateStatus('⚠️ Dữ liệu trống.'); return; }
-            try {
-                const decoded = atob(p.data);
-                alert('Giải mã:\n\n' + decoded.substring(0, 2000));
-                updateStatus('✅ Giải mã OK.');
-            } catch (e) { updateStatus('❌ Base64 không hợp lệ.'); }
-        }
-
-        // ============================================================
-        // BASE64 SECTION
-        // ============================================================
-        function addBase64Payload() {
-            const input = document.getElementById('base64Input').value.trim();
-            if (!input) { updateStatus('⚠️ Vui lòng dán dữ liệu vào ô.'); return; }
-            try { atob(input); } catch (e) { updateStatus('❌ Base64 không hợp lệ.'); return; }
-            const id = payloadIdCounter++;
-            payloads.push({
-                id,
-                type: 'Custom (PayloadData)',
-                description: 'Base64 Payload ' + (payloads.length + 1),
-                data: input,
-                customFields: {}
-            });
-            renderPayloads();
-            document.getElementById('base64Input').value = '';
-            updateStatus('✅ Đã thêm payload từ Base64.');
-        }
-
-        function decodeBase64FromInput() {
-            const input = document.getElementById('base64Input').value.trim();
-            if (!input) { updateStatus('⚠️ Vui lòng dán dữ liệu vào ô.'); return; }
-            try {
-                const decoded = atob(input);
-                alert('Giải mã thành công:\n\n' + decoded.substring(0, 2000));
-                updateStatus('✅ Giải mã thành công.');
-            } catch (e) {
-                updateStatus('❌ Dữ liệu không phải Base64 hợp lệ.');
-            }
-        }
-
-        function clearBase64Input() {
-            document.getElementById('base64Input').value = '';
-            updateStatus('🧹 Đã xóa ô nhập.');
-        }
-
-        // ============================================================
-        // SEARCH & FILTER
-        // ============================================================
-        function filterPayloads() {
-            searchQuery = document.getElementById('searchInput').value;
-            renderPayloads();
-        }
-
-        function setFilter(filter) {
-            currentFilter = filter;
-            document.querySelectorAll('.filter-options button').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.filter === filter);
-            });
-            renderPayloads();
-        }
-
-        // ============================================================
-        // TOOLS
-        // ============================================================
-        function encodeBase64Prompt() {
-            const text = prompt('Nhập văn bản cần mã hóa:');
-            if (!text) return;
-            try {
-                const base64 = btoa(unescape(encodeURIComponent(text)));
-                document.getElementById('base64Input').value = base64;
-                updateStatus('✅ Đã mã hóa thành Base64.');
-            } catch (e) { updateStatus('❌ Lỗi: ' + e.message); }
-        }
-
-        function decodeBase64Prompt() {
-            const input = document.getElementById('base64Input').value.trim();
-            if (!input) { updateStatus('⚠️ Vui lòng nhập Base64 vào ô.'); return; }
-            try {
-                const decoded = atob(input);
-                alert('Giải mã thành công:\n\n' + decoded);
-                updateStatus('✅ Giải mã thành công.');
-            } catch (e) { updateStatus('❌ Base64 không hợp lệ.'); }
-        }
-
-        // ============================================================
-        // CHUYỂN ĐỔI BASE64 <-> HEX <-> DEC <-> BIN (FIX 100%)
-        // ============================================================
-        function convertBase64ToHex() {
-            const input = document.getElementById('base64Input').value.trim();
-            if (!input) { updateStatus('⚠️ Nhập Base64 trước.'); return; }
-            try {
-                const binary = atob(input);
-                let hex = '';
-                for (let i = 0; i < binary.length; i++) {
-                    hex += binary.charCodeAt(i).toString(16).padStart(2, '0').toUpperCase();
-                }
-                document.getElementById('base64Input').value = hex;
-                updateStatus('✅ Base64 → Hex thành công.');
-            } catch (e) { updateStatus('❌ Lỗi: ' + e.message); }
-        }
-
-        function convertHexToBase64() {
-            const input = document.getElementById('base64Input').value.trim().replace(/\s/g, '');
-            if (!input || input.length % 2 !== 0) {
-                updateStatus('⚠️ Hex không hợp lệ (độ dài phải chẵn).');
-                return;
-            }
-            try {
-                let binary = '';
-                for (let i = 0; i < input.length; i += 2) {
-                    const byte = parseInt(input.substr(i, 2), 16);
-                    if (isNaN(byte)) throw new Error('Hex không hợp lệ');
-                    binary += String.fromCharCode(byte);
-                }
-                document.getElementById('base64Input').value = btoa(binary);
-                updateStatus('✅ Hex → Base64 thành công.');
-            } catch (e) { updateStatus('❌ Lỗi: ' + e.message); }
-        }
-
-        function convertBase64ToDec() {
-            const input = document.getElementById('base64Input').value.trim();
-            if (!input) { updateStatus('⚠️ Nhập Base64 trước.'); return; }
-            try {
-                const binary = atob(input);
-                const decArray = [];
-                for (let i = 0; i < binary.length; i++) {
-                    decArray.push(binary.charCodeAt(i));
-                }
-                document.getElementById('base64Input').value = decArray.join(', ');
-                updateStatus('✅ Base64 → Dec thành công.');
-            } catch (e) { updateStatus('❌ Lỗi: ' + e.message); }
-        }
-
-        function convertDecToBase64() {
-            const input = document.getElementById('base64Input').value.trim();
-            if (!input) { updateStatus('⚠️ Nhập Dec trước (cách nhau dấu phẩy).'); return; }
-            try {
-                const numbers = input.split(',').map(s => parseInt(s.trim()));
-                if (numbers.some(isNaN)) throw new Error('Dec không hợp lệ');
-                let binary = '';
-                for (const num of numbers) {
-                    binary += String.fromCharCode(num);
-                }
-                document.getElementById('base64Input').value = btoa(binary);
-                updateStatus('✅ Dec → Base64 thành công.');
-            } catch (e) { updateStatus('❌ Lỗi: ' + e.message); }
-        }
-
-        function convertBase64ToBin() {
-            const input = document.getElementById('base64Input').value.trim();
-            if (!input) { updateStatus('⚠️ Nhập Base64 trước.'); return; }
-            try {
-                const binary = atob(input);
-                let binStr = '';
-                for (let i = 0; i < binary.length; i++) {
-                    binStr += binary.charCodeAt(i).toString(2).padStart(8, '0') + ' ';
-                }
-                document.getElementById('base64Input').value = binStr.trim();
-                updateStatus('✅ Base64 → Bin thành công.');
-            } catch (e) { updateStatus('❌ Lỗi: ' + e.message); }
-        }
-
-        function convertBinToBase64() {
-            const input = document.getElementById('base64Input').value.trim().replace(/\s/g, '');
-            if (!input || input.length % 8 !== 0) {
-                updateStatus('⚠️ Bin không hợp lệ (phải là bội số của 8 bit).');
-                return;
-            }
-            try {
-                let binary = '';
-                for (let i = 0; i < input.length; i += 8) {
-                    const byte = parseInt(input.substr(i, 8), 2);
-                    if (isNaN(byte)) throw new Error('Bin không hợp lệ');
-                    binary += String.fromCharCode(byte);
-                }
-                document.getElementById('base64Input').value = btoa(binary);
-                updateStatus('✅ Bin → Base64 thành công.');
-            } catch (e) { updateStatus('❌ Lỗi: ' + e.message); }
-        }
-
-        // ============================================================
-        // HEX STREAM (CHUYỂN HEX THÀNH STREAM + C ARRAY)
-        // ============================================================
-        function convertHexStream() {
-            const input = document.getElementById('base64Input').value.trim().replace(/\s/g, '');
-            if (!input || input.length % 2 !== 0) {
-                updateStatus('⚠️ Nhập Hex hợp lệ (độ dài chẵn) để tạo Stream.');
-                return;
-            }
-            try {
-                let stream = '';
-                let cArray = 'unsigned char hexStream[] = { ';
-                for (let i = 0; i < input.length; i += 2) {
-                    const byte = parseInt(input.substr(i, 2), 16);
-                    if (isNaN(byte)) throw new Error('Hex không hợp lệ');
-                    const hexStr = '0x' + byte.toString(16).padStart(2, '0').toUpperCase();
-                    stream += hexStr;
-                    cArray += hexStr;
-                    if (i < input.length - 2) {
-                        stream += ', ';
-                        cArray += ', ';
-                    }
-                }
-                cArray += ' };';
-                const result = stream + '\n\n' + cArray;
-                document.getElementById('base64Input').value = result;
-                updateStatus('✅ Đã tạo HEX Stream + C Array thành công.');
-            } catch (e) {
-                updateStatus('❌ Lỗi: ' + e.message);
-            }
-        }
-
-        // ============================================================
-        // AUTO DETECT & CONVERT
-        // ============================================================
-        function autoDetectAndConvert() {
-            const input = document.getElementById('base64Input').value.trim();
-            if (!input) { updateStatus('⚠️ Vui lòng nhập dữ liệu.'); return; }
-
-            // Kiểm tra Base64
-            try {
-                const decoded = atob(input);
-                if (decoded.length > 0 && input === btoa(decoded)) {
-                    document.getElementById('base64Input').value = '✅ Đây là Base64 hợp lệ.\nDecoded: ' + decoded;
-                    updateStatus('✅ Auto Detect: Base64');
-                    return;
-                }
-            } catch (e) {}
-
-            // Kiểm tra Hex
-            const hexClean = input.replace(/\s/g, '');
-            if (/^[0-9A-Fa-f]+$/.test(hexClean) && hexClean.length % 2 === 0) {
-                try {
-                    let binary = '';
-                    for (let i = 0; i < hexClean.length; i += 2) {
-                        binary += String.fromCharCode(parseInt(hexClean.substr(i, 2), 16));
-                    }
-                    document.getElementById('base64Input').value = '✅ Đây là Hex hợp lệ.\nBase64: ' + btoa(binary) +
-                        '\nDecoded: ' + binary;
-                    updateStatus('✅ Auto Detect: Hex');
-                    return;
-                } catch (e) {}
-            }
-
-            // Kiểm tra Dec
-            const decParts = input.split(',').map(s => s.trim());
-            if (decParts.every(s => /^\d+$/.test(s))) {
-                try {
-                    let binary = '';
-                    for (const num of decParts) {
-                        binary += String.fromCharCode(parseInt(num));
-                    }
-                    document.getElementById('base64Input').value = '✅ Đây là Dec hợp lệ.\nBase64: ' + btoa(binary) +
-                        '\nDecoded: ' + binary;
-                    updateStatus('✅ Auto Detect: Decimal');
-                    return;
-                } catch (e) {}
-            }
-
-            // Kiểm tra Bin
-            const binClean = input.replace(/\s/g, '');
-            if (/^[01]+$/.test(binClean) && binClean.length % 8 === 0) {
-                try {
-                    let binary = '';
-                    for (let i = 0; i < binClean.length; i += 8) {
-                        binary += String.fromCharCode(parseInt(binClean.substr(i, 8), 2));
-                    }
-                    document.getElementById('base64Input').value = '✅ Đây là Bin hợp lệ.\nBase64: ' + btoa(binary) +
-                        '\nDecoded: ' + binary;
-                    updateStatus('✅ Auto Detect: Binary');
-                    return;
-                } catch (e) {}
-            }
-
-            updateStatus('⚠️ Không thể tự động nhận dạng định dạng. Hãy chọn chuyển đổi thủ công.');
-        }
-
-        function copyBase64Output() {
-            const val = document.getElementById('base64Input').value;
-            if (!val) { updateStatus('⚠️ Không có dữ liệu.'); return; }
-            navigator.clipboard.writeText(val).then(() => {
-                updateStatus('📋 Đã sao chép.');
-            }).catch(() => {
-                const ta = document.createElement('textarea');
-                ta.value = val;
-                document.body.appendChild(ta);
-                ta.select();
-                document.execCommand('copy');
-                document.body.removeChild(ta);
-                updateStatus('📋 Sao chép (fallback).');
-            });
-        }
-
-        // ============================================================
-        // VERSION SYSTEM
-        // ============================================================
-        function generateNextVersion() {
-            const ver = `v${versionCounter++}`;
-            versionHistory.push({ version: ver, timestamp: new Date().toLocaleString() });
-            updateStatus(`✅ Đã tạo version mới: ${ver} (Tổng: ${versionCounter-1} versions)`);
-            return ver;
-        }
-
-        function showVersionHistory() {
-            if (versionHistory.length === 0) {
-                alert('Chưa có version nào được tạo.');
-                return;
-            }
-            let msg = '📜 LỊCH SỬ VERSION:\n\n';
-            versionHistory.forEach((item, idx) => {
-                msg += `${idx+1}. ${item.version} - ${item.timestamp}\n`;
-            });
-            msg += `\nTổng: ${versionHistory.length} versions`;
-            alert(msg);
-        }
-
-        // ============================================================
-        // AIMLOCK TOOL
-        // ============================================================
-        function generateAimlockCode() {
-            const ver = generateNextVersion();
-            const sens = prompt('Độ nhạy (1-100):', '75') || '75';
-            const smooth = prompt('Độ mượt (1-100):', '80') || '80';
-            const aimFov = prompt('FOV bám (1-360):', '120') || '120';
-            const recoil = prompt('Giảm giật (0-100):', '70') || '70';
-            const fpsBuff = prompt('Buff FPS (tối đa 240):', '240') || '240';
-            const code = `// ${ver} - Aimlock Pro by Tdung
-float sensitivity = ${parseFloat(sens) || 75};
-float smoothness = ${parseFloat(smooth) || 80};
-float aimFov = ${parseFloat(aimFov) || 120};
-float recoilReduction = ${parseFloat(recoil) || 70};
-int maxFps = ${Math.min(parseInt(fpsBuff) || 240, 240)};
-void AimLock() {
-    Vector3 target = GetNearestEnemy(aimFov);
-    if (target != null) {
-        Vector3 smoothed = SmoothAim(target, smoothness);
-        MoveCrosshair(smoothed);
-        ReduceRecoil(recoilReduction);
     }
-    LimitFPS(maxFps);
-}`;
-            const id = payloadIdCounter++;
-            payloads.push({
-                id,
-                type: 'Custom (PayloadData)',
-                description: `Aimlock ${ver}`,
-                data: btoa(unescape(encodeURIComponent(code))),
-                customFields: { version: ver, sens, smooth, aimFov, recoil, fpsBuff }
-            });
-            renderPayloads();
-            updateStatus(`✅ Aimlock ${ver} thành công.`);
-        }
 
-        // ============================================================
-        // ANDROID CODE
-        // ============================================================
-        function generateAndroidCode() {
-            const ver = generateNextVersion();
-            const lang = prompt('Ngôn ngữ: 1 - C#, 2 - C++', '1') || '1';
-            const type = prompt('Loại: 1 - Native, 2 - Unity, 3 - Unreal', '1') || '1';
-            let code = '';
-            if (lang === '1') {
-                code = `// ${ver} - C# for Android (Unity/IL2CPP)
-using UnityEngine;
-public class TdungMod : MonoBehaviour {
-    void Start() { Application.targetFrameRate = 240; QualitySettings.vSyncCount = 0; }
-    void Update() { if (Input.GetKey(KeyCode.LeftShift)) { /* Aimlock */ } }
-}`;
-            } else {
-                code = `// ${ver} - C++ for Android (NDK/Unreal)
-#include <jni.h>
-#include <android/log.h>
-#define LOG_TAG "TdungSama"
-void AimLock() { __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Aimlock active"); }`;
-            }
-            const id = payloadIdCounter++;
-            payloads.push({
-                id,
-                type: 'Custom (PayloadData)',
-                description: `Android ${ver} (${lang === '1' ? 'C#' : 'C++'})`,
-                data: btoa(unescape(encodeURIComponent(code))),
-                customFields: { version: ver, lang, type }
-            });
-            renderPayloads();
-            updateStatus(`✅ Android ${ver} (${lang === '1' ? 'C#' : 'C++'}).`);
-        }
+    function targetName() {
+        const map = { head: 'Đầu', neck: 'Cổ', chest: 'Ngực', body: 'Thân', drag: 'Drag' };
+        return map[gTarget()] || 'Cổ';
+    }
 
-        // ============================================================
-        // iOS VIP
-        // ============================================================
-        function generateIOSVIP() {
-            const ver = generateNextVersion();
-            const features = prompt('Tính năng (FFMax, FFTh, ...):', 'FFMax+FFTh') || 'FFMax+FFTh';
-            const code = `// ${ver} - iOS VIP by Tdung
-// Ăn sâu FFMax & FFTh, fix WebClip, tăng FPS, no lag
-// Aimlock, ESP, xray, no recoil, speed hack, auto-update
-#define VIP_VERSION "${ver}"
-#define FEATURES "${features}"
-// Code thực thi ...`;
-            const id = payloadIdCounter++;
-            payloads.push({
-                id,
-                type: 'Custom (PayloadData)',
-                description: `iOS VIP ${ver}`,
-                data: btoa(unescape(encodeURIComponent(code))),
-                customFields: { version: ver, features }
-            });
-            renderPayloads();
-            updateStatus(`✅ iOS VIP ${ver} thành công.`);
-        }
+    // ============================================================
+    // UPDATE DISPLAY
+    // ============================================================
+    function updateDisplay() {
+        document.getElementById('fovVal').textContent = gFOV();
+        document.getElementById('smoothVal').textContent = gSmooth();
+        document.getElementById('aimSpeedVal').textContent = gAimSpeed();
+        document.getElementById('antiShakeVal').textContent = gAntiShake();
+        document.getElementById('stabilizerVal').textContent = gStabilizer();
+        document.getElementById('spreadFixVal').textContent = gSpreadFix();
+        document.getElementById('overcorrectionVal').textContent = gOvercorrection();
+        document.getElementById('baseHex').textContent = gB();
+        document.getElementById('xrayHex').textContent = gX();
+        document.getElementById('speedHex').textContent = gS();
+        document.getElementById('norecoilHex').textContent = gN();
+        document.getElementById('godmodeHex').textContent = gG();
+        document.getElementById('infoFOV').textContent = gFOV();
+        document.getElementById('infoSmooth').textContent = gSmooth();
+        document.getElementById('infoTarget').textContent = targetName();
+        document.getElementById('infoFeatures').textContent = document.querySelectorAll('.toggle-item input:checked').length;
+        document.getElementById('infoBase').textContent = gB();
+        document.getElementById('infoStatus').textContent = '● Sẵn sàng';
+        document.getElementById('infoStatus').style.color = '#44dd88';
+    }
 
-        // ============================================================
-        // VIP GAME
-        // ============================================================
-        function generateGameVIP() {
-            const ver = generateNextVersion();
-            const gameChoice = prompt(
-                'Chọn game:\n1 - Free Fire Max\n2 - Free Fire Th\n3 - Cả hai\n4 - PUBG Mobile\n5 - Liên Quân',
-                '1'
-            );
-            const features = prompt('Tính năng (aimbot, xray, speed, norecoil, esp):', 'aimbot+xray+speed+norecoil') ||
-            'aimbot+xray+speed+norecoil';
-            const gameMap = {
-                '1': 'Free Fire Max',
-                '2': 'Free Fire Th',
-                '3': 'Free Fire Max & Free Fire Th',
-                '4': 'PUBG Mobile',
-                '5': 'Liên Quân'
-            };
-            const gameName = gameMap[gameChoice] || 'Free Fire Max';
-            const code = `// ${ver} - VIP Game Pro by Tdung\n// Target: ${gameName}\n// Features: ${features}\n\n#include <windows.h>\n#include <thread>\n\nvoid MainLoop() {\n    while (true) {\n        // Aimlock, XRay, Speed, NoRecoil\n        std::this_thread::sleep_for(std::chrono::milliseconds(10));\n    }\n}\n\nBOOL WINAPI DllMain(HINSTANCE hinst, DWORD reason, LPVOID reserved) {\n    if (reason == DLL_PROCESS_ATTACH) {\n        CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)MainLoop, NULL, 0, NULL);\n    }\n    return TRUE;\n}`;
-            const id = payloadIdCounter++;
-            payloads.push({
-                id,
-                type: 'Custom (PayloadData)',
-                description: `VIP Game ${ver} - ${gameName}`,
-                data: btoa(unescape(encodeURIComponent(code))),
-                customFields: { version: ver, game: gameName, features }
-            });
-            renderPayloads();
-            updateStatus(`✅ VIP Game ${ver} (${gameName}) thành công.`);
-        }
+    // ============================================================
+    // PRESETS
+    // ============================================================
+    function presetFF() {
+        document.getElementById('baseOffset').value = '0x8A5A1A0';
+        document.getElementById('xrayOffset').value = '0x5A0A1A0';
+        document.getElementById('speedOffset').value = '0x4B0A1A0';
+        document.getElementById('norecoilOffset').value = '0x5C0A1A0';
+        document.getElementById('godmodeOffset').value = '0x7A0A1A0';
+        document.getElementById('fovSlider').value = '120';
+        document.getElementById('smoothSlider').value = '80';
+        document.getElementById('aimSpeedSlider').value = '60';
+        document.getElementById('antiShakeSlider').value = '80';
+        document.getElementById('stabilizerSlider').value = '70';
+        document.getElementById('spreadFixSlider').value = '85';
+        document.getElementById('overcorrectionSlider').value = '60';
+        document.getElementById('aimTarget').value = 'neck';
+        document.querySelectorAll('.toggle-item input').forEach(cb => cb.checked = true);
+        updateDisplay();
+        updateStatus('✅ FF Max preset loaded');
+        exportSO();
+    }
 
-        // ============================================================
-        // BUILD PLIST
-        // ============================================================
-        function buildPlist() {
-            const displayName = document.getElementById('displayName').value.trim() || 'Cấu hình';
-            const identifier = document.getElementById('identifier').value.trim() || 'com.tdung.config';
-            let uuid = document.getElementById('uuid').value.trim() || genUUID();
-            const osVersion = document.getElementById('osVersion').value.trim() || '14.0';
-            const org = document.getElementById('organization').value.trim() || 'Tdung';
-            const desc = document.getElementById('description').value.trim() || 'Cấu hình nâng cao';
-            const scope = document.getElementById('scope').value;
-            const targetDevice = document.getElementById('targetDevice').value;
+    function presetFFTH() {
+        document.getElementById('baseOffset').value = '0x8A5A1A0';
+        document.getElementById('xrayOffset').value = '0x5B0A1A0';
+        document.getElementById('speedOffset').value = '0x4C0A1A0';
+        document.getElementById('norecoilOffset').value = '0x5D0A1A0';
+        document.getElementById('godmodeOffset').value = '0x7B0A1A0';
+        document.getElementById('fovSlider').value = '120';
+        document.getElementById('smoothSlider').value = '80';
+        document.getElementById('aimSpeedSlider').value = '60';
+        document.getElementById('antiShakeSlider').value = '80';
+        document.getElementById('stabilizerSlider').value = '70';
+        document.getElementById('spreadFixSlider').value = '85';
+        document.getElementById('overcorrectionSlider').value = '60';
+        document.getElementById('aimTarget').value = 'neck';
+        document.querySelectorAll('.toggle-item input').forEach(cb => cb.checked = true);
+        updateDisplay();
+        updateStatus('✅ FF Th preset loaded');
+        exportSO();
+    }
 
-            const payloadContent = payloads.map(p => {
-                const payloadUUID = genUUID();
-                const payloadType = getPayloadTypeId(p.type);
-                let dict = `
-                <key>PayloadDescription</key>
-                <string>${escapeXml(p.description || 'Payload')}</string>
-                <key>PayloadDisplayName</key>
-                <string>${escapeXml(p.description || 'Payload')}</string>
-                <key>PayloadIdentifier</key>
-                <string>${identifier}.payload.${p.id}</string>
-                <key>PayloadType</key>
-                <string>${payloadType}</string>
-                <key>PayloadUUID</key>
-                <string>${payloadUUID}</string>
-                <key>PayloadVersion</key>
-                <integer>1</integer>
-            `;
-                if (p.type === 'WebClip' && p.data) {
-                    try {
-                        const decoded = atob(p.data);
-                        const parser = new DOMParser();
-                        const doc = parser.parseFromString(decoded, 'text/xml');
-                        const urlElem = doc.querySelector('key:contains("URL") + string');
-                        const labelElem = doc.querySelector('key:contains("Label") + string');
-                        const url = urlElem ? urlElem.textContent : (p.customFields?.url || 'https://example.com');
-                        const label = labelElem ? labelElem.textContent : (p.customFields?.label || 'Web Clip');
-                        dict += `
-                        <key>PayloadContent</key>
-                        <dict>
-                            <key>URL</key>
-                            <string>${escapeXml(url)}</string>
-                            <key>Label</key>
-                            <string>${escapeXml(label)}</string>
-                            <key>FullScreen</key>
-                            <true/>
-                            <key>IsRemovable</key>
-                            <true/>
-                            <key>Precomposed</key>
-                            <true/>
-                        </dict>
-                    `;
-                    } catch (e) {
-                        dict += `<key>PayloadData</key><data>${p.data || ''}</data>`;
-                    }
-                } else if (p.type === 'DNS Proxy' && p.data) {
-                    try {
-                        const decoded = atob(p.data);
-                        const parser = new DOMParser();
-                        const doc = parser.parseFromString(decoded, 'text/xml');
-                        const configName = p.customFields?.configName || 'DNS Custom';
-                        const serverNodes = doc.querySelectorAll('key:contains("DNSServerAddresses") + array string');
-                        const servers = Array.from(serverNodes).map(el => el.textContent);
-                        const searchNodes = doc.querySelectorAll('key:contains("SearchDomains") + array string');
-                        const searches = Array.from(searchNodes).map(el => el.textContent);
-                        const fallbackNode = doc.querySelector('key:contains("FallbackServer") + string');
-                        const fallback = fallbackNode ? fallbackNode.textContent : '';
-                        let dnsDict =
-                            `<key>ConfigurationName</key><string>${escapeXml(configName)}</string><key>DNSServerAddresses</key><array>${servers.map(s => `<string>${escapeXml(s)}</string>`).join('')}</array>`;
-                        if (searches.length > 0) {
-                            dnsDict +=
-                                `<key>SearchDomains</key><array>${searches.map(s => `<string>${escapeXml(s)}</string>`).join('')}</array>`;
-                        }
-                        if (fallback) {
-                            dnsDict += `<key>FallbackServer</key><string>${escapeXml(fallback)}</string>`;
-                        }
-                        dict += `<key>PayloadContent</key><dict>${dnsDict}</dict>`;
-                    } catch (e) {
-                        dict += `<key>PayloadData</key><data>${p.data || ''}</data>`;
-                    }
-                } else {
-                    dict += `<key>PayloadData</key><data>${p.data || ''}</data>`;
-                }
-                return `<dict>${dict}</dict>`;
-            }).join('\n');
+    function presetVIP() {
+        document.getElementById('baseOffset').value = '0x8A5A1A0';
+        document.getElementById('xrayOffset').value = '0x5A0A1A0';
+        document.getElementById('speedOffset').value = '0x4B0A1A0';
+        document.getElementById('norecoilOffset').value = '0x5C0A1A0';
+        document.getElementById('godmodeOffset').value = '0x7A0A1A0';
+        document.getElementById('fovSlider').value = '180';
+        document.getElementById('smoothSlider').value = '90';
+        document.getElementById('aimSpeedSlider').value = '80';
+        document.getElementById('antiShakeSlider').value = '90';
+        document.getElementById('stabilizerSlider').value = '85';
+        document.getElementById('spreadFixSlider').value = '95';
+        document.getElementById('overcorrectionSlider').value = '80';
+        document.getElementById('aimTarget').value = 'neck';
+        document.querySelectorAll('.toggle-item input').forEach(cb => cb.checked = true);
+        updateDisplay();
+        updateStatus('✅ VIP Mode loaded');
+        exportSO();
+    }
 
-            return `<?xml version="1.0" encoding="UTF-8"?>
-        <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-        <plist version="1.0">
-        <dict>
-            <key>PayloadContent</key>
-            <array>${payloadContent}</array>
-            <key>PayloadDescription</key>
-            <string>${escapeXml(desc)}</string>
-            <key>PayloadDisplayName</key>
-            <string>${escapeXml(displayName)}</string>
-            <key>PayloadIdentifier</key>
-            <string>${identifier}</string>
-            <key>PayloadOrganization</key>
-            <string>${escapeXml(org)}</string>
-            <key>PayloadRemovalDisallowed</key>
-            <false/>
-            <key>PayloadType</key>
-            <string>Configuration</string>
-            <key>PayloadUUID</key>
-            <string>${uuid}</string>
-            <key>PayloadVersion</key>
-            <integer>1</integer>
-            <key>PayloadScope</key>
-            <string>${scope}</string>
-            <key>TargetDeviceType</key>
-            <integer>${parseInt(targetDevice) || 0}</integer>
-            <key>MinimumOSVersion</key>
-            <string>${osVersion}</string>
-        </dict>
-        </plist>`;
-        }
+    function resetAll() {
+        presetFF();
+        updateStatus('🔄 Đã reset về mặc định');
+    }
 
-        // ============================================================
-        // ACTIONS
-        // ============================================================
-        function previewXML() {
-            try {
-                const xml = buildPlist();
-                const lines = xml.split('\n').length;
-                document.getElementById('xmlLineCount').textContent = lines + ' dòng';
-                let highlighted = xml.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-                highlighted = highlighted.replace(/(&lt;\/?[a-zA-Z0-9_:]+)/g, '<span class="xml-tag">$1</span>');
-                highlighted = highlighted.replace(/(\s+[a-zA-Z0-9_:]+)=/g, ' <span class="xml-attr">$1</span>=');
-                highlighted = highlighted.replace(/="([^"]*)"/g, '="<span class="xml-value">$1</span>"');
-                document.getElementById('previewArea').innerHTML = highlighted;
-                updateStatus('👀 Đã cập nhật xem trước XML.');
-                updateStats();
-            } catch (e) {
-                updateStatus('❌ Lỗi: ' + e.message);
-            }
-        }
+    // ============================================================
+    // BUILD CODE (CORE)
+    // ============================================================
+    function buildCore() {
+        const f = flags();
+        const b = gB(), x = gX(), sp = gS(), nr = gN(), gm = gG();
+        const fov = gFOV(), smooth = gSmooth(), aimSpeed = gAimSpeed();
+        const antiShake = gAntiShake(), stabilizer = gStabilizer(), spreadFix = gSpreadFix(), overcorrection = gOvercorrection();
+        const target = gTarget();
 
-        function copyXML() {
-            const xml = document.getElementById('previewArea').innerText;
-            if (!xml || xml.startsWith('🔍')) { updateStatus('⚠️ Không có XML.'); return; }
-            navigator.clipboard.writeText(xml).then(() => {
-                updateStatus('📋 Đã sao chép XML.');
-            }).catch(() => {
-                const ta = document.createElement('textarea');
-                ta.value = xml;
-                document.body.appendChild(ta);
-                ta.select();
-                document.execCommand('copy');
-                document.body.removeChild(ta);
-                updateStatus('📋 Sao chép (fallback).');
-            });
-        }
+        let code = `// ============================================================\n`;
+        code += `// VIP PRO MAX ULTIMATE V4 FIX\n`;
+        code += `// FF Max & FF Th - Tạo bởi Worm GPT\n`;
+        code += `// ============================================================\n\n`;
+        code += `#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n#include <unistd.h>\n#include <sys/mman.h>\n#include <dlfcn.h>\n#include <pthread.h>\n#include <thread>\n#include <cmath>\n\n`;
+        code += `// ===== OFFSET =====\n`;
+        code += `#define BASE ${b}\n`;
+        code += `#define OFFSET_XRAY ${x}\n`;
+        code += `#define OFFSET_SPEED ${sp}\n`;
+        code += `#define OFFSET_NORECOIL ${nr}\n`;
+        code += `#define OFFSET_GODMODE ${gm}\n`;
+        code += `#define OFFSET_ANTICHEAT1 0x5A0A1A0\n`;
+        code += `#define OFFSET_ANTICHEAT2 0x5B0A1A0\n\n`;
+        code += `// ===== AIM PARAM =====\n`;
+        code += `#define FOV ${fov}\n`;
+        code += `#define SMOOTH ${smooth}\n`;
+        code += `#define AIM_SPEED ${aimSpeed}\n`;
+        code += `#define ANTI_SHAKE ${antiShake}\n`;
+        code += `#define STABILIZER ${stabilizer}\n`;
+        code += `#define SPREAD_FIX ${spreadFix}\n`;
+        code += `#define OVERCORRECTION ${overcorrection}\n`;
+        code += `#define AIM_TARGET "${target}"\n\n`;
+        code += `// ===== FEATURES =====\n`;
+        code += `#define ENABLE_AIMLOCK ${f.aimlock?1:0}\n`;
+        code += `#define ENABLE_HEAD_AIM ${f.headAim?1:0}\n`;
+        code += `#define ENABLE_NECK_AIM ${f.neckAim?1:0}\n`;
+        code += `#define ENABLE_DRAG ${f.drag?1:0}\n`;
+        code += `#define ENABLE_FIX_RUNG ${f.fixRung?1:0}\n`;
+        code += `#define ENABLE_FIX_LO ${f.fixLo?1:0}\n`;
+        code += `#define ENABLE_FIX_SPREAD ${f.fixSpread?1:0}\n`;
+        code += `#define ENABLE_EM_TAM ${f.emTam?1:0}\n`;
+        code += `#define ENABLE_XRAY ${f.xray?1:0}\n`;
+        code += `#define ENABLE_SPEED ${f.speed?1:0}\n`;
+        code += `#define ENABLE_NORECOIL ${f.norecoil?1:0}\n`;
+        code += `#define ENABLE_GODMODE ${f.godmode?1:0}\n`;
+        code += `#define ENABLE_BYPASSAC ${f.bypassac?1:0}\n\n`;
+        code += `// ===== STRUCT =====\n`;
+        code += `struct Vec3 { float x, y, z; };\n`;
+        code += `struct Player { Vec3 pos; Vec3 head; Vec3 neck; float health; float dist; int alive; };\n\n`;
+        code += `// ===== PATCH FUNCTIONS =====\n`;
+        code += `bool patch(uintptr_t a, void* d, size_t s) {\n`;
+        code += `  size_t p = sysconf(_SC_PAGESIZE);\n`;
+        code += `  uintptr_t st = (a / p) * p;\n`;
+        code += `  mprotect((void*)st, p, 7);\n`;
+        code += `  memcpy((void*)a, d, s);\n`;
+        code += `  mprotect((void*)st, p, 5);\n`;
+        code += `  return true;\n`;
+        code += `}\n`;
+        code += `void pb(uintptr_t a, unsigned char v){ patch(a, &v, 1); }\n`;
+        code += `void pf(uintptr_t a, float v){ patch(a, &v, 4); }\n`;
+        code += `void pi(uintptr_t a, int v){ patch(a, &v, 4); }\n`;
+        code += `void pnop(uintptr_t a, int c=5){ unsigned char n[16]; memset(n, 0x90, c); patch(a, n, c); }\n`;
+        code += `void pret(uintptr_t a){ unsigned char r=0xC3; patch(a, &r, 1); }\n\n`;
+        code += `// ===== BYPASS AC =====\n`;
+        code += `void bypass_ac() {\n`;
+        code += `  #if ENABLE_BYPASSAC\n`;
+        code += `  pnop(OFFSET_ANTICHEAT1);\n`;
+        code += `  pnop(OFFSET_ANTICHEAT2);\n`;
+        code += `  pret(BASE + 0x300);\n`;
+        code += `  #endif\n`;
+        code += `}\n\n`;
+        code += `// ===== AIMLOCK =====\n`;
+        code += `void aimlock() {\n`;
+        code += `  #if ENABLE_AIMLOCK\n`;
+        code += `  uintptr_t lp = *(uintptr_t*)(BASE + 0x50);\n`;
+        code += `  if (!lp) return;\n`;
+        code += `  float* va = (float*)(lp + 0x100);\n`;
+        code += `  float speedFactor = (AIM_SPEED / 100.0f) * (SMOOTH / 100.0f);\n`;
+        code += `  #if ENABLE_HEAD_AIM\n`;
+        code += `    va[0] += 0.05f * speedFactor;\n`;
+        code += `    va[1] += 0.05f * speedFactor;\n`;
+        code += `  #elif ENABLE_NECK_AIM\n`;
+        code += `    va[0] += 0.04f * speedFactor;\n`;
+        code += `    va[1] += 0.06f * speedFactor;\n`;
+        code += `  #elif ENABLE_DRAG\n`;
+        code += `    va[0] += 0.03f * speedFactor;\n`;
+        code += `    va[1] += 0.08f * speedFactor;\n`;
+        code += `  #else\n`;
+        code += `    va[0] += 0.05f * speedFactor;\n`;
+        code += `    va[1] += 0.05f * speedFactor;\n`;
+        code += `  #endif\n`;
+        code += `  #endif\n`;
+        code += `}\n\n`;
+        code += `// ===== FIX RUNG =====\n`;
+        code += `void fix_rung() {\n`;
+        code += `  #if ENABLE_FIX_RUNG\n`;
+        code += `  float val = 1.0f - (ANTI_SHAKE / 100.0f) * 0.9f;\n`;
+        code += `  pf(BASE + 0x200, val);\n`;
+        code += `  #endif\n`;
+        code += `}\n\n`;
+        code += `// ===== FIX LỐ =====\n`;
+        code += `void fix_lo() {\n`;
+        code += `  #if ENABLE_FIX_LO\n`;
+        code += `  float val = 1.0f - (OVERCORRECTION / 100.0f) * 0.8f;\n`;
+        code += `  pf(BASE + 0x250, val);\n`;
+        code += `  #endif\n`;
+        code += `}\n\n`;
+        code += `// ===== FIX LẠC ĐẠN =====\n`;
+        code += `void fix_spread() {\n`;
+        code += `  #if ENABLE_FIX_SPREAD\n`;
+        code += `  float val = 1.0f - (SPREAD_FIX / 100.0f) * 0.95f;\n`;
+        code += `  pf(BASE + 0x300, val);\n`;
+        code += `  #endif\n`;
+        code += `}\n\n`;
+        code += `// ===== ÊM TÂM =====\n`;
+        code += `void em_tam() {\n`;
+        code += `  #if ENABLE_EM_TAM\n`;
+        code += `  float val = (STABILIZER / 100.0f) * 0.8f + 0.2f;\n`;
+        code += `  pf(BASE + 0x350, val);\n`;
+        code += `  #endif\n`;
+        code += `}\n\n`;
+        code += `// ===== XRAY =====\n`;
+        code += `void xray() {\n`;
+        code += `  #if ENABLE_XRAY\n`;
+        code += `  pb(OFFSET_XRAY, 1);\n`;
+        code += `  #endif\n`;
+        code += `}\n\n`;
+        code += `// ===== SPEED =====\n`;
+        code += `void speed() {\n`;
+        code += `  #if ENABLE_SPEED\n`;
+        code += `  pf(OFFSET_SPEED, 600.0f * 2.5f);\n`;
+        code += `  #endif\n`;
+        code += `}\n\n`;
+        code += `// ===== NO RECOIL =====\n`;
+        code += `void norecoil() {\n`;
+        code += `  #if ENABLE_NORECOIL\n`;
+        code += `  pf(OFFSET_NORECOIL, 0.0f);\n`;
+        code += `  #endif\n`;
+        code += `}\n\n`;
+        code += `// ===== GOD MODE =====\n`;
+        code += `void godmode() {\n`;
+        code += `  #if ENABLE_GODMODE\n`;
+        code += `  pb(OFFSET_GODMODE, 1);\n`;
+        code += `  pnop(OFFSET_GODMODE + 0x50, 10);\n`;
+        code += `  #endif\n`;
+        code += `}\n\n`;
+        code += `// ===== MAIN LOOP =====\n`;
+        code += `void* main_loop(void*) {\n`;
+        code += `  while (1) {\n`;
+        code += `    aimlock();\n`;
+        code += `    std::this_thread::sleep_for(std::chrono::milliseconds(10));\n`;
+        code += `  }\n`;
+        code += `  return nullptr;\n`;
+        code += `}\n\n`;
+        code += `// ===== INIT =====\n`;
+        code += `extern "C" {\n`;
+        code += `  void __attribute__((constructor)) init() {\n`;
+        code += `    printf("[VIP Pro Max Ultimate V4 FIX] Loading...\\n");\n`;
+        code += `    bypass_ac();\n`;
+        code += `    xray(); speed(); norecoil(); godmode();\n`;
+        code += `    fix_rung(); fix_lo(); fix_spread(); em_tam();\n`;
+        code += `    pthread_t t; pthread_create(&t, nullptr, main_loop, nullptr);\n`;
+        code += `    printf("[VIP Pro Max Ultimate V4 FIX] Loaded!\\n");\n`;
+        code += `  }\n`;
+        code += `}\n`;
+        return code;
+    }
 
-        function generateAndDownload() {
-            try {
-                const plist = buildPlist();
-                const blob = new Blob([plist], { type: 'application/x-apple-aspen-config;charset=utf-8' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                const name = document.getElementById('displayName').value.trim() || 'config';
-                a.download = `${name.replace(/\s+/g, '_')}_tdung_v30.mobileconfig`;
-                a.href = url;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-                updateStatus(`✅ TẢI THÀNH CÔNG! Kích thước: ${formatSize(blob.size)}`);
-                previewXML();
-                updateStats();
-            } catch (e) {
-                updateStatus('❌ LỖI: ' + e.message);
-            }
-        }
+    // ============================================================
+    // EXPORT FUNCTIONS (TRỰC TIẾP GÁN NỘI DUNG)
+    // ============================================================
+    function exportSO() {
+        const code = buildCore();
+        document.getElementById('fileTypeBadge').textContent = '.so';
+        document.getElementById('outputArea').textContent = code;
+        const lines = code.split('\n').length;
+        document.getElementById('lineCount').textContent = lines + ' dòng';
+        document.getElementById('infoLines').textContent = lines;
+        document.getElementById('infoFile').textContent = '.so';
+        updateStatus(`✅ Xuất .so (${lines} dòng)`);
+    }
 
-        function exportMobileConfig() { generateAndDownload(); }
+    function exportDex() {
+        const f = flags();
+        const b = gB();
+        let code = `// DEX PATCH - VIP PRO MAX\n.class public Lcom/vip/ProMax;\n.super Ljava/lang/Object;\n\n.field static BASE:J = ${b}L\n\n.method static patch()V\n    .registers 4\n    const/4 v0, 0x1\n    const/4 v1, 0x0\n    const/high16 v2, 0x447a0000\n    const v3, 0x47c35000\n`;
+        if(f.xray) code += `    invoke-static {v0}, Lpatch;->writeByte(JB)V\n`;
+        if(f.speed) code += `    invoke-static {v2}, Lpatch;->writeFloat(JF)V\n`;
+        if(f.norecoil) code += `    invoke-static {v1}, Lpatch;->writeFloat(JF)V\n`;
+        if(f.godmode) code += `    invoke-static {v0}, Lpatch;->writeByte(JB)V\n`;
+        if(f.fixRung) code += `    const v0, 0x3d4ccccd; invoke-static {v0}, Lpatch;->writeFloat(JF)V\n`;
+        if(f.fixSpread) code += `    const v0, 0x3d4ccccd; invoke-static {v0}, Lpatch;->writeFloat(JF)V\n`;
+        if(f.bypassac) code += `    invoke-static {v0}, Lpatch;->writeByte(JB)V\n`;
+        code += `    return-void\n.end method\n`;
+        document.getElementById('fileTypeBadge').textContent = '.dex';
+        document.getElementById('outputArea').textContent = code;
+        const lines = code.split('\n').length;
+        document.getElementById('lineCount').textContent = lines + ' dòng';
+        document.getElementById('infoLines').textContent = lines;
+        document.getElementById('infoFile').textContent = '.dex';
+        updateStatus(`✅ Xuất .dex (${lines} dòng)`);
+    }
 
-        function downloadPlistOnly() {
-            try {
-                const plist = buildPlist();
-                const blob = new Blob([plist], { type: 'application/xml;charset=utf-8' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.download = 'config_v30.plist';
-                a.href = url;
-                a.click();
-                URL.revokeObjectURL(url);
-                updateStatus('📄 Đã xuất .plist');
-            } catch (e) { updateStatus('❌ Lỗi: ' + e.message); }
-        }
+    function exportLua() {
+        const f = flags();
+        const b = gB();
+        const fov = gFOV(), smooth = gSmooth(), aimSpeed = gAimSpeed();
+        const antiShake = gAntiShake(), stabilizer = gStabilizer(), spreadFix = gSpreadFix(), overcorrection = gOvercorrection();
 
-        function validateXML() {
-            try {
-                const xml = buildPlist();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(xml, 'text/xml');
-                const errors = doc.querySelector('parsererror');
-                if (errors) {
-                    updateStatus('❌ XML KHÔNG HỢP LỆ: ' + errors.textContent);
-                } else {
-                    updateStatus('✅ XML hợp lệ.');
-                }
-            } catch (e) {
-                updateStatus('❌ Lỗi validate: ' + e.message);
-            }
-        }
+        let code = `-- VIP Pro Max Ultimate V4 FIX\n`;
+        code += `local base = ${b}\n`;
+        code += `local fov = ${fov}\n`;
+        code += `local smooth = ${smooth}\n`;
+        code += `local aimSpeed = ${aimSpeed}\n`;
+        code += `local antiShake = ${antiShake}\n`;
+        code += `local stabilizer = ${stabilizer}\n`;
+        code += `local spreadFix = ${spreadFix}\n`;
+        code += `local overcorrection = ${overcorrection}\n\n`;
 
-        // ============================================================
-        // IMPORT / EXPORT
-        // ============================================================
-        function exportJSON() {
-            const data = {
-                meta: {
-                    displayName: document.getElementById('displayName').value,
-                    identifier: document.getElementById('identifier').value,
-                    uuid: document.getElementById('uuid').value,
-                    osVersion: document.getElementById('osVersion').value,
-                    organization: document.getElementById('organization').value,
-                    description: document.getElementById('description').value,
-                    scope: document.getElementById('scope').value,
-                    targetDevice: document.getElementById('targetDevice').value,
-                },
-                payloads: payloads,
-                counter: payloadIdCounter,
-                versionCounter: versionCounter,
-                versionHistory: versionHistory
-            };
-            const json = JSON.stringify(data, null, 2);
-            const blob = new Blob([json], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.download = 'tdung_config_v30.json';
-            a.href = url;
-            a.click();
-            URL.revokeObjectURL(url);
-            updateStatus('📦 Đã xuất JSON.');
-        }
+        code += `local flags = {\n`;
+        code += `  aimlock = ${f.aimlock && 'true' || 'false'},\n`;
+        code += `  headAim = ${f.headAim && 'true' || 'false'},\n`;
+        code += `  neckAim = ${f.neckAim && 'true' || 'false'},\n`;
+        code += `  drag = ${f.drag && 'true' || 'false'},\n`;
+        code += `  fixRung = ${f.fixRung && 'true' || 'false'},\n`;
+        code += `  fixLo = ${f.fixLo && 'true' || 'false'},\n`;
+        code += `  fixSpread = ${f.fixSpread && 'true' || 'false'},\n`;
+        code += `  emTam = ${f.emTam && 'true' || 'false'},\n`;
+        code += `  xray = ${f.xray && 'true' || 'false'},\n`;
+        code += `  speed = ${f.speed && 'true' || 'false'},\n`;
+        code += `  norecoil = ${f.norecoil && 'true' || 'false'},\n`;
+        code += `  godmode = ${f.godmode && 'true' || 'false'},\n`;
+        code += `  bypassac = ${f.bypassac && 'true' || 'false'},\n`;
+        code += `}\n\n`;
 
-        function importJSON(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                try {
-                    const data = JSON.parse(e.target.result);
-                    if (data.meta) {
-                        document.getElementById('displayName').value = data.meta.displayName || '';
-                        document.getElementById('identifier').value = data.meta.identifier || '';
-                        document.getElementById('uuid').value = data.meta.uuid || '';
-                        document.getElementById('osVersion').value = data.meta.osVersion || '14.0';
-                        document.getElementById('organization').value = data.meta.organization || '';
-                        document.getElementById('description').value = data.meta.description || '';
-                        document.getElementById('scope').value = data.meta.scope || 'System';
-                        document.getElementById('targetDevice').value = data.meta.targetDevice || '0';
-                    }
-                    if (data.payloads && Array.isArray(data.payloads)) {
-                        payloads = data.payloads;
-                        payloadIdCounter = data.counter || payloads.length + 1;
-                        if (data.versionCounter) versionCounter = data.versionCounter;
-                        if (data.versionHistory) versionHistory = data.versionHistory;
-                        renderPayloads();
-                        updateStatus('✅ Nhập JSON thành công.');
-                    }
-                } catch (err) {
-                    updateStatus('❌ Lỗi parse JSON: ' + err.message);
-                }
-            };
-            reader.readAsText(file);
-            event.target.value = '';
-        }
+        code += `local function patch(addr, val, type)\n`;
+        code += `  gg.setValues({{address = addr, flags = type, value = val}})\n`;
+        code += `end\n\n`;
 
-        function importMobileConfig(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                try {
-                    const xml = e.target.result;
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(xml, 'text/xml');
-                    const errors = doc.querySelector('parsererror');
-                    if (errors) { updateStatus('❌ Lỗi parse XML.'); return; }
-                    const plist = doc.querySelector('plist');
-                    if (!plist) { updateStatus('❌ Không tìm thấy plist.'); return; }
-                    const root = plist.firstElementChild;
-                    if (!root) { updateStatus('❌ Không có nội dung.'); return; }
-                    // Cập nhật meta từ file
-                    const displayNameEl = root.querySelector('key:contains("PayloadDisplayName") + string');
-                    const identifierEl = root.querySelector('key:contains("PayloadIdentifier") + string');
-                    const uuidEl = root.querySelector('key:contains("PayloadUUID") + string');
-                    const osVersionEl = root.querySelector('key:contains("MinimumOSVersion") + string');
-                    const orgEl = root.querySelector('key:contains("PayloadOrganization") + string');
-                    const descEl = root.querySelector('key:contains("PayloadDescription") + string');
-                    const scopeEl = root.querySelector('key:contains("PayloadScope") + string');
-                    const targetDeviceEl = root.querySelector('key:contains("TargetDeviceType") + integer');
+        if(f.xray) code += `patch(base + 0x400, 1, 4)\n`;
+        if(f.speed) code += `patch(base + 0x500, 1500, 16)\n`;
+        if(f.norecoil) code += `patch(base + 0x600, 0, 16)\n`;
+        if(f.godmode) code += `patch(base + 0x700, 1, 4); patch(base + 0x750, 1, 4)\n`;
+        if(f.fixRung) code += `patch(base + 0x200, 1 - antiShake / 100 * 0.9, 16)\n`;
+        if(f.fixLo) code += `patch(base + 0x250, 1 - overcorrection / 100 * 0.8, 16)\n`;
+        if(f.fixSpread) code += `patch(base + 0x300, 1 - spreadFix / 100 * 0.95, 16)\n`;
+        if(f.emTam) code += `patch(base + 0x350, (stabilizer / 100 * 0.8 + 0.2), 16)\n`;
+        if(f.bypassac) code += `patch(base + 0x100, 1, 4); patch(base + 0x200, 1, 4)\n`;
 
-                    if (displayNameEl) document.getElementById('displayName').value = displayNameEl.textContent;
-                    if (identifierEl) document.getElementById('identifier').value = identifierEl.textContent;
-                    if (uuidEl) document.getElementById('uuid').value = uuidEl.textContent;
-                    if (osVersionEl) document.getElementById('osVersion').value = osVersionEl.textContent;
-                    if (orgEl) document.getElementById('organization').value = orgEl.textContent;
-                    if (descEl) document.getElementById('description').value = descEl.textContent;
-                    if (scopeEl) document.getElementById('scope').value = scopeEl.textContent;
-                    if (targetDeviceEl) document.getElementById('targetDevice').value = targetDeviceEl.textContent;
+        code += `print('[VIP Pro Max Ultimate V4 FIX] Patches applied!')\n`;
 
-                    const payloadArray = root.querySelector('key:contains("PayloadContent") + array');
-                    if (payloadArray) {
-                        const payloadDicts = payloadArray.querySelectorAll('dict');
-                        const newPayloads = [];
-                        payloadDicts.forEach((dict, idx) => {
-                            const typeEl = dict.querySelector('key:contains("PayloadType") + string');
-                            const descEl2 = dict.querySelector('key:contains("PayloadDescription") + string');
-                            const displayNameEl2 = dict.querySelector('key:contains("PayloadDisplayName") + string');
-                            const dataEl = dict.querySelector('key:contains("PayloadData") + data');
-                            const contentDict = dict.querySelector('key:contains("PayloadContent") + dict');
+        document.getElementById('fileTypeBadge').textContent = '.lua';
+        document.getElementById('outputArea').textContent = code;
+        const lines = code.split('\n').length;
+        document.getElementById('lineCount').textContent = lines + ' dòng';
+        document.getElementById('infoLines').textContent = lines;
+        document.getElementById('infoFile').textContent = '.lua';
+        updateStatus(`✅ Xuất .lua (${lines} dòng)`);
+    }
 
-                            let type = typeEl ? typeEl.textContent : 'Custom (PayloadData)';
-                            const typeMap = {
-                                'com.apple.webClip.managed': 'WebClip',
-                                'com.apple.dnsproxy': 'DNS Proxy',
-                                'com.apple.vpn.managed': 'VPN (IKEv2)',
-                                'com.apple.wifi.managed': 'Wi-Fi (Enterprise)',
-                                'com.apple.mobiledevice.passwordpolicy': 'Passcode Policy',
-                                'com.apple.applicationaccess': 'Restrictions (App Lock)'
-                            };
-                            const foundType = Object.keys(typeMap).find(k => type.includes(k));
-                            if (foundType) type = typeMap[foundType];
+    function exportJS() {
+        const f = flags();
+        const b = gB();
+        const fov = gFOV(), smooth = gSmooth(), aimSpeed = gAimSpeed();
+        const antiShake = gAntiShake(), stabilizer = gStabilizer(), spreadFix = gSpreadFix(), overcorrection = gOvercorrection();
 
-                            const desc = descEl2 ? descEl2.textContent : (displayNameEl2 ? displayNameEl2.textContent :
-                                'Payload ' + (idx + 1));
-                            let data = dataEl ? dataEl.textContent : '';
-                            let customFields = {};
-                            if (contentDict) {
-                                const keys = contentDict.querySelectorAll('key');
-                                keys.forEach(k => {
-                                    const key = k.textContent;
-                                    const next = k.nextElementSibling;
-                                    if (next) {
-                                        let value = '';
-                                        if (next.tagName === 'string') value = next.textContent;
-                                        else if (next.tagName === 'integer') value = next.textContent;
-                                        else if (next.tagName === 'true') value = 'true';
-                                        else if (next.tagName === 'false') value = 'false';
-                                        else if (next.tagName === 'array') {
-                                            const items = next.querySelectorAll('string');
-                                            value = Array.from(items).map(el => el.textContent).join(',');
-                                        }
-                                        customFields[key] = value;
-                                    }
-                                });
-                            }
-                            const id = payloadIdCounter++;
-                            newPayloads.push({
-                                id,
-                                type,
-                                description: desc,
-                                data: data || '',
-                                customFields
-                            });
-                        });
-                        payloads = newPayloads;
-                        renderPayloads();
-                        updateStatus('✅ Nhập mobileconfig thành công.');
-                    }
-                } catch (err) {
-                    updateStatus('❌ Lỗi import: ' + err.message);
-                }
-            };
-            reader.readAsText(file);
-            event.target.value = '';
-        }
+        let code = `// VIP Pro Max Ultimate V4 FIX - Frida\n`;
+        code += `var base = ptr("${b}");\n`;
+        code += `var fov = ${fov};\n`;
+        code += `var smooth = ${smooth};\n`;
+        code += `var aimSpeed = ${aimSpeed};\n`;
+        code += `var antiShake = ${antiShake};\n`;
+        code += `var stabilizer = ${stabilizer};\n`;
+        code += `var spreadFix = ${spreadFix};\n`;
+        code += `var overcorrection = ${overcorrection};\n\n`;
 
-        // ============================================================
-        // LOCAL STORAGE
-        // ============================================================
-        function saveLocal() {
-            try {
-                const data = {
-                    meta: {
-                        displayName: document.getElementById('displayName').value,
-                        identifier: document.getElementById('identifier').value,
-                        uuid: document.getElementById('uuid').value,
-                        osVersion: document.getElementById('osVersion').value,
-                        organization: document.getElementById('organization').value,
-                        description: document.getElementById('description').value,
-                        scope: document.getElementById('scope').value,
-                        targetDevice: document.getElementById('targetDevice').value,
-                    },
-                    payloads: payloads,
-                    counter: payloadIdCounter,
-                    versionCounter: versionCounter,
-                    versionHistory: versionHistory
-                };
-                localStorage.setItem('tdung_config_v30', JSON.stringify(data));
-                updateStatus('💾 Đã lưu.');
-            } catch (e) {
-                updateStatus('❌ Lưu lỗi: ' + e.message);
-            }
-        }
+        code += `var flags = {\n`;
+        code += `  aimlock: ${f.aimlock},\n`;
+        code += `  headAim: ${f.headAim},\n`;
+        code += `  neckAim: ${f.neckAim},\n`;
+        code += `  drag: ${f.drag},\n`;
+        code += `  fixRung: ${f.fixRung},\n`;
+        code += `  fixLo: ${f.fixLo},\n`;
+        code += `  fixSpread: ${f.fixSpread},\n`;
+        code += `  emTam: ${f.emTam},\n`;
+        code += `  xray: ${f.xray},\n`;
+        code += `  speed: ${f.speed},\n`;
+        code += `  norecoil: ${f.norecoil},\n`;
+        code += `  godmode: ${f.godmode},\n`;
+        code += `  bypassac: ${f.bypassac},\n`;
+        code += `};\n\n`;
 
-        function loadLocal() {
-            try {
-                const raw = localStorage.getItem('tdung_config_v30');
-                if (!raw) { updateStatus('⚠️ Không có dữ liệu.'); return; }
-                const data = JSON.parse(raw);
-                if (data.meta) {
-                    document.getElementById('displayName').value = data.meta.displayName || '';
-                    document.getElementById('identifier').value = data.meta.identifier || '';
-                    document.getElementById('uuid').value = data.meta.uuid || '';
-                    document.getElementById('osVersion').value = data.meta.osVersion || '14.0';
-                    document.getElementById('organization').value = data.meta.organization || '';
-                    document.getElementById('description').value = data.meta.description || '';
-                    document.getElementById('scope').value = data.meta.scope || 'System';
-                    document.getElementById('targetDevice').value = data.meta.targetDevice || '0';
-                }
-                if (data.payloads) {
-                    payloads = data.payloads;
-                    payloadIdCounter = data.counter || payloads.length + 1;
-                    if (data.versionCounter) versionCounter = data.versionCounter;
-                    if (data.versionHistory) versionHistory = data.versionHistory;
-                    renderPayloads();
-                    updateStatus('📂 Đã tải từ localStorage.');
-                }
-            } catch (e) {
-                updateStatus('❌ Tải lỗi: ' + e.message);
-            }
-        }
+        code += `function patch(addr, val, size) {\n`;
+        code += `  Memory.protect(addr, size, 'rwx');\n`;
+        code += `  Memory.writeByteArray(addr, val);\n`;
+        code += `}\n\n`;
 
-        // ============================================================
-        // ANALYZE & CSV
-        // ============================================================
-        function analyzePlist() {
-            if (payloads.length === 0) { updateStatus('⚠️ Không có payload.'); return; }
-            const types = {};
-            payloads.forEach(p => { types[p.type] = (types[p.type] || 0) + 1; });
-            let msg = '📊 Phân tích payload:\n';
-            Object.entries(types).forEach(([type, count]) => {
-                msg += `  - ${type}: ${count}\n`;
-            });
-            msg += `\nTổng: ${payloads.length} payload, tổng dung lượng: ${formatSize(payloads.reduce((s,p) => s + (p.data||'').length, 0))}`;
-            alert(msg);
-            updateStatus('📊 Đã phân tích.');
-        }
+        code += `function pb(addr, val) { patch(addr, [val], 1); }\n`;
+        code += `function pf(addr, val) {\n`;
+        code += `  var buf = new ArrayBuffer(4);\n`;
+        code += `  new Float32Array(buf)[0] = val;\n`;
+        code += `  patch(addr, new Uint8Array(buf), 4);\n`;
+        code += `}\n\n`;
 
-        function exportCSV() {
-            if (payloads.length === 0) { updateStatus('⚠️ Không có payload.'); return; }
-            let csv = 'ID,Type,Description,Data Size,Custom Fields\n';
-            payloads.forEach(p => {
-                const fields = p.customFields ? Object.entries(p.customFields).map(([k, v]) => `${k}:${v}`).join(';') : '';
-                csv += `${p.id},"${p.type}","${p.description}",${(p.data||'').length},"${fields}"\n`;
-            });
-            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.download = 'tdung_payloads_v30.csv';
-            a.href = url;
-            a.click();
-            URL.revokeObjectURL(url);
-            updateStatus('📊 Đã xuất CSV.');
-        }
+        if(f.xray) code += `pb(base.add(0x400), 1);\n`;
+        if(f.speed) code += `pf(base.add(0x500), 1500);\n`;
+        if(f.norecoil) code += `pf(base.add(0x600), 0);\n`;
+        if(f.godmode) code += `pb(base.add(0x700), 1); pb(base.add(0x750), 1);\n`;
+        if(f.fixRung) code += `pf(base.add(0x200), 1 - antiShake / 100 * 0.9);\n`;
+        if(f.fixLo) code += `pf(base.add(0x250), 1 - overcorrection / 100 * 0.8);\n`;
+        if(f.fixSpread) code += `pf(base.add(0x300), 1 - spreadFix / 100 * 0.95);\n`;
+        if(f.emTam) code += `pf(base.add(0x350), (stabilizer / 100 * 0.8 + 0.2));\n`;
+        if(f.bypassac) code += `pb(base.add(0x100), 1); pb(base.add(0x200), 1);\n`;
 
-        // ============================================================
-        // QR
-        // ============================================================
-        function generateQR() {
-            const container = document.getElementById('qrContainer');
-            container.innerHTML = '';
-            if (payloads.length === 0) {
-                container.innerHTML = '<span style="color:var(--text-muted);font-size:13px;">Không có payload.</span>';
-                return;
-            }
-            const firstData = payloads[0].data || 'No data';
-            try {
-                if (typeof QRCode === 'undefined') {
-                    const script = document.createElement('script');
-                    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
-                    document.head.appendChild(script);
-                    script.onload = () => { generateQR(); };
-                    container.innerHTML = '<span style="color:#ff8844;">Đang tải QR...</span>';
-                    return;
-                }
-                qrInstance = new QRCode(container, {
-                    text: firstData,
-                    width: 180,
-                    height: 180,
-                    colorDark: '#ff2222',
-                    colorLight: '#0a0a0a',
-                    correctLevel: QRCode.CorrectLevel.H
-                });
-                updateStatus('✅ Đã tạo QR.');
-            } catch (e) {
-                container.innerHTML = '<span style="color:#ff4466;">Lỗi QR: ' + e.message + '</span>';
-            }
-        }
+        code += `console.log('[VIP Pro Max Ultimate V4 FIX] Patches applied!');\n`;
 
-        function clearQR() {
-            document.getElementById('qrContainer').innerHTML =
-                '<span style="color:var(--text-muted);font-size:13px;">Nhấn "Tạo QR" để hiển thị</span>';
-            qrInstance = null;
-            updateStatus('🧹 Đã xóa QR.');
-        }
+        document.getElementById('fileTypeBadge').textContent = '.js';
+        document.getElementById('outputArea').textContent = code;
+        const lines = code.split('\n').length;
+        document.getElementById('lineCount').textContent = lines + ' dòng';
+        document.getElementById('infoLines').textContent = lines;
+        document.getElementById('infoFile').textContent = '.js';
+        updateStatus(`✅ Xuất .js (${lines} dòng)`);
+    }
 
-        // ============================================================
-        // SHARE
-        // ============================================================
-        function shareConfig() {
-            if (navigator.share) {
-                try {
-                    const plist = buildPlist();
-                    const blob = new Blob([plist], { type: 'application/x-apple-aspen-config' });
-                    const file = new File([blob], 'tdung_config_v30.mobileconfig', { type: 'application/x-apple-aspen-config' });
-                    navigator.share({
-                        title: 'VISUAL CODE Tdung V30',
-                        text: 'Cấu hình từ Tdung V30',
-                        files: [file]
-                    }).then(() => {
-                        updateStatus('✅ Đã chia sẻ.');
-                    }).catch(() => {});
-                } catch (e) {
-                    updateStatus('❌ Lỗi chia sẻ: ' + e.message);
-                }
-            } else {
-                const xml = buildPlist();
-                navigator.clipboard.writeText(xml).then(() => {
-                    updateStatus('📋 Đã copy XML.');
-                }).catch(() => {
-                    alert('Không hỗ trợ chia sẻ, đã copy XML.');
-                });
-            }
-        }
+    function exportCPP() {
+        const f = flags();
+        const b = gB();
+        let code = `#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <sys/mman.h>\n#define BASE ${b}\n#define SP ${gS()}\n#define FOV ${gFOV()}\n#define SMOOTH ${gSmooth()}\n\n`;
+        code += `void patch(unsigned long a,void*d,size_t s){ size_t p=sysconf(_SC_PAGESIZE); unsigned long st=(a/p)*p; mprotect((void*)st,p,7); memcpy((void*)a,d,s); mprotect((void*)st,p,5); }\n`;
+        code += `void pb(unsigned long a,unsigned char v){ patch(a,&v,1); }\nvoid pf(unsigned long a,float v){ patch(a,&v,4); }\nvoid pi(unsigned long a,int v){ patch(a,&v,4); }\n\n`;
+        code += `int main(){ `;
+        if(f.xray) code += `pb(BASE+0x400,1); `;
+        if(f.speed) code += `pf(BASE+0x500,600*SP); `;
+        if(f.norecoil) code += `pf(BASE+0x600,0); `;
+        if(f.godmode) code += `pb(BASE+0x700,1); `;
+        if(f.fixRung) code += `pf(BASE+0x200,1-${gAntiShake()}/100*0.9); `;
+        if(f.fixSpread) code += `pf(BASE+0x300,1-${gSpreadFix()}/100*0.95); `;
+        if(f.emTam) code += `pf(BASE+0x350,(${gStabilizer()}/100*0.8+0.2)); `;
+        if(f.bypassac) code += `pb(BASE+0x100,1); pb(BASE+0x200,1); `;
+        code += `printf("[VIP] Patched!\\n"); return 0; }\n`;
+        document.getElementById('fileTypeBadge').textContent = '.cpp';
+        document.getElementById('outputArea').textContent = code;
+        const lines = code.split('\n').length;
+        document.getElementById('lineCount').textContent = lines + ' dòng';
+        document.getElementById('infoLines').textContent = lines;
+        document.getElementById('infoFile').textContent = '.cpp';
+        updateStatus(`✅ Xuất .cpp (${lines} dòng)`);
+    }
 
-        // ============================================================
-        // RESET
-        // ============================================================
-        function resetAll() {
-            if (!confirm('Reset về mặc định?')) return;
-            document.getElementById('displayName').value = 'Cấu hình Pro';
-            document.getElementById('identifier').value = 'com.tdung.pro';
-            document.getElementById('uuid').value = genUUID();
-            document.getElementById('osVersion').value = '14.0';
-            document.getElementById('organization').value = 'Tdung';
-            document.getElementById('description').value = 'Cấu hình đa năng tối ưu';
-            document.getElementById('scope').value = 'System';
-            document.getElementById('targetDevice').value = '0';
-            payloads = [];
-            payloadIdCounter = 0;
-            versionCounter = 1;
-            versionHistory = [];
-            renderPayloads();
-            clearQR();
-            updateStatus('🔄 Đã reset.');
-        }
+    function exportCFG() {
+        const f = flags();
+        let code = `# VIP Pro Max Ultimate V4 FIX\nversion=6.0\ngame=FF\nbase=${gB()}\nxray=${gX()}\nspeed=${gS()}\nnorecoil=${gN()}\ngodmode=${gG()}\n`;
+        code += `fov=${gFOV()}\nsmooth=${gSmooth()}\naimSpeed=${gAimSpeed()}\nantiShake=${gAntiShake()}\nstabilizer=${gStabilizer()}\nspreadFix=${gSpreadFix()}\novercorrection=${gOvercorrection()}\ntarget=${gTarget()}\n\n[FEATURES]\n`;
+        Object.entries(flags()).forEach(([k,v]) => code += `${k}=${v?1:0}\n`);
+        document.getElementById('fileTypeBadge').textContent = '.cfg';
+        document.getElementById('outputArea').textContent = code;
+        const lines = code.split('\n').length;
+        document.getElementById('lineCount').textContent = lines + ' dòng';
+        document.getElementById('infoLines').textContent = lines;
+        document.getElementById('infoFile').textContent = '.cfg';
+        updateStatus(`✅ Xuất .cfg (${lines} dòng)`);
+    }
 
-        // ============================================================
-        // STATS
-        // ============================================================
-        function updateStats() {
-            try {
-                const plist = buildPlist();
-                const size = new Blob([plist]).size;
-                document.getElementById('statCount').textContent = payloads.length;
-                document.getElementById('statSize').textContent = formatSize(size);
-                document.getElementById('statTimestamp').textContent = new Date().toLocaleTimeString();
-            } catch (e) {}
-        }
+    function exportINI() {
+        const f = flags();
+        let code = `[VIP]\nversion=6.0\ngame=FF\nbase=${gB()}\nxray=${gX()}\nspeed=${gS()}\nnorecoil=${gN()}\ngodmode=${gG()}\n`;
+        code += `fov=${gFOV()}\nsmooth=${gSmooth()}\naimSpeed=${gAimSpeed()}\nantiShake=${gAntiShake()}\nstabilizer=${gStabilizer()}\nspreadFix=${gSpreadFix()}\novercorrection=${gOvercorrection()}\ntarget=${gTarget()}\n\n[FEATURES]\n`;
+        Object.entries(flags()).forEach(([k,v]) => code += `${k}=${v?1:0}\n`);
+        document.getElementById('fileTypeBadge').textContent = '.ini';
+        document.getElementById('outputArea').textContent = code;
+        const lines = code.split('\n').length;
+        document.getElementById('lineCount').textContent = lines + ' dòng';
+        document.getElementById('infoLines').textContent = lines;
+        document.getElementById('infoFile').textContent = '.ini';
+        updateStatus(`✅ Xuất .ini (${lines} dòng)`);
+    }
 
-        // ============================================================
-        // STATUS
-        // ============================================================
-        function updateStatus(msg) {
-            document.getElementById('statusText').innerHTML = msg;
-            document.getElementById('statusTime').textContent = new Date().toLocaleTimeString();
-        }
+    function exportTXT() {
+        const f = flags();
+        let code = `VIP PRO MAX ULTIMATE V4 FIX\n====================================\n`;
+        code += `BASE: ${gB()}\nXRAY: ${gX()}\nSPEED: ${gS()}\nNORECOIL: ${gN()}\nGODMODE: ${gG()}\n`;
+        code += `FOV: ${gFOV()}\nSMOOTH: ${gSmooth()}\nAIM SPEED: ${gAimSpeed()}\nANTI SHAKE: ${gAntiShake()}\nSTABILIZER: ${gStabilizer()}\nSPREAD FIX: ${gSpreadFix()}\nOVERCORRECTION: ${gOvercorrection()}\nTARGET: ${targetName()}\n\nFEATURES:\n`;
+        Object.entries(flags()).forEach(([k,v]) => code += `${k}: ${v?'ON':'OFF'}\n`);
+        document.getElementById('fileTypeBadge').textContent = '.txt';
+        document.getElementById('outputArea').textContent = code;
+        const lines = code.split('\n').length;
+        document.getElementById('lineCount').textContent = lines + ' dòng';
+        document.getElementById('infoLines').textContent = lines;
+        document.getElementById('infoFile').textContent = '.txt';
+        updateStatus(`✅ Xuất .txt (${lines} dòng)`);
+    }
 
-        // ============================================================
-        // INIT
-        // ============================================================
-        function initApp() {
-            const savedTheme = localStorage.getItem('tdung_theme') || 'dark';
-            setTheme(savedTheme);
-            if (!document.getElementById('uuid').value) {
-                document.getElementById('uuid').value = genUUID();
-            }
-            addDNSPayload();
-            addWebClipPayload();
-            setTimeout(() => {
-                updateStats();
-                previewXML();
-            }, 300);
-            document.querySelectorAll('.form-control').forEach(el => {
-                el.addEventListener('input', () => { updateStats(); });
-                el.addEventListener('change', () => { updateStats(); });
-            });
-            updateStatus('🚀 VISUAL CODE Tdung V30 FIX sẵn sàng.');
-        }
+    function exportJSON() {
+        const f = flags();
+        const data = {
+            version: '6.0',
+            game: 'FF',
+            base: gB(),
+            offsets: { xray: gX(), speed: gS(), norecoil: gN(), godmode: gG() },
+            aim: { fov: gFOV(), smooth: gSmooth(), aimSpeed: gAimSpeed(), target: gTarget() },
+            fix: { antiShake: gAntiShake(), stabilizer: gStabilizer(), spreadFix: gSpreadFix(), overcorrection: gOvercorrection() },
+            features: f
+        };
+        const code = JSON.stringify(data, null, 2);
+        document.getElementById('fileTypeBadge').textContent = '.json';
+        document.getElementById('outputArea').textContent = code;
+        const lines = code.split('\n').length;
+        document.getElementById('lineCount').textContent = lines + ' dòng';
+        document.getElementById('infoLines').textContent = lines;
+        document.getElementById('infoFile').textContent = '.json';
+        updateStatus(`✅ Xuất .json (${lines} dòng)`);
+    }
 
-        // ============================================================
-        // START
-        // ============================================================
-        document.getElementById('appMain').style.display = 'none';
-        checkLogin();
-    </script>
+    function exportAll() {
+        const types = ['SO', 'Dex', 'Lua', 'JS', 'CPP', 'CFG', 'INI', 'TXT', 'JSON'];
+        const funcs = [exportSO, exportDex, exportLua, exportJS, exportCPP, exportCFG, exportINI, exportTXT, exportJSON];
+        let all = '';
+        funcs.forEach((fn, i) => {
+            fn();
+            all += `// ===== ${types[i]} =====\n${document.getElementById('outputArea').textContent}\n\n`;
+        });
+        document.getElementById('fileTypeBadge').textContent = 'All Files';
+        document.getElementById('outputArea').textContent = all;
+        const lines = all.split('\n').length;
+        document.getElementById('lineCount').textContent = lines + ' dòng';
+        document.getElementById('infoLines').textContent = lines;
+        updateStatus(`✅ Xuất tất cả (${lines} dòng)`);
+    }
+
+    // ============================================================
+    // ACTIONS
+    // ============================================================
+    function applyConfig() {
+        updateDisplay();
+        updateStatus('✅ Đã áp dụng cấu hình');
+        exportSO();
+    }
+
+    function copyOutput() {
+        const text = document.getElementById('outputArea').textContent;
+        if (!text || text.includes('Chọn loại file')) { updateStatus('⚠️ Chưa có nội dung'); return; }
+        navigator.clipboard.writeText(text).then(() => updateStatus('📋 Đã sao chép')).catch(() => {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            updateStatus('📋 Sao chép (fallback)');
+        });
+    }
+
+    function downloadFile() {
+        const text = document.getElementById('outputArea').textContent;
+        if (!text || text.includes('Chọn loại file')) { updateStatus('⚠️ Chưa có nội dung'); return; }
+        const ext = document.getElementById('fileTypeBadge').textContent.includes('All') ? '.txt' : document.getElementById('fileTypeBadge').textContent;
+        const blob = new Blob([text], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.download = `VIP_Pro_Max_V4_FIX${ext}`;
+        a.href = url;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        updateStatus(`⬇️ Đã tải file ${ext}`);
+    }
+
+    function clearOutput() {
+        document.getElementById('outputArea').textContent = '// Đã xóa nội dung';
+        document.getElementById('lineCount').textContent = '0 dòng';
+        document.getElementById('infoLines').textContent = '0';
+        updateStatus('🧹 Đã xóa nội dung');
+    }
+
+    function updateStatus(msg) {
+        document.getElementById('statusText').textContent = msg + ' | ' + new Date().toLocaleTimeString();
+    }
+
+    // ============================================================
+    // INIT
+    // ============================================================
+    window.onload = function() {
+        presetFF();
+        updateDisplay();
+        updateStatus('🚀 VIP Pro Max Ultimate V4 FIX sẵn sàng');
+    };
+</script>
 </body>
 </html>
