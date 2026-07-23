@@ -1,919 +1,365 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIP Pro Max Ultimate V4 FIX</title>
-    <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { background:#0a0c16; color:#d0d8e8; font-family:'Segoe UI',sans-serif; padding:16px; display:flex; justify-content:center; min-height:100vh; }
-        .container { max-width:1500px; width:100%; background:#111726; border-radius:36px; padding:24px; border:1px solid #2a3a5a; box-shadow:0 20px 60px rgba(0,0,0,0.9); }
-        h1 { text-align:center; font-size:38px; font-weight:900; background:linear-gradient(135deg,#ff44aa,#ffaa44,#44ddff,#ff44aa); background-size:300% 300%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:grad 4s ease infinite; }
-        @keyframes grad { 0%{background-position:0% 50%;} 50%{background-position:100% 50%;} 100%{background-position:0% 50%;} }
-        .sub { text-align:center; color:#8899bb; font-size:14px; margin-bottom:16px; border-bottom:1px solid #1e2a3a; padding-bottom:12px; }
-        .grid-4 { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:14px; }
-        @media (max-width:1100px){ .grid-4{ grid-template-columns:1fr 1fr; } }
-        @media (max-width:600px){ .grid-4{ grid-template-columns:1fr; } }
-        .card { background:#0e1424; border-radius:18px; padding:14px 16px; border:1px solid #1e2a3a; transition:0.3s; }
-        .card:hover { border-color:#3a5a8a; box-shadow:0 0 50px rgba(0,180,255,0.05); }
-        .card-title { font-size:15px; font-weight:700; color:#88ccff; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
-        .card-title i { color:#ff66aa; font-size:16px; }
-        .card-title .badge { font-size:9px; background:#1a2a3a; padding:2px 10px; border-radius:30px; color:#88aadd; margin-left:auto; }
-        .badge-gold { background:#ffaa0022; color:#ffcc66; border:1px solid #ffaa0044; }
-        .badge-red { background:#ff446622; color:#ff6688; border:1px solid #ff446644; }
-        .badge-green { background:#00cc8822; color:#66dd88; border:1px solid #00cc8844; }
-        .form-group { margin-bottom:8px; }
-        .form-group label { display:block; font-size:11px; font-weight:600; color:#99bbdd; margin-bottom:2px; }
-        .form-group label i { color:#ff66aa; margin-right:4px; }
-        .form-control { width:100%; padding:7px 10px; background:#080c18; border:1px solid #1e2a3a; border-radius:8px; color:#e8f0f8; font-size:12px; outline:none; transition:0.2s; font-family:'Courier New',monospace; }
-        .form-control:focus { border-color:#44ddff; box-shadow:0 0 0 3px rgba(68,221,255,0.08); }
-        select.form-control { appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2344ddff' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 10px center; padding-right:32px; }
-        .range-group { display:flex; align-items:center; gap:10px; margin-top:2px; }
-        .range-group input[type="range"] { flex:1; accent-color:#44ddff; height:4px; background:#1a2a3a; border-radius:10px; }
-        .range-group .val { min-width:36px; font-weight:700; color:#88ddff; font-size:14px; text-align:center; font-family:'Courier New',monospace; }
-        .range-group .label-mini { font-size:10px; color:#445566; }
-        .toggle-group { display:flex; gap:4px; flex-wrap:wrap; margin-top:4px; }
-        .toggle-item { display:flex; align-items:center; gap:4px; background:#080c18; padding:2px 8px 2px 5px; border-radius:30px; border:1px solid #1e2a3a; cursor:pointer; transition:0.2s; font-size:11px; }
-        .toggle-item:hover { border-color:#3a5a8a; }
-        .toggle-item input[type="checkbox"] { accent-color:#44ddff; width:14px; height:14px; cursor:pointer; }
-        .btn-group { display:flex; gap:6px; flex-wrap:wrap; margin:10px 0 8px; }
-        .btn { padding:8px 16px; border-radius:40px; border:none; font-weight:700; font-size:12px; cursor:pointer; transition:0.3s; display:inline-flex; align-items:center; gap:6px; flex:1; justify-content:center; min-width:60px; }
-        .btn:hover { transform:translateY(-2px) scale(1.02); box-shadow:0 8px 30px rgba(0,0,0,0.3); }
-        .btn-primary { background:linear-gradient(135deg,#44ddff,#7b2ffc); color:#fff; }
-        .btn-gold { background:linear-gradient(135deg,#ffaa44,#ff6600); color:#fff; }
-        .btn-green { background:linear-gradient(135deg,#00cc88,#00aa66); color:#fff; }
-        .btn-red { background:linear-gradient(135deg,#ff4466,#cc2244); color:#fff; }
-        .btn-purple { background:linear-gradient(135deg,#aa66ff,#7733cc); color:#fff; }
-        .btn-secondary { background:#1a2a3a; color:#88bbdd; border:1px solid #2a3a5a; }
-        .btn-secondary:hover { background:#2a3a5a; color:#bbddff; }
-        .output-box { background:#060a12; border:1px solid #1a2a3a; border-radius:14px; padding:14px; font-family:'Courier New',monospace; font-size:11px; color:#bbddff; white-space:pre-wrap; max-height:550px; overflow:auto; line-height:1.5; }
-        .row-actions { display:flex; gap:6px; margin-top:8px; flex-wrap:wrap; }
-        .row-actions button { padding:5px 14px; border-radius:30px; border:1px solid #1e2a3a; background:#080c18; color:#88aadd; cursor:pointer; transition:0.2s; font-size:11px; }
-        .row-actions button:hover { background:#1a2a3a; border-color:#3a5a8a; color:#bbddff; }
-        .status-bar { background:#080c18; border-radius:40px; padding:8px 18px; margin-top:12px; display:flex; align-items:center; gap:12px; border:1px solid #1a2a3a; font-size:13px; color:#88aadd; }
-        .status-bar .dot { width:8px; height:8px; border-radius:50%; background:#44dd88; animation:pulse 1.5s infinite; }
-        @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
-        .status-bar .status-text{ flex:1; }
-        .footer { margin-top:16px; text-align:center; font-size:11px; color:#445566; border-top:1px solid #1a2a3a; padding-top:12px; }
-        .file-badge { display:inline-block; padding:2px 10px; border-radius:30px; font-size:10px; font-weight:700; background:#ffaa0022; color:#ffcc66; border:1px solid #ffaa0044; margin-left:6px; }
-        .offset-row { display:flex; gap:8px; align-items:center; margin-bottom:4px; }
-        .offset-row .label { font-size:11px; color:#88aadd; min-width:70px; }
-        .offset-row .val-hex { font-family:'Courier New',monospace; color:#ff88aa; font-size:12px; min-width:90px; }
-        .file-grid { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:4px; margin-top:6px; }
-        .file-grid .btn { padding:4px; font-size:10px; min-width:auto; }
-        @media (max-width:700px){ .file-grid{ grid-template-columns:1fr 1fr 1fr; } }
-        .mt-2 { margin-top:6px; }
-        .highlight { color:#44ddff; }
-        .highlight2 { color:#ff88aa; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>✦ INFINITY HEAX V2</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-<div class="container">
+    <!-- ===== PARTICLES BACKGROUND ===== -->
+    <div id="particles-container"></div>
 
-    <h1>⚡ VIP PRO MAX ULTIMATE V4 FIX</h1>
-    <div class="sub">
-        <i class="fas fa-dragon"></i> Đẳng cấp nhất – Aimlock · Fix rung · Fix lố · Fix lạc đạn · Bám đầu · Êm tâm · AimNeck · AimDrag
+    <div class="app">
+
+        <!-- ===== LOCK SCREEN ===== -->
+        <div id="lockScreen" class="lock-screen">
+            <div class="lock-container">
+                <div class="lock-neon-ring"></div>
+                <div class="lock-icon">
+                    <i class="fas fa-infinity"></i>
+                </div>
+                <h1 class="lock-title">✦ INFINITY HEAX V2 ✦</h1>
+                <p class="lock-subtitle">Hệ thống bảo mật đa tầng</p>
+
+                <div class="sys-status">
+                    <span><i class="fas fa-circle status-dot"></i> ONLINE</span>
+                    <span id="sysTime">--:--:--</span>
+                </div>
+
+                <div class="input-group">
+                    <input id="keyInput" type="text" placeholder="NEXORA-XXXX" autofocus>
+                    <button onclick="loginKey()" id="loginBtn"><i class="fas fa-unlock"></i> KÍCH HOẠT</button>
+                </div>
+
+                <div id="lockMsg" class="lock-msg"></div>
+
+                <div class="lock-footer">
+                    <span class="version">v2.0.0</span>
+                    <span class="divider">•</span>
+                    <span>🔒 Bảo mật cấp AAA</span>
+                    <span class="divider">•</span>
+                    <span id="deviceInfo">💻</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== DASHBOARD ===== -->
+        <div id="dashboard" class="dashboard">
+
+            <!-- HEADER -->
+            <header class="main-header">
+                <div class="header-left">
+                    <div class="brand">
+                        <i class="fas fa-infinity"></i>
+                        <h1>INFINITY HEAX</h1>
+                    </div>
+                    <p><i class="fas fa-user-astronaut"></i> Quản lý: <strong>Bảo Phúc</strong></p>
+                </div>
+                <div class="header-right">
+                    <span class="badge online"><span class="dot"></span> ONLINE</span>
+                    <span id="keyBadge" class="badge key">🔑 --</span>
+                    <button onclick="logoutKey()" class="btn-logout" title="Đăng xuất">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- MAIN CONTENT -->
+            <main class="main-content">
+
+                <!-- ===== HOME TAB ===== -->
+                <section id="home" class="page active">
+
+                    <!-- Profile -->
+                    <div class="card profile-card">
+                        <div class="avatar">
+                            <img src="https://i.ibb.co/TDGvJHkd/Hinh-nen-anime-ngau-14.jpg" alt="avatar">
+                            <div class="avatar-status"></div>
+                            <div class="avatar-ring"></div>
+                            <div class="avatar-glow"></div>
+                        </div>
+                        <h2>INFINITY HEAX V2</h2>
+                        <p class="role"><i class="fas fa-crown"></i> Quản lý: <strong>Bảo Phúc</strong></p>
+                        <div class="tier">
+                            <span class="tier-badge">👑 VIP</span>
+                            <span class="tier-level">Level 99</span>
+                        </div>
+                        <div class="profile-stats">
+                            <div>
+                                <span>KEY</span>
+                                <strong id="profileKey">--</strong>
+                            </div>
+                            <div>
+                                <span>HẠN</span>
+                                <strong id="profileExpiry">--</strong>
+                            </div>
+                            <div>
+                                <span>CÒN</span>
+                                <strong id="profileDays">--</strong>
+                            </div>
+                        </div>
+                        <div class="social">
+                            <button onclick="openLink('fb')"><i class="fab fa-facebook-f"></i></button>
+                            <button onclick="openLink('zl')"><i class="fab fa-zalo"></i></button>
+                            <button onclick="openLink('tt')"><i class="fab fa-tiktok"></i></button>
+                            <button onclick="openLink('yt')"><i class="fab fa-youtube"></i></button>
+                            <button onclick="openLink('github')"><i class="fab fa-github"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Key Info -->
+                    <div class="card key-card">
+                        <h3><i class="fas fa-key"></i> THÔNG TIN KEY</h3>
+                        <div class="key-grid">
+                            <div class="key-item">
+                                <label>🔑 KEY</label>
+                                <span id="currentKey" class="highlight">--</span>
+                            </div>
+                            <div class="key-item">
+                                <label>🏷️ LOẠI</label>
+                                <span id="keyType">--</span>
+                            </div>
+                            <div class="key-item">
+                                <label>📅 HẠN</label>
+                                <span id="expiryDate">--</span>
+                            </div>
+                            <div class="key-item">
+                                <label>⏳ CÒN</label>
+                                <span id="daysLeft">--</span>
+                            </div>
+                        </div>
+                        <div class="progress-wrap">
+                            <div class="progress-label">
+                                <span>Thời gian còn lại</span>
+                                <span id="progressPercent">100%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div id="expiryProgress" style="width:100%;"></div>
+                            </div>
+                        </div>
+                        <div class="key-status" id="keyStatus">
+                            <i class="fas fa-check-circle"></i> Hoạt động
+                        </div>
+                        <div class="key-actions">
+                            <button onclick="syncKeys()" class="btn-sync"><i class="fas fa-sync"></i> Đồng bộ</button>
+                        </div>
+                    </div>
+
+                    <!-- Terminal -->
+                    <div class="card terminal-card">
+                        <div class="term-header">
+                            <i class="fas fa-terminal"></i>
+                            <h3>BOT TERMINAL</h3>
+                            <div class="term-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div id="terminalOutput" class="term-output">🚀 Terminal sẵn sàng...</div>
+                        <div class="term-input">
+                            <input id="terminalInput" placeholder="Nhập lệnh...">
+                            <button onclick="execTerminal()"><i class="fas fa-paper-plane"></i></button>
+                            <button onclick="clearTerminal()" class="term-clear"><i class="fas fa-eraser"></i></button>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- ===== FUNC TAB ===== -->
+                <section id="func" class="page">
+                    <div class="page-header">
+                        <h2><i class="fas fa-gamepad"></i> FUNC SYSTEM</h2>
+                        <span class="badge-page">8 chức năng</span>
+                    </div>
+                    <div id="funcList" class="func-grid"></div>
+                </section>
+
+                <!-- ===== BOOST TAB ===== -->
+                <section id="boost" class="page">
+                    <div class="page-header">
+                        <h2><i class="fas fa-bolt"></i> BOOST CENTER</h2>
+                        <span class="badge-page">6 tính năng</span>
+                    </div>
+                    <div id="boostList" class="boost-grid"></div>
+                </section>
+
+                <!-- ===== LIVE TAB ===== -->
+                <section id="live" class="page">
+                    <div class="page-header">
+                        <h2><i class="fas fa-chart-line"></i> LIVE MONITOR</h2>
+                        <span class="badge-page">📊 Real-time</span>
+                    </div>
+
+                    <div class="card stats-card">
+                        <div class="stat-item">
+                            <i class="fas fa-microchip"></i>
+                            <span>CPU</span>
+                            <b id="cpu">0%</b>
+                            <div class="stat-bar"><div id="cpuBar" style="width:0%;"></div></div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-memory"></i>
+                            <span>RAM</span>
+                            <b id="ram">0%</b>
+                            <div class="stat-bar"><div id="ramBar" style="width:0%;"></div></div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>FPS</span>
+                            <b id="fps">120</b>
+                            <div class="stat-bar"><div id="fpsBar" style="width:100%;"></div></div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-thermometer-half"></i>
+                            <span>NHIỆT</span>
+                            <b id="temp">0°C</b>
+                            <div class="stat-bar"><div id="tempBar" style="width:0%;"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="card chart-card">
+                        <div class="chart-header">
+                            <span><i class="fas fa-wave-square"></i> Hiệu suất hệ thống</span>
+                            <span class="chart-live">● LIVE</span>
+                        </div>
+                        <canvas id="chart"></canvas>
+                    </div>
+
+                    <div class="card console-card">
+                        <h3><i class="fas fa-code"></i> CONSOLE</h3>
+                        <div id="consoleLog" class="console-log">🚀 System initialized...</div>
+                        <div class="console-buttons">
+                            <button onclick="cleanRam()"><i class="fas fa-broom"></i> Dọn RAM</button>
+                            <button onclick="clearConsole()"><i class="fas fa-eraser"></i> Xóa</button>
+                            <button onclick="resetSystem()"><i class="fas fa-sync"></i> Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="card game-card">
+                        <h3><i class="fas fa-dice"></i> GAME CENTER</h3>
+                        <div class="game-buttons">
+                            <button onclick="openGame('ffmax')"><i class="fas fa-fire"></i> FF MAX</button>
+                            <button onclick="openGame('ffth')"><i class="fas fa-bolt"></i> FF THÁI</button>
+                            <button onclick="openGame('ff')"><i class="fas fa-gamepad"></i> FREE FIRE</button>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- ===== SETTING TAB ===== -->
+                <section id="setting" class="page">
+                    <div class="page-header">
+                        <h2><i class="fas fa-sliders"></i> CÀI ĐẶT</h2>
+                        <span class="badge-page">⚙️ Tùy chỉnh</span>
+                    </div>
+
+                    <div class="card settings-card">
+                        <div class="setting-group">
+                            <label><i class="fas fa-palette"></i> Màu chủ đạo</label>
+                            <div class="color-options">
+                                <button class="color-btn active" style="background:#ff2020;" onclick="changeColor('#ff2020', this)"></button>
+                                <button class="color-btn" style="background:#00ffcc;" onclick="changeColor('#00ffcc', this)"></button>
+                                <button class="color-btn" style="background:#ff6b9d;" onclick="changeColor('#ff6b9d', this)"></button>
+                                <button class="color-btn" style="background:#ffd93d;" onclick="changeColor('#ffd93d', this)"></button>
+                                <button class="color-btn" style="background:#6bcbff;" onclick="changeColor('#6bcbff', this)"></button>
+                                <button class="color-btn" style="background:#b388ff;" onclick="changeColor('#b388ff', this)"></button>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <span><i class="fas fa-film"></i> Animation</span>
+                            <label class="switch">
+                                <input type="checkbox" checked onchange="toggleSetting(this)">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <span><i class="fas fa-volume-up"></i> Âm thanh</span>
+                            <label class="switch">
+                                <input type="checkbox" checked onchange="toggleSetting(this)">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <span><i class="fas fa-rocket"></i> Chế độ hiệu suất</span>
+                            <label class="switch">
+                                <input type="checkbox" checked onchange="toggleSetting(this)">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <span><i class="fas fa-moon"></i> Dark Mode</span>
+                            <label class="switch">
+                                <input type="checkbox" onchange="toggleDarkMode(this)">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <span><i class="fas fa-key"></i> Tự động gia hạn</span>
+                            <label class="switch">
+                                <input type="checkbox" onchange="toggleSetting(this)">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                </section>
+
+            </main>
+
+            <!-- ===== BOTTOM NAV ===== -->
+            <nav class="bottom-nav">
+                <button onclick="tab('home')" class="nav-btn active" data-tab="home">
+                    <i class="fas fa-house"></i>
+                    <span>Home</span>
+                </button>
+                <button onclick="tab('func')" class="nav-btn" data-tab="func">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Func</span>
+                </button>
+                <button onclick="tab('boost')" class="nav-btn" data-tab="boost">
+                    <i class="fas fa-bolt"></i>
+                    <span>Boost</span>
+                </button>
+                <button onclick="tab('live')" class="nav-btn" data-tab="live">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Live</span>
+                </button>
+                <button onclick="tab('setting')" class="nav-btn" data-tab="setting">
+                    <i class="fas fa-gear"></i>
+                    <span>Setting</span>
+                </button>
+            </nav>
+
+        </div>
+
     </div>
 
-    <!-- ===== ROW 1 ===== -->
-    <div class="grid-4">
-        <div class="card">
-            <div class="card-title"><i class="fas fa-crosshairs"></i> Aimlock <span class="badge badge-gold">VIP</span></div>
-            <div class="form-group">
-                <label><i class="fas fa-bullseye"></i> FOV</label>
-                <div class="range-group">
-                    <span class="label-mini">1</span>
-                    <input type="range" id="fovSlider" min="1" max="360" value="120" oninput="updateDisplay()">
-                    <span class="val" id="fovVal">120</span>
-                    <span class="label-mini">360</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label><i class="fas fa-feather-alt"></i> Smooth</label>
-                <div class="range-group">
-                    <span class="label-mini">1</span>
-                    <input type="range" id="smoothSlider" min="1" max="100" value="80" oninput="updateDisplay()">
-                    <span class="val" id="smoothVal">80</span>
-                    <span class="label-mini">100</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label><i class="fas fa-tachometer-alt"></i> Aim Speed</label>
-                <div class="range-group">
-                    <span class="label-mini">1</span>
-                    <input type="range" id="aimSpeedSlider" min="1" max="100" value="60" oninput="updateDisplay()">
-                    <span class="val" id="aimSpeedVal">60</span>
-                    <span class="label-mini">100</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label><i class="fas fa-dot-circle"></i> Target</label>
-                <select class="form-control" id="aimTarget" onchange="updateDisplay()">
-                    <option value="head">Đầu (Head)</option>
-                    <option value="neck" selected>Cổ (Neck)</option>
-                    <option value="chest">Ngực (Chest)</option>
-                    <option value="body">Thân (Body)</option>
-                    <option value="drag">Drag (Kéo chuột)</option>
-                </select>
-            </div>
-        </div>
+    <!-- ===== AUDIO ELEMENTS ===== -->
+    <audio id="audio-click" preload="auto">
+        <source src="https://www.soundjay.com/buttons/sounds/button-16.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio-success" preload="auto">
+        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio-error" preload="auto">
+        <source src="https://www.soundjay.com/misc/sounds/fail-trombone-01.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio-warning" preload="auto">
+        <source src="https://www.soundjay.com/misc/sounds/beep-06.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio-toggle" preload="auto">
+        <source src="https://www.soundjay.com/buttons/sounds/button-09.mp3" type="audio/mpeg">
+    </audio>
 
-        <div class="card">
-            <div class="card-title"><i class="fas fa-cog"></i> Fix & Ổn định <span class="badge badge-red">Pro</span></div>
-            <div class="form-group">
-                <label><i class="fas fa-wave-square"></i> Fix rung (Anti-Shake)</label>
-                <div class="range-group">
-                    <span class="label-mini">0</span>
-                    <input type="range" id="antiShakeSlider" min="0" max="100" value="80" oninput="updateDisplay()">
-                    <span class="val" id="antiShakeVal">80</span>
-                    <span class="label-mini">100</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label><i class="fas fa-crosshairs"></i> Cứng tâm (Stabilizer)</label>
-                <div class="range-group">
-                    <span class="label-mini">0</span>
-                    <input type="range" id="stabilizerSlider" min="0" max="100" value="70" oninput="updateDisplay()">
-                    <span class="val" id="stabilizerVal">70</span>
-                    <span class="label-mini">100</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label><i class="fas fa-bullseye"></i> Fix lạc đạn (Spread)</label>
-                <div class="range-group">
-                    <span class="label-mini">0</span>
-                    <input type="range" id="spreadFixSlider" min="0" max="100" value="85" oninput="updateDisplay()">
-                    <span class="val" id="spreadFixVal">85</span>
-                    <span class="label-mini">100</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label><i class="fas fa-undo-alt"></i> Fix lố (Overcorrection)</label>
-                <div class="range-group">
-                    <span class="label-mini">0</span>
-                    <input type="range" id="overcorrectionSlider" min="0" max="100" value="60" oninput="updateDisplay()">
-                    <span class="val" id="overcorrectionVal">60</span>
-                    <span class="label-mini">100</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-title"><i class="fas fa-sliders-h"></i> Offset Setting <span class="badge badge-green">Live</span></div>
-            <div class="offset-row">
-                <span class="label">Base</span>
-                <input class="form-control" id="baseOffset" value="0x8A5A1A0" style="flex:1;font-size:11px;" oninput="updateDisplay()">
-                <span class="val-hex" id="baseHex">0x8A5A1A0</span>
-            </div>
-            <div class="offset-row">
-                <span class="label">XRay</span>
-                <input class="form-control" id="xrayOffset" value="0x5A0A1A0" style="flex:1;font-size:11px;" oninput="updateDisplay()">
-                <span class="val-hex" id="xrayHex">0x5A0A1A0</span>
-            </div>
-            <div class="offset-row">
-                <span class="label">Speed</span>
-                <input class="form-control" id="speedOffset" value="0x4B0A1A0" style="flex:1;font-size:11px;" oninput="updateDisplay()">
-                <span class="val-hex" id="speedHex">0x4B0A1A0</span>
-            </div>
-            <div class="offset-row">
-                <span class="label">NoRecoil</span>
-                <input class="form-control" id="norecoilOffset" value="0x5C0A1A0" style="flex:1;font-size:11px;" oninput="updateDisplay()">
-                <span class="val-hex" id="norecoilHex">0x5C0A1A0</span>
-            </div>
-            <div class="offset-row">
-                <span class="label">GodMode</span>
-                <input class="form-control" id="godmodeOffset" value="0x7A0A1A0" style="flex:1;font-size:11px;" oninput="updateDisplay()">
-                <span class="val-hex" id="godmodeHex">0x7A0A1A0</span>
-            </div>
-            <div style="margin-top:6px;display:flex;gap:4px;">
-                <button class="btn btn-secondary" style="flex:1;padding:4px;font-size:10px;" onclick="presetFF()">FF Max</button>
-                <button class="btn btn-secondary" style="flex:1;padding:4px;font-size:10px;" onclick="presetFFTH()">FF Th</button>
-                <button class="btn btn-gold" style="flex:1;padding:4px;font-size:10px;" onclick="presetVIP()">VIP Mode</button>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-title"><i class="fas fa-toggle-on"></i> Tính năng <span class="badge badge-red">VIP+</span></div>
-            <div class="toggle-group">
-                <label class="toggle-item"><input type="checkbox" id="chkAimlock" checked onchange="updateDisplay()"><span>Aimlock</span></label>
-                <label class="toggle-item"><input type="checkbox" id="chkHeadAim" checked onchange="updateDisplay()"><span>Bám đầu</span></label>
-                <label class="toggle-item"><input type="checkbox" id="chkNeckAim" checked onchange="updateDisplay()"><span>AimNeck</span></label>
-                <label class="toggle-item"><input type="checkbox" id="chkDrag" checked onchange="updateDisplay()"><span>AimDrag</span></label>
-                <label class="toggle-item"><input type="checkbox" id="chkFixRung" checked onchange="updateDisplay()"><span>Fix rung</span></label>
-                <label class="toggle-item"><input type="checkbox" id="chkFixLo" checked onchange="updateDisplay()"><span>Fix lố</span></label>
-                <label class="toggle-item"><input type="checkbox" id="chkFixSpread" checked onchange="updateDisplay()"><span>Fix lạc đạn</span></label>
-                <label class="toggle-item"><input type="checkbox" id="chkEmTam" checked onchange="updateDisplay()"><span>Êm tâm</span></label>
-                <label class="toggle-item"><input type="checkbox" id="chkXRay" checked onchange="updateDisplay()"><span>XRay</span></label>
-                <label class="toggle-item"><input type="checkbox" id="chkSpeed" checked onchange="updateDisplay()"><span>Speed</span></label>
-                <label class="toggle-item"><input type="checkbox" id="chkNoRecoil" checked onchange="updateDisplay()"><span>NoRecoil</span></label>
-                <label class="toggle-item"><input type="checkbox" id="chkGodMode" checked onchange="updateDisplay()"><span>GodMode</span></label>
-                <label class="toggle-item"><input type="checkbox" id="chkBypassAC" checked onchange="updateDisplay()"><span>BypassAC</span></label>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== ROW 2 ===== -->
-    <div class="grid-4" style="margin-top:6px;">
-        <div class="card">
-            <div class="card-title"><i class="fas fa-file-export"></i> Xuất file <span class="badge badge-gold">Đa dạng</span></div>
-            <div class="file-grid">
-                <button class="btn btn-primary" onclick="exportSO()">.so</button>
-                <button class="btn btn-purple" onclick="exportDex()">.dex</button>
-                <button class="btn btn-green" onclick="exportLua()">.lua</button>
-                <button class="btn btn-secondary" onclick="exportJS()">.js</button>
-                <button class="btn btn-secondary" onclick="exportCPP()">.cpp</button>
-                <button class="btn btn-secondary" onclick="exportCFG()">.cfg</button>
-                <button class="btn btn-secondary" onclick="exportINI()">.ini</button>
-                <button class="btn btn-secondary" onclick="exportTXT()">.txt</button>
-                <button class="btn btn-secondary" onclick="exportJSON()">.json</button>
-            </div>
-            <button class="btn btn-gold" style="margin-top:4px;padding:5px;font-size:11px;width:100%;" onclick="exportAll()"><i class="fas fa-boxes"></i> Xuất tất cả</button>
-        </div>
-
-        <div class="card">
-            <div class="card-title"><i class="fas fa-magic"></i> Hành động <span class="badge">VIP</span></div>
-            <button class="btn btn-primary" style="width:100%;margin-bottom:4px;padding:6px;" onclick="applyConfig()"><i class="fas fa-check"></i> Áp dụng</button>
-            <button class="btn btn-secondary" style="width:100%;margin-bottom:4px;padding:6px;" onclick="resetAll()"><i class="fas fa-undo"></i> Reset</button>
-            <button class="btn btn-secondary" style="width:100%;padding:6px;" onclick="clearOutput()"><i class="fas fa-eraser"></i> Xóa output</button>
-        </div>
-
-        <div class="card">
-            <div class="card-title"><i class="fas fa-info-circle"></i> Trạng thái <span class="badge badge-green">Live</span></div>
-            <div style="font-size:11px;color:#88aadd;line-height:1.8;">
-                <div><span style="color:#445566;">FOV:</span> <span id="infoFOV">120</span></div>
-                <div><span style="color:#445566;">Smooth:</span> <span id="infoSmooth">80</span></div>
-                <div><span style="color:#445566;">Target:</span> <span id="infoTarget">Neck</span></div>
-                <div><span style="color:#445566;">Tính năng:</span> <span id="infoFeatures">13</span></div>
-                <div><span style="color:#445566;">File:</span> <span id="infoFile">.so</span></div>
-                <div><span style="color:#445566;">Trạng thái:</span> <span id="infoStatus" style="color:#44dd88;">● Sẵn sàng</span></div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-title"><i class="fas fa-database"></i> Thông tin <span class="badge badge-purple">Pro</span></div>
-            <div style="font-size:11px;color:#88aadd;line-height:1.8;">
-                <div><span style="color:#445566;">Version:</span> <span id="infoVersion">V4 FIX</span></div>
-                <div><span style="color:#445566;">Game:</span> <span id="infoGame">FF Max & FF Th</span></div>
-                <div><span style="color:#445566;">Base:</span> <span id="infoBase">0x8A5A1A0</span></div>
-                <div><span style="color:#445566;">Số dòng:</span> <span id="infoLines">0</span></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== KẾT QUẢ ===== -->
-    <div class="card" style="margin-top:12px;">
-        <div class="card-title">
-            <i class="fas fa-terminal"></i> Nội dung xuất
-            <span class="file-badge" id="fileTypeBadge">.so</span>
-            <span style="margin-left:auto;font-size:11px;color:#445566;" id="lineCount">0 dòng</span>
-        </div>
-        <div class="output-box" id="outputArea">// Chọn loại file và bấm xuất</div>
-        <div class="row-actions">
-            <button onclick="copyOutput()"><i class="fas fa-copy"></i> Sao chép</button>
-            <button onclick="downloadFile()"><i class="fas fa-download"></i> Tải file</button>
-            <button onclick="clearOutput()"><i class="fas fa-eraser"></i> Xóa</button>
-        </div>
-    </div>
-
-    <!-- ===== STATUS ===== -->
-    <div class="status-bar">
-        <span class="dot"></span>
-        <span class="status-text" id="statusText">✅ Sẵn sàng. Điều chỉnh thông số và xuất file.</span>
-        <span id="statusTime" style="font-size:11px;color:#445566;"></span>
-    </div>
-
-    <div class="footer">
-        <span>⚡ VIP Pro Max Ultimate V4 FIX – <span class="highlight">Không lỗi</span> – <span class="highlight2">Logic VIP</span></span>
-    </div>
-</div>
-
-<script>
-    // ============================================================
-    // CORE LOGIC
-    // ============================================================
-    function getVal(id) { return document.getElementById(id).value; }
-    function getInt(id) { return parseInt(document.getElementById(id).value) || 0; }
-    function isChecked(id) { return document.getElementById(id).checked; }
-
-    function gB() { return getVal('baseOffset') || '0x8A5A1A0'; }
-    function gX() { return getVal('xrayOffset') || '0x5A0A1A0'; }
-    function gS() { return getVal('speedOffset') || '0x4B0A1A0'; }
-    function gN() { return getVal('norecoilOffset') || '0x5C0A1A0'; }
-    function gG() { return getVal('godmodeOffset') || '0x7A0A1A0'; }
-    function gFOV() { return getInt('fovSlider') || 120; }
-    function gSmooth() { return getInt('smoothSlider') || 80; }
-    function gAimSpeed() { return getInt('aimSpeedSlider') || 60; }
-    function gAntiShake() { return getInt('antiShakeSlider') || 80; }
-    function gStabilizer() { return getInt('stabilizerSlider') || 70; }
-    function gSpreadFix() { return getInt('spreadFixSlider') || 85; }
-    function gOvercorrection() { return getInt('overcorrectionSlider') || 60; }
-    function gTarget() { return getVal('aimTarget') || 'neck'; }
-
-    function flags() {
-        return {
-            aimlock: isChecked('chkAimlock'),
-            headAim: isChecked('chkHeadAim'),
-            neckAim: isChecked('chkNeckAim'),
-            drag: isChecked('chkDrag'),
-            fixRung: isChecked('chkFixRung'),
-            fixLo: isChecked('chkFixLo'),
-            fixSpread: isChecked('chkFixSpread'),
-            emTam: isChecked('chkEmTam'),
-            xray: isChecked('chkXRay'),
-            speed: isChecked('chkSpeed'),
-            norecoil: isChecked('chkNoRecoil'),
-            godmode: isChecked('chkGodMode'),
-            bypassac: isChecked('chkBypassAC')
-        };
-    }
-
-    function targetName() {
-        const map = { head: 'Đầu', neck: 'Cổ', chest: 'Ngực', body: 'Thân', drag: 'Drag' };
-        return map[gTarget()] || 'Cổ';
-    }
-
-    // ============================================================
-    // UPDATE DISPLAY
-    // ============================================================
-    function updateDisplay() {
-        document.getElementById('fovVal').textContent = gFOV();
-        document.getElementById('smoothVal').textContent = gSmooth();
-        document.getElementById('aimSpeedVal').textContent = gAimSpeed();
-        document.getElementById('antiShakeVal').textContent = gAntiShake();
-        document.getElementById('stabilizerVal').textContent = gStabilizer();
-        document.getElementById('spreadFixVal').textContent = gSpreadFix();
-        document.getElementById('overcorrectionVal').textContent = gOvercorrection();
-        document.getElementById('baseHex').textContent = gB();
-        document.getElementById('xrayHex').textContent = gX();
-        document.getElementById('speedHex').textContent = gS();
-        document.getElementById('norecoilHex').textContent = gN();
-        document.getElementById('godmodeHex').textContent = gG();
-        document.getElementById('infoFOV').textContent = gFOV();
-        document.getElementById('infoSmooth').textContent = gSmooth();
-        document.getElementById('infoTarget').textContent = targetName();
-        document.getElementById('infoFeatures').textContent = document.querySelectorAll('.toggle-item input:checked').length;
-        document.getElementById('infoBase').textContent = gB();
-        document.getElementById('infoStatus').textContent = '● Sẵn sàng';
-        document.getElementById('infoStatus').style.color = '#44dd88';
-    }
-
-    // ============================================================
-    // PRESETS
-    // ============================================================
-    function presetFF() {
-        document.getElementById('baseOffset').value = '0x8A5A1A0';
-        document.getElementById('xrayOffset').value = '0x5A0A1A0';
-        document.getElementById('speedOffset').value = '0x4B0A1A0';
-        document.getElementById('norecoilOffset').value = '0x5C0A1A0';
-        document.getElementById('godmodeOffset').value = '0x7A0A1A0';
-        document.getElementById('fovSlider').value = '120';
-        document.getElementById('smoothSlider').value = '80';
-        document.getElementById('aimSpeedSlider').value = '60';
-        document.getElementById('antiShakeSlider').value = '80';
-        document.getElementById('stabilizerSlider').value = '70';
-        document.getElementById('spreadFixSlider').value = '85';
-        document.getElementById('overcorrectionSlider').value = '60';
-        document.getElementById('aimTarget').value = 'neck';
-        document.querySelectorAll('.toggle-item input').forEach(cb => cb.checked = true);
-        updateDisplay();
-        updateStatus('✅ FF Max preset loaded');
-        exportSO();
-    }
-
-    function presetFFTH() {
-        document.getElementById('baseOffset').value = '0x8A5A1A0';
-        document.getElementById('xrayOffset').value = '0x5B0A1A0';
-        document.getElementById('speedOffset').value = '0x4C0A1A0';
-        document.getElementById('norecoilOffset').value = '0x5D0A1A0';
-        document.getElementById('godmodeOffset').value = '0x7B0A1A0';
-        document.getElementById('fovSlider').value = '120';
-        document.getElementById('smoothSlider').value = '80';
-        document.getElementById('aimSpeedSlider').value = '60';
-        document.getElementById('antiShakeSlider').value = '80';
-        document.getElementById('stabilizerSlider').value = '70';
-        document.getElementById('spreadFixSlider').value = '85';
-        document.getElementById('overcorrectionSlider').value = '60';
-        document.getElementById('aimTarget').value = 'neck';
-        document.querySelectorAll('.toggle-item input').forEach(cb => cb.checked = true);
-        updateDisplay();
-        updateStatus('✅ FF Th preset loaded');
-        exportSO();
-    }
-
-    function presetVIP() {
-        document.getElementById('baseOffset').value = '0x8A5A1A0';
-        document.getElementById('xrayOffset').value = '0x5A0A1A0';
-        document.getElementById('speedOffset').value = '0x4B0A1A0';
-        document.getElementById('norecoilOffset').value = '0x5C0A1A0';
-        document.getElementById('godmodeOffset').value = '0x7A0A1A0';
-        document.getElementById('fovSlider').value = '180';
-        document.getElementById('smoothSlider').value = '90';
-        document.getElementById('aimSpeedSlider').value = '80';
-        document.getElementById('antiShakeSlider').value = '90';
-        document.getElementById('stabilizerSlider').value = '85';
-        document.getElementById('spreadFixSlider').value = '95';
-        document.getElementById('overcorrectionSlider').value = '80';
-        document.getElementById('aimTarget').value = 'neck';
-        document.querySelectorAll('.toggle-item input').forEach(cb => cb.checked = true);
-        updateDisplay();
-        updateStatus('✅ VIP Mode loaded');
-        exportSO();
-    }
-
-    function resetAll() {
-        presetFF();
-        updateStatus('🔄 Đã reset về mặc định');
-    }
-
-    // ============================================================
-    // BUILD CODE (CORE)
-    // ============================================================
-    function buildCore() {
-        const f = flags();
-        const b = gB(), x = gX(), sp = gS(), nr = gN(), gm = gG();
-        const fov = gFOV(), smooth = gSmooth(), aimSpeed = gAimSpeed();
-        const antiShake = gAntiShake(), stabilizer = gStabilizer(), spreadFix = gSpreadFix(), overcorrection = gOvercorrection();
-        const target = gTarget();
-
-        let code = `// ============================================================\n`;
-        code += `// VIP PRO MAX ULTIMATE V4 FIX\n`;
-        code += `// FF Max & FF Th - Tạo bởi Worm GPT\n`;
-        code += `// ============================================================\n\n`;
-        code += `#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n#include <unistd.h>\n#include <sys/mman.h>\n#include <dlfcn.h>\n#include <pthread.h>\n#include <thread>\n#include <cmath>\n\n`;
-        code += `// ===== OFFSET =====\n`;
-        code += `#define BASE ${b}\n`;
-        code += `#define OFFSET_XRAY ${x}\n`;
-        code += `#define OFFSET_SPEED ${sp}\n`;
-        code += `#define OFFSET_NORECOIL ${nr}\n`;
-        code += `#define OFFSET_GODMODE ${gm}\n`;
-        code += `#define OFFSET_ANTICHEAT1 0x5A0A1A0\n`;
-        code += `#define OFFSET_ANTICHEAT2 0x5B0A1A0\n\n`;
-        code += `// ===== AIM PARAM =====\n`;
-        code += `#define FOV ${fov}\n`;
-        code += `#define SMOOTH ${smooth}\n`;
-        code += `#define AIM_SPEED ${aimSpeed}\n`;
-        code += `#define ANTI_SHAKE ${antiShake}\n`;
-        code += `#define STABILIZER ${stabilizer}\n`;
-        code += `#define SPREAD_FIX ${spreadFix}\n`;
-        code += `#define OVERCORRECTION ${overcorrection}\n`;
-        code += `#define AIM_TARGET "${target}"\n\n`;
-        code += `// ===== FEATURES =====\n`;
-        code += `#define ENABLE_AIMLOCK ${f.aimlock?1:0}\n`;
-        code += `#define ENABLE_HEAD_AIM ${f.headAim?1:0}\n`;
-        code += `#define ENABLE_NECK_AIM ${f.neckAim?1:0}\n`;
-        code += `#define ENABLE_DRAG ${f.drag?1:0}\n`;
-        code += `#define ENABLE_FIX_RUNG ${f.fixRung?1:0}\n`;
-        code += `#define ENABLE_FIX_LO ${f.fixLo?1:0}\n`;
-        code += `#define ENABLE_FIX_SPREAD ${f.fixSpread?1:0}\n`;
-        code += `#define ENABLE_EM_TAM ${f.emTam?1:0}\n`;
-        code += `#define ENABLE_XRAY ${f.xray?1:0}\n`;
-        code += `#define ENABLE_SPEED ${f.speed?1:0}\n`;
-        code += `#define ENABLE_NORECOIL ${f.norecoil?1:0}\n`;
-        code += `#define ENABLE_GODMODE ${f.godmode?1:0}\n`;
-        code += `#define ENABLE_BYPASSAC ${f.bypassac?1:0}\n\n`;
-        code += `// ===== STRUCT =====\n`;
-        code += `struct Vec3 { float x, y, z; };\n`;
-        code += `struct Player { Vec3 pos; Vec3 head; Vec3 neck; float health; float dist; int alive; };\n\n`;
-        code += `// ===== PATCH FUNCTIONS =====\n`;
-        code += `bool patch(uintptr_t a, void* d, size_t s) {\n`;
-        code += `  size_t p = sysconf(_SC_PAGESIZE);\n`;
-        code += `  uintptr_t st = (a / p) * p;\n`;
-        code += `  mprotect((void*)st, p, 7);\n`;
-        code += `  memcpy((void*)a, d, s);\n`;
-        code += `  mprotect((void*)st, p, 5);\n`;
-        code += `  return true;\n`;
-        code += `}\n`;
-        code += `void pb(uintptr_t a, unsigned char v){ patch(a, &v, 1); }\n`;
-        code += `void pf(uintptr_t a, float v){ patch(a, &v, 4); }\n`;
-        code += `void pi(uintptr_t a, int v){ patch(a, &v, 4); }\n`;
-        code += `void pnop(uintptr_t a, int c=5){ unsigned char n[16]; memset(n, 0x90, c); patch(a, n, c); }\n`;
-        code += `void pret(uintptr_t a){ unsigned char r=0xC3; patch(a, &r, 1); }\n\n`;
-        code += `// ===== BYPASS AC =====\n`;
-        code += `void bypass_ac() {\n`;
-        code += `  #if ENABLE_BYPASSAC\n`;
-        code += `  pnop(OFFSET_ANTICHEAT1);\n`;
-        code += `  pnop(OFFSET_ANTICHEAT2);\n`;
-        code += `  pret(BASE + 0x300);\n`;
-        code += `  #endif\n`;
-        code += `}\n\n`;
-        code += `// ===== AIMLOCK =====\n`;
-        code += `void aimlock() {\n`;
-        code += `  #if ENABLE_AIMLOCK\n`;
-        code += `  uintptr_t lp = *(uintptr_t*)(BASE + 0x50);\n`;
-        code += `  if (!lp) return;\n`;
-        code += `  float* va = (float*)(lp + 0x100);\n`;
-        code += `  float speedFactor = (AIM_SPEED / 100.0f) * (SMOOTH / 100.0f);\n`;
-        code += `  #if ENABLE_HEAD_AIM\n`;
-        code += `    va[0] += 0.05f * speedFactor;\n`;
-        code += `    va[1] += 0.05f * speedFactor;\n`;
-        code += `  #elif ENABLE_NECK_AIM\n`;
-        code += `    va[0] += 0.04f * speedFactor;\n`;
-        code += `    va[1] += 0.06f * speedFactor;\n`;
-        code += `  #elif ENABLE_DRAG\n`;
-        code += `    va[0] += 0.03f * speedFactor;\n`;
-        code += `    va[1] += 0.08f * speedFactor;\n`;
-        code += `  #else\n`;
-        code += `    va[0] += 0.05f * speedFactor;\n`;
-        code += `    va[1] += 0.05f * speedFactor;\n`;
-        code += `  #endif\n`;
-        code += `  #endif\n`;
-        code += `}\n\n`;
-        code += `// ===== FIX RUNG =====\n`;
-        code += `void fix_rung() {\n`;
-        code += `  #if ENABLE_FIX_RUNG\n`;
-        code += `  float val = 1.0f - (ANTI_SHAKE / 100.0f) * 0.9f;\n`;
-        code += `  pf(BASE + 0x200, val);\n`;
-        code += `  #endif\n`;
-        code += `}\n\n`;
-        code += `// ===== FIX LỐ =====\n`;
-        code += `void fix_lo() {\n`;
-        code += `  #if ENABLE_FIX_LO\n`;
-        code += `  float val = 1.0f - (OVERCORRECTION / 100.0f) * 0.8f;\n`;
-        code += `  pf(BASE + 0x250, val);\n`;
-        code += `  #endif\n`;
-        code += `}\n\n`;
-        code += `// ===== FIX LẠC ĐẠN =====\n`;
-        code += `void fix_spread() {\n`;
-        code += `  #if ENABLE_FIX_SPREAD\n`;
-        code += `  float val = 1.0f - (SPREAD_FIX / 100.0f) * 0.95f;\n`;
-        code += `  pf(BASE + 0x300, val);\n`;
-        code += `  #endif\n`;
-        code += `}\n\n`;
-        code += `// ===== ÊM TÂM =====\n`;
-        code += `void em_tam() {\n`;
-        code += `  #if ENABLE_EM_TAM\n`;
-        code += `  float val = (STABILIZER / 100.0f) * 0.8f + 0.2f;\n`;
-        code += `  pf(BASE + 0x350, val);\n`;
-        code += `  #endif\n`;
-        code += `}\n\n`;
-        code += `// ===== XRAY =====\n`;
-        code += `void xray() {\n`;
-        code += `  #if ENABLE_XRAY\n`;
-        code += `  pb(OFFSET_XRAY, 1);\n`;
-        code += `  #endif\n`;
-        code += `}\n\n`;
-        code += `// ===== SPEED =====\n`;
-        code += `void speed() {\n`;
-        code += `  #if ENABLE_SPEED\n`;
-        code += `  pf(OFFSET_SPEED, 600.0f * 2.5f);\n`;
-        code += `  #endif\n`;
-        code += `}\n\n`;
-        code += `// ===== NO RECOIL =====\n`;
-        code += `void norecoil() {\n`;
-        code += `  #if ENABLE_NORECOIL\n`;
-        code += `  pf(OFFSET_NORECOIL, 0.0f);\n`;
-        code += `  #endif\n`;
-        code += `}\n\n`;
-        code += `// ===== GOD MODE =====\n`;
-        code += `void godmode() {\n`;
-        code += `  #if ENABLE_GODMODE\n`;
-        code += `  pb(OFFSET_GODMODE, 1);\n`;
-        code += `  pnop(OFFSET_GODMODE + 0x50, 10);\n`;
-        code += `  #endif\n`;
-        code += `}\n\n`;
-        code += `// ===== MAIN LOOP =====\n`;
-        code += `void* main_loop(void*) {\n`;
-        code += `  while (1) {\n`;
-        code += `    aimlock();\n`;
-        code += `    std::this_thread::sleep_for(std::chrono::milliseconds(10));\n`;
-        code += `  }\n`;
-        code += `  return nullptr;\n`;
-        code += `}\n\n`;
-        code += `// ===== INIT =====\n`;
-        code += `extern "C" {\n`;
-        code += `  void __attribute__((constructor)) init() {\n`;
-        code += `    printf("[VIP Pro Max Ultimate V4 FIX] Loading...\\n");\n`;
-        code += `    bypass_ac();\n`;
-        code += `    xray(); speed(); norecoil(); godmode();\n`;
-        code += `    fix_rung(); fix_lo(); fix_spread(); em_tam();\n`;
-        code += `    pthread_t t; pthread_create(&t, nullptr, main_loop, nullptr);\n`;
-        code += `    printf("[VIP Pro Max Ultimate V4 FIX] Loaded!\\n");\n`;
-        code += `  }\n`;
-        code += `}\n`;
-        return code;
-    }
-
-    // ============================================================
-    // EXPORT FUNCTIONS (TRỰC TIẾP GÁN NỘI DUNG)
-    // ============================================================
-    function exportSO() {
-        const code = buildCore();
-        document.getElementById('fileTypeBadge').textContent = '.so';
-        document.getElementById('outputArea').textContent = code;
-        const lines = code.split('\n').length;
-        document.getElementById('lineCount').textContent = lines + ' dòng';
-        document.getElementById('infoLines').textContent = lines;
-        document.getElementById('infoFile').textContent = '.so';
-        updateStatus(`✅ Xuất .so (${lines} dòng)`);
-    }
-
-    function exportDex() {
-        const f = flags();
-        const b = gB();
-        let code = `// DEX PATCH - VIP PRO MAX\n.class public Lcom/vip/ProMax;\n.super Ljava/lang/Object;\n\n.field static BASE:J = ${b}L\n\n.method static patch()V\n    .registers 4\n    const/4 v0, 0x1\n    const/4 v1, 0x0\n    const/high16 v2, 0x447a0000\n    const v3, 0x47c35000\n`;
-        if(f.xray) code += `    invoke-static {v0}, Lpatch;->writeByte(JB)V\n`;
-        if(f.speed) code += `    invoke-static {v2}, Lpatch;->writeFloat(JF)V\n`;
-        if(f.norecoil) code += `    invoke-static {v1}, Lpatch;->writeFloat(JF)V\n`;
-        if(f.godmode) code += `    invoke-static {v0}, Lpatch;->writeByte(JB)V\n`;
-        if(f.fixRung) code += `    const v0, 0x3d4ccccd; invoke-static {v0}, Lpatch;->writeFloat(JF)V\n`;
-        if(f.fixSpread) code += `    const v0, 0x3d4ccccd; invoke-static {v0}, Lpatch;->writeFloat(JF)V\n`;
-        if(f.bypassac) code += `    invoke-static {v0}, Lpatch;->writeByte(JB)V\n`;
-        code += `    return-void\n.end method\n`;
-        document.getElementById('fileTypeBadge').textContent = '.dex';
-        document.getElementById('outputArea').textContent = code;
-        const lines = code.split('\n').length;
-        document.getElementById('lineCount').textContent = lines + ' dòng';
-        document.getElementById('infoLines').textContent = lines;
-        document.getElementById('infoFile').textContent = '.dex';
-        updateStatus(`✅ Xuất .dex (${lines} dòng)`);
-    }
-
-    function exportLua() {
-        const f = flags();
-        const b = gB();
-        const fov = gFOV(), smooth = gSmooth(), aimSpeed = gAimSpeed();
-        const antiShake = gAntiShake(), stabilizer = gStabilizer(), spreadFix = gSpreadFix(), overcorrection = gOvercorrection();
-
-        let code = `-- VIP Pro Max Ultimate V4 FIX\n`;
-        code += `local base = ${b}\n`;
-        code += `local fov = ${fov}\n`;
-        code += `local smooth = ${smooth}\n`;
-        code += `local aimSpeed = ${aimSpeed}\n`;
-        code += `local antiShake = ${antiShake}\n`;
-        code += `local stabilizer = ${stabilizer}\n`;
-        code += `local spreadFix = ${spreadFix}\n`;
-        code += `local overcorrection = ${overcorrection}\n\n`;
-
-        code += `local flags = {\n`;
-        code += `  aimlock = ${f.aimlock && 'true' || 'false'},\n`;
-        code += `  headAim = ${f.headAim && 'true' || 'false'},\n`;
-        code += `  neckAim = ${f.neckAim && 'true' || 'false'},\n`;
-        code += `  drag = ${f.drag && 'true' || 'false'},\n`;
-        code += `  fixRung = ${f.fixRung && 'true' || 'false'},\n`;
-        code += `  fixLo = ${f.fixLo && 'true' || 'false'},\n`;
-        code += `  fixSpread = ${f.fixSpread && 'true' || 'false'},\n`;
-        code += `  emTam = ${f.emTam && 'true' || 'false'},\n`;
-        code += `  xray = ${f.xray && 'true' || 'false'},\n`;
-        code += `  speed = ${f.speed && 'true' || 'false'},\n`;
-        code += `  norecoil = ${f.norecoil && 'true' || 'false'},\n`;
-        code += `  godmode = ${f.godmode && 'true' || 'false'},\n`;
-        code += `  bypassac = ${f.bypassac && 'true' || 'false'},\n`;
-        code += `}\n\n`;
-
-        code += `local function patch(addr, val, type)\n`;
-        code += `  gg.setValues({{address = addr, flags = type, value = val}})\n`;
-        code += `end\n\n`;
-
-        if(f.xray) code += `patch(base + 0x400, 1, 4)\n`;
-        if(f.speed) code += `patch(base + 0x500, 1500, 16)\n`;
-        if(f.norecoil) code += `patch(base + 0x600, 0, 16)\n`;
-        if(f.godmode) code += `patch(base + 0x700, 1, 4); patch(base + 0x750, 1, 4)\n`;
-        if(f.fixRung) code += `patch(base + 0x200, 1 - antiShake / 100 * 0.9, 16)\n`;
-        if(f.fixLo) code += `patch(base + 0x250, 1 - overcorrection / 100 * 0.8, 16)\n`;
-        if(f.fixSpread) code += `patch(base + 0x300, 1 - spreadFix / 100 * 0.95, 16)\n`;
-        if(f.emTam) code += `patch(base + 0x350, (stabilizer / 100 * 0.8 + 0.2), 16)\n`;
-        if(f.bypassac) code += `patch(base + 0x100, 1, 4); patch(base + 0x200, 1, 4)\n`;
-
-        code += `print('[VIP Pro Max Ultimate V4 FIX] Patches applied!')\n`;
-
-        document.getElementById('fileTypeBadge').textContent = '.lua';
-        document.getElementById('outputArea').textContent = code;
-        const lines = code.split('\n').length;
-        document.getElementById('lineCount').textContent = lines + ' dòng';
-        document.getElementById('infoLines').textContent = lines;
-        document.getElementById('infoFile').textContent = '.lua';
-        updateStatus(`✅ Xuất .lua (${lines} dòng)`);
-    }
-
-    function exportJS() {
-        const f = flags();
-        const b = gB();
-        const fov = gFOV(), smooth = gSmooth(), aimSpeed = gAimSpeed();
-        const antiShake = gAntiShake(), stabilizer = gStabilizer(), spreadFix = gSpreadFix(), overcorrection = gOvercorrection();
-
-        let code = `// VIP Pro Max Ultimate V4 FIX - Frida\n`;
-        code += `var base = ptr("${b}");\n`;
-        code += `var fov = ${fov};\n`;
-        code += `var smooth = ${smooth};\n`;
-        code += `var aimSpeed = ${aimSpeed};\n`;
-        code += `var antiShake = ${antiShake};\n`;
-        code += `var stabilizer = ${stabilizer};\n`;
-        code += `var spreadFix = ${spreadFix};\n`;
-        code += `var overcorrection = ${overcorrection};\n\n`;
-
-        code += `var flags = {\n`;
-        code += `  aimlock: ${f.aimlock},\n`;
-        code += `  headAim: ${f.headAim},\n`;
-        code += `  neckAim: ${f.neckAim},\n`;
-        code += `  drag: ${f.drag},\n`;
-        code += `  fixRung: ${f.fixRung},\n`;
-        code += `  fixLo: ${f.fixLo},\n`;
-        code += `  fixSpread: ${f.fixSpread},\n`;
-        code += `  emTam: ${f.emTam},\n`;
-        code += `  xray: ${f.xray},\n`;
-        code += `  speed: ${f.speed},\n`;
-        code += `  norecoil: ${f.norecoil},\n`;
-        code += `  godmode: ${f.godmode},\n`;
-        code += `  bypassac: ${f.bypassac},\n`;
-        code += `};\n\n`;
-
-        code += `function patch(addr, val, size) {\n`;
-        code += `  Memory.protect(addr, size, 'rwx');\n`;
-        code += `  Memory.writeByteArray(addr, val);\n`;
-        code += `}\n\n`;
-
-        code += `function pb(addr, val) { patch(addr, [val], 1); }\n`;
-        code += `function pf(addr, val) {\n`;
-        code += `  var buf = new ArrayBuffer(4);\n`;
-        code += `  new Float32Array(buf)[0] = val;\n`;
-        code += `  patch(addr, new Uint8Array(buf), 4);\n`;
-        code += `}\n\n`;
-
-        if(f.xray) code += `pb(base.add(0x400), 1);\n`;
-        if(f.speed) code += `pf(base.add(0x500), 1500);\n`;
-        if(f.norecoil) code += `pf(base.add(0x600), 0);\n`;
-        if(f.godmode) code += `pb(base.add(0x700), 1); pb(base.add(0x750), 1);\n`;
-        if(f.fixRung) code += `pf(base.add(0x200), 1 - antiShake / 100 * 0.9);\n`;
-        if(f.fixLo) code += `pf(base.add(0x250), 1 - overcorrection / 100 * 0.8);\n`;
-        if(f.fixSpread) code += `pf(base.add(0x300), 1 - spreadFix / 100 * 0.95);\n`;
-        if(f.emTam) code += `pf(base.add(0x350), (stabilizer / 100 * 0.8 + 0.2));\n`;
-        if(f.bypassac) code += `pb(base.add(0x100), 1); pb(base.add(0x200), 1);\n`;
-
-        code += `console.log('[VIP Pro Max Ultimate V4 FIX] Patches applied!');\n`;
-
-        document.getElementById('fileTypeBadge').textContent = '.js';
-        document.getElementById('outputArea').textContent = code;
-        const lines = code.split('\n').length;
-        document.getElementById('lineCount').textContent = lines + ' dòng';
-        document.getElementById('infoLines').textContent = lines;
-        document.getElementById('infoFile').textContent = '.js';
-        updateStatus(`✅ Xuất .js (${lines} dòng)`);
-    }
-
-    function exportCPP() {
-        const f = flags();
-        const b = gB();
-        let code = `#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <sys/mman.h>\n#define BASE ${b}\n#define SP ${gS()}\n#define FOV ${gFOV()}\n#define SMOOTH ${gSmooth()}\n\n`;
-        code += `void patch(unsigned long a,void*d,size_t s){ size_t p=sysconf(_SC_PAGESIZE); unsigned long st=(a/p)*p; mprotect((void*)st,p,7); memcpy((void*)a,d,s); mprotect((void*)st,p,5); }\n`;
-        code += `void pb(unsigned long a,unsigned char v){ patch(a,&v,1); }\nvoid pf(unsigned long a,float v){ patch(a,&v,4); }\nvoid pi(unsigned long a,int v){ patch(a,&v,4); }\n\n`;
-        code += `int main(){ `;
-        if(f.xray) code += `pb(BASE+0x400,1); `;
-        if(f.speed) code += `pf(BASE+0x500,600*SP); `;
-        if(f.norecoil) code += `pf(BASE+0x600,0); `;
-        if(f.godmode) code += `pb(BASE+0x700,1); `;
-        if(f.fixRung) code += `pf(BASE+0x200,1-${gAntiShake()}/100*0.9); `;
-        if(f.fixSpread) code += `pf(BASE+0x300,1-${gSpreadFix()}/100*0.95); `;
-        if(f.emTam) code += `pf(BASE+0x350,(${gStabilizer()}/100*0.8+0.2)); `;
-        if(f.bypassac) code += `pb(BASE+0x100,1); pb(BASE+0x200,1); `;
-        code += `printf("[VIP] Patched!\\n"); return 0; }\n`;
-        document.getElementById('fileTypeBadge').textContent = '.cpp';
-        document.getElementById('outputArea').textContent = code;
-        const lines = code.split('\n').length;
-        document.getElementById('lineCount').textContent = lines + ' dòng';
-        document.getElementById('infoLines').textContent = lines;
-        document.getElementById('infoFile').textContent = '.cpp';
-        updateStatus(`✅ Xuất .cpp (${lines} dòng)`);
-    }
-
-    function exportCFG() {
-        const f = flags();
-        let code = `# VIP Pro Max Ultimate V4 FIX\nversion=6.0\ngame=FF\nbase=${gB()}\nxray=${gX()}\nspeed=${gS()}\nnorecoil=${gN()}\ngodmode=${gG()}\n`;
-        code += `fov=${gFOV()}\nsmooth=${gSmooth()}\naimSpeed=${gAimSpeed()}\nantiShake=${gAntiShake()}\nstabilizer=${gStabilizer()}\nspreadFix=${gSpreadFix()}\novercorrection=${gOvercorrection()}\ntarget=${gTarget()}\n\n[FEATURES]\n`;
-        Object.entries(flags()).forEach(([k,v]) => code += `${k}=${v?1:0}\n`);
-        document.getElementById('fileTypeBadge').textContent = '.cfg';
-        document.getElementById('outputArea').textContent = code;
-        const lines = code.split('\n').length;
-        document.getElementById('lineCount').textContent = lines + ' dòng';
-        document.getElementById('infoLines').textContent = lines;
-        document.getElementById('infoFile').textContent = '.cfg';
-        updateStatus(`✅ Xuất .cfg (${lines} dòng)`);
-    }
-
-    function exportINI() {
-        const f = flags();
-        let code = `[VIP]\nversion=6.0\ngame=FF\nbase=${gB()}\nxray=${gX()}\nspeed=${gS()}\nnorecoil=${gN()}\ngodmode=${gG()}\n`;
-        code += `fov=${gFOV()}\nsmooth=${gSmooth()}\naimSpeed=${gAimSpeed()}\nantiShake=${gAntiShake()}\nstabilizer=${gStabilizer()}\nspreadFix=${gSpreadFix()}\novercorrection=${gOvercorrection()}\ntarget=${gTarget()}\n\n[FEATURES]\n`;
-        Object.entries(flags()).forEach(([k,v]) => code += `${k}=${v?1:0}\n`);
-        document.getElementById('fileTypeBadge').textContent = '.ini';
-        document.getElementById('outputArea').textContent = code;
-        const lines = code.split('\n').length;
-        document.getElementById('lineCount').textContent = lines + ' dòng';
-        document.getElementById('infoLines').textContent = lines;
-        document.getElementById('infoFile').textContent = '.ini';
-        updateStatus(`✅ Xuất .ini (${lines} dòng)`);
-    }
-
-    function exportTXT() {
-        const f = flags();
-        let code = `VIP PRO MAX ULTIMATE V4 FIX\n====================================\n`;
-        code += `BASE: ${gB()}\nXRAY: ${gX()}\nSPEED: ${gS()}\nNORECOIL: ${gN()}\nGODMODE: ${gG()}\n`;
-        code += `FOV: ${gFOV()}\nSMOOTH: ${gSmooth()}\nAIM SPEED: ${gAimSpeed()}\nANTI SHAKE: ${gAntiShake()}\nSTABILIZER: ${gStabilizer()}\nSPREAD FIX: ${gSpreadFix()}\nOVERCORRECTION: ${gOvercorrection()}\nTARGET: ${targetName()}\n\nFEATURES:\n`;
-        Object.entries(flags()).forEach(([k,v]) => code += `${k}: ${v?'ON':'OFF'}\n`);
-        document.getElementById('fileTypeBadge').textContent = '.txt';
-        document.getElementById('outputArea').textContent = code;
-        const lines = code.split('\n').length;
-        document.getElementById('lineCount').textContent = lines + ' dòng';
-        document.getElementById('infoLines').textContent = lines;
-        document.getElementById('infoFile').textContent = '.txt';
-        updateStatus(`✅ Xuất .txt (${lines} dòng)`);
-    }
-
-    function exportJSON() {
-        const f = flags();
-        const data = {
-            version: '6.0',
-            game: 'FF',
-            base: gB(),
-            offsets: { xray: gX(), speed: gS(), norecoil: gN(), godmode: gG() },
-            aim: { fov: gFOV(), smooth: gSmooth(), aimSpeed: gAimSpeed(), target: gTarget() },
-            fix: { antiShake: gAntiShake(), stabilizer: gStabilizer(), spreadFix: gSpreadFix(), overcorrection: gOvercorrection() },
-            features: f
-        };
-        const code = JSON.stringify(data, null, 2);
-        document.getElementById('fileTypeBadge').textContent = '.json';
-        document.getElementById('outputArea').textContent = code;
-        const lines = code.split('\n').length;
-        document.getElementById('lineCount').textContent = lines + ' dòng';
-        document.getElementById('infoLines').textContent = lines;
-        document.getElementById('infoFile').textContent = '.json';
-        updateStatus(`✅ Xuất .json (${lines} dòng)`);
-    }
-
-    function exportAll() {
-        const types = ['SO', 'Dex', 'Lua', 'JS', 'CPP', 'CFG', 'INI', 'TXT', 'JSON'];
-        const funcs = [exportSO, exportDex, exportLua, exportJS, exportCPP, exportCFG, exportINI, exportTXT, exportJSON];
-        let all = '';
-        funcs.forEach((fn, i) => {
-            fn();
-            all += `// ===== ${types[i]} =====\n${document.getElementById('outputArea').textContent}\n\n`;
-        });
-        document.getElementById('fileTypeBadge').textContent = 'All Files';
-        document.getElementById('outputArea').textContent = all;
-        const lines = all.split('\n').length;
-        document.getElementById('lineCount').textContent = lines + ' dòng';
-        document.getElementById('infoLines').textContent = lines;
-        updateStatus(`✅ Xuất tất cả (${lines} dòng)`);
-    }
-
-    // ============================================================
-    // ACTIONS
-    // ============================================================
-    function applyConfig() {
-        updateDisplay();
-        updateStatus('✅ Đã áp dụng cấu hình');
-        exportSO();
-    }
-
-    function copyOutput() {
-        const text = document.getElementById('outputArea').textContent;
-        if (!text || text.includes('Chọn loại file')) { updateStatus('⚠️ Chưa có nội dung'); return; }
-        navigator.clipboard.writeText(text).then(() => updateStatus('📋 Đã sao chép')).catch(() => {
-            const ta = document.createElement('textarea');
-            ta.value = text;
-            document.body.appendChild(ta);
-            ta.select();
-            document.execCommand('copy');
-            document.body.removeChild(ta);
-            updateStatus('📋 Sao chép (fallback)');
-        });
-    }
-
-    function downloadFile() {
-        const text = document.getElementById('outputArea').textContent;
-        if (!text || text.includes('Chọn loại file')) { updateStatus('⚠️ Chưa có nội dung'); return; }
-        const ext = document.getElementById('fileTypeBadge').textContent.includes('All') ? '.txt' : document.getElementById('fileTypeBadge').textContent;
-        const blob = new Blob([text], { type: 'text/plain' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.download = `VIP_Pro_Max_V4_FIX${ext}`;
-        a.href = url;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        updateStatus(`⬇️ Đã tải file ${ext}`);
-    }
-
-    function clearOutput() {
-        document.getElementById('outputArea').textContent = '// Đã xóa nội dung';
-        document.getElementById('lineCount').textContent = '0 dòng';
-        document.getElementById('infoLines').textContent = '0';
-        updateStatus('🧹 Đã xóa nội dung');
-    }
-
-    function updateStatus(msg) {
-        document.getElementById('statusText').textContent = msg + ' | ' + new Date().toLocaleTimeString();
-    }
-
-    // ============================================================
-    // INIT
-    // ============================================================
-    window.onload = function() {
-        presetFF();
-        updateDisplay();
-        updateStatus('🚀 VIP Pro Max Ultimate V4 FIX sẵn sàng');
-    };
-</script>
+    <script src="script.js"></script>
 </body>
+
 </html>
