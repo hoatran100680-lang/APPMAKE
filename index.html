@@ -4,33 +4,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <title>✦ INFINITY HEAX V2</title>
+    <title>INFINITY HEAX V2</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
-    <!-- ===== PARTICLES BACKGROUND ===== -->
-    <div id="particles-container"></div>
 
     <div class="app">
 
         <!-- ===== LOCK SCREEN ===== -->
         <div id="lockScreen" class="lock-screen">
             <div class="lock-container">
-                <div class="lock-neon-ring"></div>
-                <div class="lock-icon">
-                    <i class="fas fa-infinity"></i>
-                </div>
-                <h1 class="lock-title">✦ INFINITY HEAX V2 ✦</h1>
-                <p class="lock-subtitle">Hệ thống bảo mật đa tầng</p>
+                <div class="lock-icon"><i class="fas fa-infinity"></i></div>
+                <h1>✦ INFINITY HEAX V2 ✦</h1>
+                <p>Hệ thống bảo mật đa tầng</p>
 
+                <!-- Thông tin hệ thống -->
                 <div class="sys-status">
                     <span><i class="fas fa-circle status-dot"></i> ONLINE</span>
                     <span id="sysTime">--:--:--</span>
+                    <span>📋 <span id="sysKeyCount">0</span> key</span>
+                    <span>🔄 <span id="syncStatus">⏳</span></span>
                 </div>
+
+                <!-- Danh sách key từ bot -->
+                <div id="lockKeyList" class="key-list">
+                    <span style="color:#666;font-size:9px;">📋 ĐANG TẢI KEY...</span>
+                </div>
+
+                <!-- Nút Import -->
+                <button onclick="importKeysFromJSON()" class="btn-import">
+                    <i class="fas fa-upload"></i> 📥 Import Key từ Bot
+                </button>
 
                 <div class="input-group">
                     <input id="keyInput" type="text" placeholder="NEXORA-XXXX" autofocus>
@@ -40,10 +46,10 @@
                 <div id="lockMsg" class="lock-msg"></div>
 
                 <div class="lock-footer">
-                    <span class="version">v2.0.0</span>
-                    <span class="divider">•</span>
-                    <span>🔒 Bảo mật cấp AAA</span>
-                    <span class="divider">•</span>
+                    <span>v2.0.0</span>
+                    <span>•</span>
+                    <span>🔒 Bảo mật AAA</span>
+                    <span>•</span>
                     <span id="deviceInfo">💻</span>
                 </div>
             </div>
@@ -82,7 +88,6 @@
                             <img src="https://i.ibb.co/TDGvJHkd/Hinh-nen-anime-ngau-14.jpg" alt="avatar">
                             <div class="avatar-status"></div>
                             <div class="avatar-ring"></div>
-                            <div class="avatar-glow"></div>
                         </div>
                         <h2>INFINITY HEAX V2</h2>
                         <p class="role"><i class="fas fa-crown"></i> Quản lý: <strong>Bảo Phúc</strong></p>
@@ -145,9 +150,6 @@
                         </div>
                         <div class="key-status" id="keyStatus">
                             <i class="fas fa-check-circle"></i> Hoạt động
-                        </div>
-                        <div class="key-actions">
-                            <button onclick="syncKeys()" class="btn-sync"><i class="fas fa-sync"></i> Đồng bộ</button>
                         </div>
                     </div>
 
@@ -342,7 +344,7 @@
 
     </div>
 
-    <!-- ===== AUDIO ELEMENTS ===== -->
+    <!-- ===== AUDIO ===== -->
     <audio id="audio-click" preload="auto">
         <source src="https://www.soundjay.com/buttons/sounds/button-16.mp3" type="audio/mpeg">
     </audio>
