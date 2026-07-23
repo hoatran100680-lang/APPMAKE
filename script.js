@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////
-// INFINITY HEAX V2 - FIX LẤY KEY TỪ BOT
+// INFINITY HEAX V2 - ĐÃ XÓA KEY CÓ SẴN
 //////////////////////////////////////////////////
 
 // ============================================
@@ -135,7 +135,6 @@ async function loadKeysFromBot() {
             localStorage.setItem(STORAGE_CUSTOM, JSON.stringify(botKeys));
             document.getElementById('syncStatus').textContent = '✅';
             document.getElementById('sysKeyCount').textContent = Object.keys(botKeys).length;
-            renderKeyList();
             console.log('✅ Đã load key từ bot:', Object.keys(botKeys));
             return true;
         } else {
@@ -149,36 +148,7 @@ async function loadKeysFromBot() {
     }
 }
 
-// === HIỂN THỊ DANH SÁCH KEY ===
-function renderKeyList() {
-    const container = document.getElementById('lockKeyList');
-    if (!container) return;
-
-    const allKeys = getAllKeys();
-    const keys = Object.keys(allKeys);
-
-    if (keys.length === 0) {
-        container.innerHTML = '<span style="color:#666;font-size:9px;">📋 Chưa có key, hãy import từ bot</span>';
-        return;
-    }
-
-    container.innerHTML = '<span style="color:#666;font-size:9px;">📋 KEY CÓ SẴN:</span>';
-    keys.forEach(k => {
-        const data = allKeys[k];
-        const span = document.createElement('span');
-        let label = k;
-        if (data && data.type) {
-            label += ' (' + data.type + ')';
-        }
-        span.textContent = label;
-        if (k === localStorage.getItem(STORAGE_KEY)) {
-            span.style.borderColor = 'var(--primary)';
-            span.style.color = 'var(--primary)';
-            span.style.background = 'rgba(255,32,32,0.08)';
-        }
-        container.appendChild(span);
-    });
-}
+// === ĐÃ XÓA HÀM renderKeyList() ===
 
 // === IMPORT KEY TỪ JSON ===
 function importKeysFromJSON() {
@@ -211,7 +181,6 @@ function importKeysFromJSON() {
                     const merged = { ...currentKeys, ...botKeys };
                     localStorage.setItem(STORAGE_CUSTOM, JSON.stringify(merged));
 
-                    renderKeyList();
                     document.getElementById('syncStatus').textContent = '✅';
                     document.getElementById('sysKeyCount').textContent = Object.keys(merged).length;
                     playSound('success');
@@ -241,9 +210,7 @@ let savedKey = localStorage.getItem(STORAGE_KEY);
 let expire = localStorage.getItem(STORAGE_EXPIRE);
 
 window.onload = function() {
-    loadKeysFromBot().then(() => {
-        renderKeyList();
-    });
+    loadKeysFromBot();
 
     updateClock();
     setInterval(updateClock, 1000);
@@ -839,6 +806,6 @@ window.openLink = openLink;
 window.onBoostChange = onBoostChange;
 window.toggleFunc = toggleFunc;
 
-console.log('🚀 INFINITY HEAX V2 - HOÀN CHỈNH');
+console.log('🚀 INFINITY HEAX V2 - ĐÃ XÓA KEY CÓ SẴN');
 console.log('📥 Gõ "import" để import key từ bot');
 console.log('📂 File JSON:', JSON_FILE);
