@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <title>INFINITY HEAX V2</title>
+    <title>✦ INFINITY HEAX V2</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -17,27 +18,26 @@
         <div id="lockScreen" class="lock-screen">
             <div class="lock-container">
                 <div class="lock-icon"><i class="fas fa-infinity"></i></div>
-                <h1>✦ INFINITY HEAX V2 ✦</h1>
-                <p>Hệ thống bảo mật đa tầng</p>
+                <h1 class="lock-title">✦ INFINITY HEAX ✦</h1>
+                <p class="lock-subtitle">Hệ thống bảo mật đa tầng</p>
 
-                <!-- Thông tin hệ thống -->
+                <!-- ===== THÔNG TIN HỆ THỐNG ===== -->
                 <div class="sys-status">
                     <span><i class="fas fa-circle status-dot"></i> ONLINE</span>
-                    <span id="sysTime">--:--:--</span>
-                    <span>📋 <span id="sysKeyCount">0</span> key</span>
-                    <span>🔄 <span id="syncStatus">⏳</span></span>
+                    <span id="sysTime"><i class="fas fa-clock"></i> --:--:--</span>
+                    <span><i class="fas fa-key"></i> <span id="sysKeyCount">0</span></span>
+                    <span><i class="fas fa-sync" id="syncStatus"></i></span>
                 </div>
 
-                <!-- ===== ĐÃ XÓA KEY LIST ===== -->
-                <!-- <div id="lockKeyList" class="key-list"> -->
-                <!--   <span style="color:#666;font-size:9px;">📋 ĐANG TẢI KEY...</span> -->
-                <!-- </div> -->
+                <!-- ===== ĐÃ XÓA DANH SÁCH KEY ===== -->
+                <!-- Không hiển thị key gợi ý -->
 
-                <!-- Nút Import -->
+                <!-- ===== NÚT IMPORT ===== -->
                 <button onclick="importKeysFromJSON()" class="btn-import">
-                    <i class="fas fa-upload"></i> 📥 Import Key từ Bot
+                    <i class="fas fa-cloud-upload-alt"></i> 📥 Import Key từ Bot
                 </button>
 
+                <!-- ===== Ô NHẬP KEY ===== -->
                 <div class="input-group">
                     <input id="keyInput" type="text" placeholder="NEXORA-XXXX" autofocus>
                     <button onclick="loginKey()" id="loginBtn"><i class="fas fa-unlock"></i> KÍCH HOẠT</button>
@@ -46,11 +46,11 @@
                 <div id="lockMsg" class="lock-msg"></div>
 
                 <div class="lock-footer">
-                    <span>v2.0.0</span>
-                    <span>•</span>
-                    <span>🔒 Bảo mật AAA</span>
-                    <span>•</span>
-                    <span id="deviceInfo">💻</span>
+                    <span class="version">v2.0.0</span>
+                    <span class="divider">•</span>
+                    <span><i class="fas fa-shield-alt"></i> Bảo mật AAA</span>
+                    <span class="divider">•</span>
+                    <span id="deviceInfo"><i class="fas fa-mobile-alt"></i></span>
                 </div>
             </div>
         </div>
@@ -69,7 +69,7 @@
                 </div>
                 <div class="header-right">
                     <span class="badge online"><span class="dot"></span> ONLINE</span>
-                    <span id="keyBadge" class="badge key">🔑 --</span>
+                    <span id="keyBadge" class="badge key"><i class="fas fa-key"></i> --</span>
                     <button onclick="logoutKey()" class="btn-logout" title="Đăng xuất">
                         <i class="fas fa-sign-out-alt"></i>
                     </button>
@@ -92,20 +92,20 @@
                         <h2>INFINITY HEAX V2</h2>
                         <p class="role"><i class="fas fa-crown"></i> Quản lý: <strong>Bảo Phúc</strong></p>
                         <div class="tier">
-                            <span class="tier-badge">👑 VIP</span>
-                            <span class="tier-level">Level 99</span>
+                            <span class="tier-badge"><i class="fas fa-star"></i> VIP</span>
+                            <span class="tier-level"><i class="fas fa-level-up-alt"></i> Level 99</span>
                         </div>
                         <div class="profile-stats">
                             <div>
-                                <span>KEY</span>
+                                <span><i class="fas fa-key"></i> KEY</span>
                                 <strong id="profileKey">--</strong>
                             </div>
                             <div>
-                                <span>HẠN</span>
+                                <span><i class="fas fa-calendar-alt"></i> HẠN</span>
                                 <strong id="profileExpiry">--</strong>
                             </div>
                             <div>
-                                <span>CÒN</span>
+                                <span><i class="fas fa-hourglass-half"></i> CÒN</span>
                                 <strong id="profileDays">--</strong>
                             </div>
                         </div>
@@ -113,8 +113,6 @@
                             <button onclick="openLink('fb')"><i class="fab fa-facebook-f"></i></button>
                             <button onclick="openLink('zl')"><i class="fab fa-zalo"></i></button>
                             <button onclick="openLink('tt')"><i class="fab fa-tiktok"></i></button>
-                            <button onclick="openLink('yt')"><i class="fab fa-youtube"></i></button>
-                            <button onclick="openLink('github')"><i class="fab fa-github"></i></button>
                         </div>
                     </div>
 
@@ -123,25 +121,25 @@
                         <h3><i class="fas fa-key"></i> THÔNG TIN KEY</h3>
                         <div class="key-grid">
                             <div class="key-item">
-                                <label>🔑 KEY</label>
+                                <label><i class="fas fa-tag"></i> KEY</label>
                                 <span id="currentKey" class="highlight">--</span>
                             </div>
                             <div class="key-item">
-                                <label>🏷️ LOẠI</label>
+                                <label><i class="fas fa-flag"></i> LOẠI</label>
                                 <span id="keyType">--</span>
                             </div>
                             <div class="key-item">
-                                <label>📅 HẠN</label>
+                                <label><i class="fas fa-calendar-day"></i> HẠN</label>
                                 <span id="expiryDate">--</span>
                             </div>
                             <div class="key-item">
-                                <label>⏳ CÒN</label>
+                                <label><i class="fas fa-hourglass-start"></i> CÒN</label>
                                 <span id="daysLeft">--</span>
                             </div>
                         </div>
                         <div class="progress-wrap">
                             <div class="progress-label">
-                                <span>Thời gian còn lại</span>
+                                <span><i class="fas fa-clock"></i> Thời gian còn lại</span>
                                 <span id="progressPercent">100%</span>
                             </div>
                             <div class="progress-bar">
@@ -178,7 +176,7 @@
                 <section id="func" class="page">
                     <div class="page-header">
                         <h2><i class="fas fa-gamepad"></i> FUNC SYSTEM</h2>
-                        <span class="badge-page">8 chức năng</span>
+                        <span class="badge-page"><i class="fas fa-bolt"></i> 8</span>
                     </div>
                     <div id="funcList" class="func-grid"></div>
                 </section>
@@ -187,7 +185,7 @@
                 <section id="boost" class="page">
                     <div class="page-header">
                         <h2><i class="fas fa-bolt"></i> BOOST CENTER</h2>
-                        <span class="badge-page">6 tính năng</span>
+                        <span class="badge-page"><i class="fas fa-rocket"></i> 6</span>
                     </div>
                     <div id="boostList" class="boost-grid"></div>
                 </section>
@@ -196,7 +194,7 @@
                 <section id="live" class="page">
                     <div class="page-header">
                         <h2><i class="fas fa-chart-line"></i> LIVE MONITOR</h2>
-                        <span class="badge-page">📊 Real-time</span>
+                        <span class="badge-page"><i class="fas fa-circle"></i> LIVE</span>
                     </div>
 
                     <div class="card stats-card">
@@ -229,7 +227,7 @@
                     <div class="card chart-card">
                         <div class="chart-header">
                             <span><i class="fas fa-wave-square"></i> Hiệu suất hệ thống</span>
-                            <span class="chart-live">● LIVE</span>
+                            <span class="chart-live"><i class="fas fa-circle"></i> LIVE</span>
                         </div>
                         <canvas id="chart"></canvas>
                     </div>
@@ -241,6 +239,7 @@
                             <button onclick="cleanRam()"><i class="fas fa-broom"></i> Dọn RAM</button>
                             <button onclick="clearConsole()"><i class="fas fa-eraser"></i> Xóa</button>
                             <button onclick="resetSystem()"><i class="fas fa-sync"></i> Reset</button>
+                            <button onclick="systemInfo()"><i class="fas fa-info-circle"></i> Info</button>
                         </div>
                     </div>
 
@@ -258,8 +257,8 @@
                 <!-- ===== SETTING TAB ===== -->
                 <section id="setting" class="page">
                     <div class="page-header">
-                        <h2><i class="fas fa-sliders"></i> CÀI ĐẶT</h2>
-                        <span class="badge-page">⚙️ Tùy chỉnh</span>
+                        <h2><i class="fas fa-sliders-h"></i> CÀI ĐẶT</h2>
+                        <span class="badge-page"><i class="fas fa-cog"></i></span>
                     </div>
 
                     <div class="card settings-card">
@@ -272,6 +271,8 @@
                                 <button class="color-btn" style="background:#ffd93d;" onclick="changeColor('#ffd93d', this)"></button>
                                 <button class="color-btn" style="background:#6bcbff;" onclick="changeColor('#6bcbff', this)"></button>
                                 <button class="color-btn" style="background:#b388ff;" onclick="changeColor('#b388ff', this)"></button>
+                                <button class="color-btn" style="background:#ff6b6b;" onclick="changeColor('#ff6b6b', this)"></button>
+                                <button class="color-btn" style="background:#ff9ff3;" onclick="changeColor('#ff9ff3', this)"></button>
                             </div>
                         </div>
 
@@ -310,6 +311,13 @@
                                 <span class="slider"></span>
                             </label>
                         </div>
+                        <div class="setting-item">
+                            <span><i class="fas fa-bell"></i> Thông báo</span>
+                            <label class="switch">
+                                <input type="checkbox" checked onchange="toggleSetting(this)">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
                     </div>
 
                 </section>
@@ -319,7 +327,7 @@
             <!-- ===== BOTTOM NAV ===== -->
             <nav class="bottom-nav">
                 <button onclick="tab('home')" class="nav-btn active" data-tab="home">
-                    <i class="fas fa-house"></i>
+                    <i class="fas fa-home"></i>
                     <span>Home</span>
                 </button>
                 <button onclick="tab('func')" class="nav-btn" data-tab="func">
@@ -335,7 +343,7 @@
                     <span>Live</span>
                 </button>
                 <button onclick="tab('setting')" class="nav-btn" data-tab="setting">
-                    <i class="fas fa-gear"></i>
+                    <i class="fas fa-cog"></i>
                     <span>Setting</span>
                 </button>
             </nav>
@@ -359,6 +367,12 @@
     </audio>
     <audio id="audio-toggle" preload="auto">
         <source src="https://www.soundjay.com/buttons/sounds/button-09.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio-levelup" preload="auto">
+        <source src="https://www.soundjay.com/misc/sounds/level-up-01.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio-notification" preload="auto">
+        <source src="https://www.soundjay.com/misc/sounds/notification-01.mp3" type="audio/mpeg">
     </audio>
 
     <script src="script.js"></script>

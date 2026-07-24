@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////
-// INFINITY HEAX V2 - ĐÃ XÓA KEY CÓ SẴN
+// INFINITY HEAX V2 - ĐÃ XÓA HIỂN THỊ KEY
 //////////////////////////////////////////////////
 
 // ============================================
@@ -18,7 +18,6 @@ let keyExpiry = null;
 let soundEnabled = true;
 let darkMode = false;
 let terminalHistory = [];
-let isSyncing = false;
 
 // ============================================
 // ÂM THANH
@@ -27,28 +26,42 @@ function playSound(type) {
     if (!soundEnabled) return;
     try {
         let audio = null;
+        let volume = 0.3;
         switch (type) {
             case 'click':
                 audio = document.getElementById('audio-click');
+                volume = 0.25;
                 break;
             case 'success':
                 audio = document.getElementById('audio-success');
+                volume = 0.35;
                 break;
             case 'error':
                 audio = document.getElementById('audio-error');
+                volume = 0.4;
                 break;
             case 'warning':
                 audio = document.getElementById('audio-warning');
+                volume = 0.3;
                 break;
             case 'toggle':
                 audio = document.getElementById('audio-toggle');
+                volume = 0.25;
+                break;
+            case 'levelup':
+                audio = document.getElementById('audio-levelup');
+                volume = 0.3;
+                break;
+            case 'notification':
+                audio = document.getElementById('audio-notification');
+                volume = 0.3;
                 break;
             default:
                 return;
         }
         if (audio) {
             audio.currentTime = 0;
-            audio.volume = 0.3;
+            audio.volume = volume;
             audio.play().catch(() => {});
         }
     } catch (e) {}
@@ -64,7 +77,7 @@ function playBeep(freq = 800, dur = 150, type = 'sine') {
         gain.connect(ctx.destination);
         osc.frequency.value = freq;
         osc.type = type;
-        gain.gain.value = 0.1;
+        gain.gain.value = 0.12;
         osc.start();
         osc.stop(ctx.currentTime + dur / 1000);
         setTimeout(() => ctx.close(), dur + 100);
@@ -72,22 +85,47 @@ function playBeep(freq = 800, dur = 150, type = 'sine') {
 }
 
 function playSuccessBeep() {
-    playBeep(1200, 120);
-    setTimeout(() => playBeep(1500, 120), 120);
-    setTimeout(() => playBeep(1800, 150), 240);
+    playBeep(1200, 100);
+    setTimeout(() => playBeep(1500, 100), 100);
+    setTimeout(() => playBeep(1800, 150), 200);
+    playSound('success');
 }
 
 function playErrorBeep() {
     playBeep(300, 400, 'sawtooth');
+    playSound('error');
 }
 
 function playWarningBeep() {
     playBeep(700, 250);
     setTimeout(() => playBeep(500, 250), 200);
+    playSound('warning');
+}
+
+function playToggleOn() {
+    playBeep(1000, 60);
+    setTimeout(() => playBeep(1300, 60), 60);
+    setTimeout(() => playBeep(1600, 80), 120);
+    playSound('toggle');
+}
+
+function playToggleOff() {
+    playBeep(800, 60);
+    setTimeout(() => playBeep(600, 60), 60);
+    setTimeout(() => playBeep(400, 80), 120);
+    playSound('toggle');
+}
+
+function playLoginSound() {
+    playBeep(800, 80);
+    setTimeout(() => playBeep(1000, 80), 80);
+    setTimeout(() => playBeep(1200, 80), 160);
+    setTimeout(() => playBeep(1500, 120), 240);
+    playSound('levelup');
 }
 
 // ============================================
-// KEY MANAGEMENT - ĐỌC TỪ BOT
+// KEY MANAGEMENT - KHÔNG HIỂN THỊ KEY
 // ============================================
 
 function getAllKeys() {
@@ -113,12 +151,12 @@ function getKeyData(key) {
     return allKeys[key] || null;
 }
 
-// === ĐỌC KEY TỪ JSON ===
+// === ĐỌC KEY TỪ JSON (CHỈ LƯU, KHÔNG HIỂN THỊ) ===
 async function loadKeysFromBot() {
     try {
         const response = await fetch(JSON_FILE + '?t=' + Date.now());
         if (!response.ok) {
-            document.getElementById('syncStatus').textContent = '⚠️';
+            document.getElementById('syncStatus').className = 'fas fa-exclamation-triangle';
             return false;
         }
 
@@ -133,24 +171,28 @@ async function loadKeysFromBot() {
 
         if (Object.keys(botKeys).length > 0) {
             localStorage.setItem(STORAGE_CUSTOM, JSON.stringify(botKeys));
-            document.getElementById('syncStatus').textContent = '✅';
+            document.getElementById('syncStatus').className = 'fas fa-check-circle';
+            document.getElementById('syncStatus').style.color = '#00cc66';
             document.getElementById('sysKeyCount').textContent = Object.keys(botKeys).length;
             console.log('✅ Đã load key từ bot:', Object.keys(botKeys));
+            playSound('notification');
             return true;
         } else {
-            document.getElementById('syncStatus').textContent = '⚠️';
+            document.getElementById('syncStatus').className = 'fas fa-exclamation-circle';
+            document.getElementById('syncStatus').style.color = '#ffaa00';
+            document.getElementById('sysKeyCount').textContent = '0';
             return false;
         }
     } catch (e) {
-        document.getElementById('syncStatus').textContent = '❌';
+        document.getElementById('syncStatus').className = 'fas fa-times-circle';
+        document.getElementById('syncStatus').style.color = '#ff4757';
+        document.getElementById('sysKeyCount').textContent = '0';
         console.log('❌ Lỗi load key:', e.message);
         return false;
     }
 }
 
-// === ĐÃ XÓA HÀM renderKeyList() ===
-
-// === IMPORT KEY TỪ JSON ===
+// === IMPORT KEY (KHÔNG HIỂN THỊ DANH SÁCH) ===
 function importKeysFromJSON() {
     const input = document.createElement('input');
     input.type = 'file';
@@ -181,19 +223,20 @@ function importKeysFromJSON() {
                     const merged = { ...currentKeys, ...botKeys };
                     localStorage.setItem(STORAGE_CUSTOM, JSON.stringify(merged));
 
-                    document.getElementById('syncStatus').textContent = '✅';
+                    document.getElementById('syncStatus').className = 'fas fa-check-circle';
+                    document.getElementById('syncStatus').style.color = '#00cc66';
                     document.getElementById('sysKeyCount').textContent = Object.keys(merged).length;
-                    playSound('success');
-                    alert('✅ Import thành công ' + Object.keys(botKeys).length + ' key!\n\n' + Object.keys(botKeys).join(', '));
+                    playSuccessBeep();
+                    alert('✅ Import thành công ' + Object.keys(botKeys).length + ' key!');
 
                     setTimeout(() => location.reload(), 1000);
                 } else {
                     alert('❌ Không tìm thấy key NEXORA-XXXX trong file!');
-                    playSound('error');
+                    playErrorBeep();
                 }
             } catch (err) {
                 alert('❌ Lỗi đọc file: ' + err.message);
-                playSound('error');
+                playErrorBeep();
             }
         };
         reader.readAsText(file);
@@ -218,7 +261,6 @@ window.onload = function() {
     if (savedKey) {
         if (expire == 0 || !expire || Date.now() < Number(expire)) {
             openApp(savedKey);
-            playSound('success');
         }
     }
 
@@ -233,7 +275,7 @@ window.onload = function() {
 
 function updateClock() {
     const now = new Date();
-    document.getElementById('sysTime').textContent = now.toLocaleTimeString('vi-VN');
+    document.getElementById('sysTime').innerHTML = '<i class="fas fa-clock"></i> ' + now.toLocaleTimeString('vi-VN');
 }
 
 // === KIỂM TRA KEY HẾT HẠN ===
@@ -243,7 +285,6 @@ function checkKey() {
         if (Date.now() > Number(exp)) {
             terminalLog('⛔ KEY ĐÃ HẾT HẠN!', 'error');
             playErrorBeep();
-            playSound('error');
 
             setTimeout(() => {
                 alert('🔒 KEY HẾT HẠN! Vui lòng nhập KEY mới.');
@@ -286,16 +327,16 @@ function loginKey() {
     playSound('click');
 
     loginBtn.disabled = true;
-    loginBtn.textContent = '⏳ ĐANG KIỂM TRA...';
+    loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ĐANG KIỂM TRA...';
 
     if (!key || key.length < 10) {
         msg.innerHTML = '❌ KEY KHÔNG HỢP LỆ';
         msg.className = 'lock-msg error';
         keyInput.classList.add('error');
-        playSound('error');
+        playErrorBeep();
         setTimeout(() => keyInput.classList.remove('error'), 500);
         loginBtn.disabled = false;
-        loginBtn.textContent = 'KÍCH HOẠT';
+        loginBtn.innerHTML = '<i class="fas fa-unlock"></i> KÍCH HOẠT';
         return;
     }
 
@@ -303,11 +344,11 @@ function loginKey() {
         msg.innerHTML = '❌ KEY KHÔNG TỒN TẠI! HÃY IMPORT KEY TỪ BOT.';
         msg.className = 'lock-msg error';
         keyInput.classList.add('error');
-        playSound('error');
+        playErrorBeep();
         setTimeout(() => keyInput.classList.remove('error'), 500);
         terminalLog(`❌ Key "${key}" không tồn tại`, 'error');
         loginBtn.disabled = false;
-        loginBtn.textContent = 'KÍCH HOẠT';
+        loginBtn.innerHTML = '<i class="fas fa-unlock"></i> KÍCH HOẠT';
         return;
     }
 
@@ -336,22 +377,21 @@ function loginKey() {
     msg.innerHTML = '✅ KEY HỢP LỆ! (' + typeName + ')';
     msg.className = 'lock-msg success';
     keyInput.classList.add('valid');
-    playSound('success');
-    playSuccessBeep();
+    playLoginSound();
     setTimeout(() => keyInput.classList.remove('valid'), 500);
 
     openApp(key);
     terminalLog(`✅ Đăng nhập thành công: ${key}`, 'success');
 
     loginBtn.disabled = false;
-    loginBtn.textContent = 'KÍCH HOẠT';
+    loginBtn.innerHTML = '<i class="fas fa-unlock"></i> KÍCH HOẠT';
 }
 
 function openApp(key) {
     document.getElementById('lockScreen').style.display = 'none';
     document.getElementById('dashboard').style.display = 'flex';
     document.getElementById('currentKey').innerHTML = key;
-    document.getElementById('keyBadge').innerHTML = '🔑 ' + key;
+    document.getElementById('keyBadge').innerHTML = '<i class="fas fa-key"></i> ' + key;
     document.getElementById('profileKey').innerHTML = key;
     updateKeyInfo();
 }
@@ -394,6 +434,10 @@ function updateKeyInfo() {
 function logoutKey() {
     if (confirm('Bạn có chắc muốn đăng xuất?')) {
         playSound('click');
+        playBeep(600, 150);
+        setTimeout(() => playBeep(400, 200), 150);
+        setTimeout(() => playBeep(300, 300), 350);
+
         localStorage.removeItem(STORAGE_KEY);
         localStorage.removeItem(STORAGE_EXPIRE);
         currentKey = '';
@@ -428,13 +472,15 @@ function terminalLog(msg, type = 'info') {
         success: '#00ff88',
         error: '#ff4757',
         warning: '#ffaa00',
-        info: '#66ccff'
+        info: '#66ccff',
+        vip: '#ff6b9d'
     };
     const prefix = {
         success: '✅ ',
         error: '❌ ',
         warning: '⚠️ ',
-        info: 'ℹ️ '
+        info: 'ℹ️ ',
+        vip: '✨ '
     };
 
     const line = document.createElement('div');
@@ -463,7 +509,7 @@ function execTerminal() {
     const lower = cmd.toLowerCase();
 
     if (lower === 'help') {
-        terminalLog('📖 DANH SÁCH LỆNH:', 'info');
+        terminalLog('📖 DANH SÁCH LỆNH:', 'vip');
         terminalLog('  help       - Trợ giúp', 'info');
         terminalLog('  status     - Trạng thái', 'info');
         terminalLog('  key list   - Danh sách key', 'info');
@@ -472,11 +518,6 @@ function execTerminal() {
         terminalLog('  clear      - Xóa terminal', 'info');
         terminalLog('  sound      - Bật/tắt âm thanh', 'info');
         terminalLog('  logout     - Đăng xuất', 'info');
-        terminalLog('', 'info');
-        terminalLog('📌 HƯỚNG DẪN:', 'vip');
-        terminalLog('  1. Chạy bot.py tạo key', 'info');
-        terminalLog('  2. Gõ "import" để import key', 'info');
-        terminalLog('  3. Nhập key và đăng nhập', 'info');
         return;
     }
 
@@ -503,7 +544,7 @@ function execTerminal() {
             terminalLog('⚠️ Chưa có key nào! Gõ "import" để import.', 'warning');
             return;
         }
-        terminalLog(`📋 DANH SÁCH KEY (${keys.length}):`, 'info');
+        terminalLog(`📋 DANH SÁCH KEY (${keys.length}):`, 'vip');
         keys.forEach(k => {
             const data = allKeys[k];
             const type = data?.type || 'Không xác định';
@@ -519,7 +560,7 @@ function execTerminal() {
         }
         const daysLeft = Math.ceil((keyExpiry - Date.now()) / (24 * 60 * 60 * 1000));
         const keyData = getKeyData(currentKey);
-        terminalLog(`🔑 KEY: ${currentKey}`, 'info');
+        terminalLog(`🔑 KEY: ${currentKey}`, 'vip');
         terminalLog(`📌 Loại: ${keyData?.type || 'Không xác định'}`, 'info');
         terminalLog(`⏳ Còn ${daysLeft} ngày`, daysLeft <= 3 ? 'warning' : 'success');
         return;
@@ -528,7 +569,7 @@ function execTerminal() {
     if (lower === 'sound') {
         soundEnabled = !soundEnabled;
         terminalLog(`🔊 Âm thanh: ${soundEnabled ? 'BẬT' : 'TẮT'}`, 'info');
-        if (soundEnabled) playSound('success');
+        if (soundEnabled) playSuccessBeep();
         return;
     }
 
@@ -538,7 +579,7 @@ function execTerminal() {
     }
 
     terminalLog(`❌ Không hiểu lệnh: ${cmd}`, 'error');
-    playSound('error');
+    playErrorBeep();
 }
 
 // ============================================
@@ -546,13 +587,13 @@ function execTerminal() {
 // ============================================
 function loadFuncs() {
     const funcs = [
-        { name: 'Auto Headshot', icon: 'fa-crosshairs' },
-        { name: 'Wall Hack', icon: 'fa-eye' },
-        { name: 'Speed Boost', icon: 'fa-forward' },
-        { name: 'Aimbot Pro', icon: 'fa-bullseye' },
-        { name: 'Skin Unlock', icon: 'fa-palette' },
-        { name: 'AntiBan', icon: 'fa-shield' },
-        { name: 'ESP', icon: 'fa-radar' },
+        { name: 'AIMLOCK', icon: 'fa-crosshairs' },
+        { name: 'STABILITY ASSIST', icon: 'fa-eye' },
+        { name: 'AIM HOLD', icon: 'fa-forward' },
+        { name: 'AIM LOCKDOWN', icon: 'fa-bullseye' },
+        { name: 'HEADSHOT FIX', icon: 'fa-palette' },
+        { name: 'SENVIBITY BOOSTER', icon: 'fa-shield' },
+        { name: 'AIM DRAG VIP', icon: 'fa-radar' },
         { name: 'No Recoil', icon: 'fa-gun' }
     ];
 
@@ -571,13 +612,11 @@ function loadFuncs() {
 function toggleFunc(el) {
     const isChecked = el.checked;
     if (isChecked) {
-        playSound('toggle');
-        playBeep(1000, 80);
-        setTimeout(() => playBeep(1300, 80), 80);
+        playToggleOn();
+        terminalLog('✅ Bật chức năng', 'success');
     } else {
-        playSound('toggle');
-        playBeep(800, 80);
-        setTimeout(() => playBeep(600, 80), 80);
+        playToggleOff();
+        terminalLog('⛔ Tắt chức năng', 'warning');
     }
 }
 
@@ -586,8 +625,8 @@ function toggleFunc(el) {
 // ============================================
 function loadBoosts() {
     const boosts = [
-        'CPU Turbo', 'RAM Cleaner', 'Network Optimizer',
-        'GPU Overclock', 'FPS Booster', 'Latency Fix'
+        'AIMLOCK', 'STABILITY ASSIST', 'AIM HOLD',
+        'HEADSHOT FIX', 'BULLET ALIGN', 'Latency Fix'
     ];
 
     const list = document.getElementById('boostList');
@@ -595,9 +634,9 @@ function loadBoosts() {
         <div class="boost-item">
             <div class="boost-header">
                 <span><i class="fas fa-bolt"></i> ${b}</span>
-                <span class="boost-value" id="boost_${b.replace(/\s/g, '_')}_val">50%</span>
+                <span class="boost-value" id="boost_${b.replace(/\s/g, '_')}_val">0%</span>
             </div>
-            <input type="range" class="boost-slider" min="0" max="100" value="50"
+            <input type="range" class="boost-slider" min="0" max="100" value="0"
                    oninput="onBoostChange(this, 'boost_${b.replace(/\s/g, '_')}_val')">
         </div>
     `).join('');
@@ -606,7 +645,15 @@ function loadBoosts() {
 function onBoostChange(el, id) {
     const val = el.value;
     document.getElementById(id).textContent = val + '%';
-    playBeep(400 + Math.floor(val / 2), 60);
+    const freq = 400 + Math.floor(val / 2);
+    playBeep(freq, 50);
+
+    if (val == 100) {
+        playSound('levelup');
+        terminalLog('⚡ Đạt mức tối đa!', 'success');
+    } else if (val == 0) {
+        terminalLog('⛔ Đã tắt boost', 'warning');
+    }
 }
 
 // ============================================
@@ -616,7 +663,7 @@ function startMonitor() {
     const canvas = document.getElementById('chart');
     const ctx = canvas.getContext('2d');
     canvas.width = canvas.parentElement.clientWidth - 20;
-    canvas.height = 60;
+    canvas.height = 70;
 
     let data = [];
 
@@ -668,11 +715,12 @@ function startMonitor() {
 function cleanRam() {
     document.getElementById('consoleLog').textContent = '🧹 Đang dọn RAM...';
     playSound('click');
+    playBeep(600, 100);
     setTimeout(() => {
         document.getElementById('consoleLog').textContent = '✅ RAM đã được dọn sạch!';
         document.getElementById('ram').textContent = '18%';
         document.getElementById('ramBar').style.width = '18%';
-        playSound('success');
+        playSuccessBeep();
     }, 1500);
 }
 
@@ -684,10 +732,20 @@ function clearConsole() {
 function resetSystem() {
     document.getElementById('consoleLog').textContent = '🔄 Đang reset hệ thống...';
     playSound('warning');
+    playBeep(700, 300);
     setTimeout(() => {
         document.getElementById('consoleLog').textContent = '✅ Hệ thống đã được reset!';
-        playSound('success');
+        playSuccessBeep();
     }, 1200);
+}
+
+function systemInfo() {
+    const log = document.getElementById('consoleLog');
+    const allKeys = getAllKeys();
+    const info = `📊 INFINITY HEAX V2 | KEY: ${currentKey || 'None'} | RAM: ${document.getElementById('ram').textContent} | CPU: ${document.getElementById('cpu').textContent} | Tổng key: ${Object.keys(allKeys).length}`;
+    log.textContent = info;
+    terminalLog(info, 'vip');
+    playSound('notification');
 }
 
 // ============================================
@@ -729,18 +787,17 @@ function changeColor(color, btn) {
 
     playSound('click');
     playBeep(500, 100);
+    terminalLog(`🎨 Đổi màu sang: ${color}`, 'info');
 }
 
 function toggleSetting(el) {
     const isChecked = el.checked;
     if (isChecked) {
-        playSound('toggle');
-        playBeep(1000, 60);
-        setTimeout(() => playBeep(1300, 60), 60);
+        playToggleOn();
+        terminalLog('⚙️ Bật cài đặt', 'success');
     } else {
-        playSound('toggle');
-        playBeep(800, 60);
-        setTimeout(() => playBeep(600, 60), 60);
+        playToggleOff();
+        terminalLog('⚙️ Tắt cài đặt', 'warning');
     }
 }
 
@@ -758,7 +815,7 @@ function toggleDarkMode(el) {
         document.documentElement.style.setProperty('--border', 'rgba(0, 0, 0, 0.08)');
     } else {
         document.documentElement.style.setProperty('--bg', '#05080f');
-        document.documentElement.style.setProperty('--bg-card', 'rgba(10, 15, 25, 0.8)');
+        document.documentElement.style.setProperty('--bg-card', 'rgba(10, 15, 25, 0.85)');
         document.documentElement.style.setProperty('--bg-input', 'rgba(0, 0, 0, 0.6)');
         document.documentElement.style.setProperty('--text', '#e8ecf1');
         document.documentElement.style.setProperty('--text-muted', '#7a8aaa');
@@ -768,6 +825,7 @@ function toggleDarkMode(el) {
 
     playSound('toggle');
     playBeep(600, 150);
+    terminalLog(`🌙 Dark Mode: ${isDark ? 'BẬT' : 'TẮT'}`, 'info');
 }
 
 // ============================================
@@ -779,10 +837,12 @@ function openLink(type) {
         zl: 'http://zalo.me/84822439761',
         tt: 'https://www.tiktok.com/@phucbanfile.lovetiktok',
         yt: 'https://youtube.com',
-        github: 'https://github.com'
+        github: 'https://github.com',
+        discord: 'https://discord.com'
     };
     window.open(links[type] || '#', '_blank');
     playSound('click');
+    terminalLog(`🔗 Mở ${type.toUpperCase()}`, 'info');
 }
 
 // ============================================
@@ -798,6 +858,7 @@ window.loadKeysFromBot = loadKeysFromBot;
 window.cleanRam = cleanRam;
 window.clearConsole = clearConsole;
 window.resetSystem = resetSystem;
+window.systemInfo = systemInfo;
 window.openGame = openGame;
 window.changeColor = changeColor;
 window.toggleSetting = toggleSetting;
@@ -806,6 +867,6 @@ window.openLink = openLink;
 window.onBoostChange = onBoostChange;
 window.toggleFunc = toggleFunc;
 
-console.log('🚀 INFINITY HEAX V2 - ĐÃ XÓA KEY CÓ SẴN');
+console.log('🚀 INFINITY HEAX V2 - ĐÃ XÓA HIỂN THỊ KEY');
 console.log('📥 Gõ "import" để import key từ bot');
 console.log('📂 File JSON:', JSON_FILE);
